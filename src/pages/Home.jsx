@@ -306,7 +306,7 @@ function Home() {
           Join hands with Axiino to create something impactful, intelligent, and innovative.
         </p>
         <a
-          href="/contact"
+          href="/#/contact"
           className="inline-block bg-blue-900 text-white font-semibold px-6 py-3 rounded-xl hover:bg-fuchsia-900 transition"
         >
           Contact Us

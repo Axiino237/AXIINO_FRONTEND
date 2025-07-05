@@ -225,7 +225,7 @@ function AboutUs() {
           Passionate engineers, designers, and thinkers — all aligned to build something meaningful.
         </p>
         <a
-          href="/contact"
+          href="/#/contact"
           className="inline-block bg-blue-900 text-white font-semibold px-6 py-3 rounded-xl hover:bg-fuchsia-900 transition"
         >
           Get in Touch
