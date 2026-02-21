@@ -1,42 +1,74 @@
+import { motion } from "framer-motion";
 import { Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
 import logo from "../assets/logo.png"
 
+const socialLinks = [
+  { icon: <Facebook size={18} />, href: "#" },
+  { icon: <Twitter size={18} />, href: "#" },
+  { icon: <Linkedin size={18} />, href: "#" },
+  { icon: <Instagram size={18} />, href: "#" },
+];
+
 function Footer() {
   return (
-    <footer className="inset-0 bg-gradient-to-br from-blue-900  to-fuchsia-900 text-slate-300 px-6 py-10">
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 items-center">
-        <div className="text-center md:text-left">
-          <h4 className="text-xl font-semibold text-white gap-2 flex items-center">
-      <img src={logo} height={"40"} width={"40"} alt="Axiino" />
-            Axiino Technologies</h4>
-          <p className="text-sm mt-2 text-slate-400">
-            Building future-ready solutions — one line of code at a time.
+    <footer className="relative bg-gray-950 overflow-hidden border-t border-white/5">
+      {/* Subtle orb */}
+      <div className="orb orb-blue w-[400px] h-[200px] bottom-0 left-1/2 -translate-x-1/2 opacity-10" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-12">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+
+          {/* Brand */}
+          <motion.div
+            className="flex items-center gap-3"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <div className="relative">
+              <div className="absolute inset-0 bg-blue-500 rounded-full blur-md opacity-30" />
+              <img src={logo} height="36" width="36" alt="Axiino" className="relative rounded-full" />
+            </div>
+            <div>
+              <h4 className="text-base font-bold bg-gradient-to-r from-blue-400 to-fuchsia-400 bg-clip-text text-transparent">
+                Axiino Technologies
+              </h4>
+              <p className="text-xs text-gray-500 mt-0.5">
+                Building future-ready solutions — one line of code at a time.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Social Icons */}
+          <motion.div
+            className="flex items-center gap-3"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            {socialLinks.map((link, i) => (
+              <motion.a
+                key={i}
+                href={link.href}
+                className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-blue-500/40 hover:bg-blue-950/30 transition-all duration-200"
+                whileHover={{ scale: 1.1, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {link.icon}
+              </motion.a>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Divider */}
+        <div className="mt-8 border-t border-white/5 pt-8">
+          <p className="text-center text-xs text-gray-600">
+            © 2025 Axiino Technologies. All rights reserved.
           </p>
         </div>
-
-        {/* Right: Social Icons or Links */}
-        <div className="flex justify-center md:justify-end space-x-4">
-          <a href="#" className="text-slate-400 hover:text-teal-500 transition">
-            <Facebook size={20} />
-          </a>
-          <a href="#" className="text-slate-400 hover:text-teal-500 transition">
-            <Twitter size={20} />
-          </a>
-          <a href="#" className="text-slate-400 hover:text-teal-500 transition">
-            <Linkedin size={20} />
-          </a>
-          <a href="#" className="text-slate-400 hover:text-teal-500 transition">
-            <Instagram size={20} />
-          </a>
-        </div>
       </div>
-
-      <hr className="border-white-800 my-6" />
-
-      {/* Bottom Text */}
-      <p className="text-center text-sm text-slate-300">
-        © 2025 Axiino Technologies. All rights reserved.
-      </p>
     </footer>
   );
 }

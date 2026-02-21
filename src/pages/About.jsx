@@ -1,237 +1,600 @@
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Lottie from "lottie-react";
-import heroAnimation from "../assets/about.json"; // replace with your Lottie file
-import {
-  Users,
-  Target,
-  ShieldCheck,
-  Activity,
-  BookOpenCheck,
-  HeartHandshake,
-} from "lucide-react";
+import heroAnimation from "../assets/about.json";
+import { Users, Target, ShieldCheck, Activity, BookOpenCheck, HeartHandshake, Zap, Globe, Code2, Cpu, Server, Database, Cloud, Bot, Layers } from "lucide-react";
 import { useEffect, useState } from "react";
+// Removed direct supabase import since we use the local API now
 
-// Animation variants
 const containerStagger = {
-  visible: { transition: { staggerChildren: 0.2 } },
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 }
+  },
 };
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6 },
-  },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
 };
 
 const itemVariant = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: 20, scale: 0.95 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
 };
+
+const BackgroundParticle = ({ size, top, left, duration, delay, smoothX, smoothY }) => {
+  const [offsetX] = useState(() => Math.random() * 40 - 20);
+  const [offsetY] = useState(() => Math.random() * 40 - 20);
+  const x = useTransform(smoothX, [0, 1920], [-offsetX, offsetX]);
+  const y = useTransform(smoothY, [0, 1080], [-offsetY, offsetY]);
+
+  return (
+    <motion.div
+      className="absolute rounded-full bg-white/10"
+      style={{
+        width: size,
+        height: size,
+        top,
+        left,
+        x,
+        y,
+      }}
+      animate={{
+        y: [0, -100, 0],
+        opacity: [0.1, 0.4, 0.1],
+      }}
+      transition={{
+        duration,
+        repeat: Infinity,
+        ease: "linear",
+        delay,
+      }}
+    />
+  );
+};
+
+const FloatingBackgroundIcon = ({ icon, top, left, delay, speed, index, smoothX, smoothY }) => {
+  const x = useTransform(smoothX, [0, 1920], [(index % 2 === 0 ? 1 : -1) * 40, (index % 2 === 0 ? -1 : 1) * 40]);
+  const y = useTransform(smoothY, [0, 1080], [(index % 3 === 0 ? 1 : -1) * 30, (index % 3 === 0 ? -1 : 1) * 30]);
+
+  return (
+    <motion.div
+      className="absolute text-white/5 hover:text-white/10 transition-colors"
+      style={{
+        top,
+        left,
+        x,
+        y,
+      }}
+      animate={{
+        y: [0, -20, 0],
+        rotate: [0, 10, -10, 0],
+      }}
+      transition={{
+        duration: speed,
+        repeat: Infinity,
+        ease: "easeInOut",
+        delay,
+      }}
+    >
+      {icon}
+    </motion.div>
+  );
+};
+
+const beliefs = [
+  { icon: <Users size={26} />, title: "Collaborative Unity", desc: "We believe cross-functional teamwork leads to the most resilient architectures and best client outcomes." },
+  { icon: <Target size={26} />, title: "Targeted Precision", desc: "We reject bloated code. Every line we write serves a specific business objective with zero waste." },
+  { icon: <ShieldCheck size={26} />, title: "Absolute Integrity", desc: "No hidden fees, no black-box development. Radical transparency forms the bedrock of our client relationships." },
+  { icon: <Activity size={26} />, title: "Continuous Innovation", desc: "Technology moves fast. We adopt modern paradigms like serverless and AI before they mainstream." },
+  { icon: <BookOpenCheck size={26} />, title: "Lifelong Learning", desc: "Our engineering culture is rooted in constant upskilling, hackathons, and rigorous code reviews." },
+  { icon: <HeartHandshake size={26} />, title: "Client ROI First", desc: "We don't consider a launch successful unless it actively drives revenue, retention, or efficiency for you." },
+  { icon: <Zap size={26} />, title: "Agile Velocity", desc: "Speed matters. We leverage CI/CD and automated testing to ship bulletproof features in days, not months." },
+  { icon: <Globe size={26} />, title: "Global Scale", desc: "We architect systems expecting them to go viral. We build for horizontal scaling from day one." },
+];
 
 function AboutUs() {
   const [teamMembers, setTeamMembers] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Mouse move parallax effect
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springConfig = { damping: 25, stiffness: 150 };
+  const smoothX = useSpring(mouseX, springConfig);
+  const smoothY = useSpring(mouseY, springConfig);
+
+  const orbX = useTransform(smoothX, [0, 1920], [-30, 30]);
+  const orbY = useTransform(smoothY, [0, 1080], [-20, 20]);
+
+  const handleMouseMove = (e) => {
+    mouseX.set(e.clientX);
+    mouseY.set(e.clientY);
+  };
+
+  const floatingIcons = [
+    { icon: <Code2 size={24} />, top: '15%', left: '10%', delay: 0, speed: 20 },
+    { icon: <Cpu size={20} />, top: '25%', left: '85%', delay: 2, speed: 25 },
+    { icon: <Server size={22} />, top: '65%', left: '5%', delay: 4, speed: 22 },
+    { icon: <Database size={18} />, top: '85%', left: '80%', delay: 1, speed: 18 },
+    { icon: <Cloud size={24} />, top: '45%', left: '92%', delay: 3, speed: 30 },
+    { icon: <Bot size={22} />, top: '10%', left: '70%', delay: 5, speed: 24 },
+    { icon: <Globe size={20} />, top: '75%', left: '15%', delay: 2, speed: 28 },
+    { icon: <Layers size={18} />, top: '40%', left: '8%', delay: 6, speed: 26 },
+  ];
+
+  const dustParticles = Array.from({ length: 20 }).map((_, i) => ({
+    id: i,
+    size: Math.random() * 3 + 1,
+    top: `${Math.random() * 100}%`,
+    left: `${Math.random() * 100}%`,
+    duration: Math.random() * 20 + 10,
+    delay: Math.random() * 5,
+  }));
+
   useEffect(() => {
-    fetch("https://axiino-backend.vercel.app/api/team-members")
-      .then((res) => res.json())
-      .then((data) => {
-        setTeamMembers(data);
+    const fetchTeam = async () => {
+      try {
+        console.log("Fetching team from backend...");
+        const res = await fetch('http://localhost:3001/api/team-members', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        });
+
+        const data = await res.json();
+        console.log("Backend response:", data);
+
+        if (!res.ok) throw new Error(data.error || 'Failed to fetch team');
+
+        // Ensure data is always an array
+        setTeamMembers(Array.isArray(data) ? data : []);
+      } catch (err) {
+        console.error("Failed to fetch team members:", err.message);
+      } finally {
         setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Failed to fetch team members", err);
-        setLoading(false);
-      });
+      }
+    };
+    fetchTeam();
   }, []);
+
   return (
-    <>
-      {/* Hero Section */}
-      <section className="relative min-h-screen bg-gradient-to-b from-gray-950 to-gray-900 text-white px-6 py-16 flex items-center justify-center overflow-hidden">
+    <div onMouseMove={handleMouseMove} className="w-full bg-[#050b14] relative selection:bg-sky-500/30">
+      {/* ── PERSISTENT BACKGROUND ELEMENTS ── */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        {/* Dust Particles */}
+        {dustParticles.map((p) => (
+          <BackgroundParticle
+            key={`dust-${p.id}`}
+            {...p}
+            smoothX={smoothX}
+            smoothY={smoothY}
+          />
+        ))}
+
+        {/* Floating IT Icons */}
+        {floatingIcons.map((item, i) => (
+          <FloatingBackgroundIcon
+            key={`icon-${i}`}
+            {...item}
+            index={i}
+            smoothX={smoothX}
+            smoothY={smoothY}
+          />
+        ))}
+      </div>
+
+      {/* ── HERO ── */}
+      <section className="relative bg-[#050b14] px-6 pt-8 pb-12 overflow-hidden z-10 w-full">
+        <div className="animated-grid absolute inset-0 opacity-40 mix-blend-screen" />
         <motion.div
-          className="absolute inset-0 bg-gradient-to-br from-blue-900 to-fuchsia-900 opacity-20"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 2 }}
+          style={{ x: orbX, y: orbY }}
+          className="orb absolute orb-blue w-[600px] h-[600px] -top-[200px] -left-[200px] opacity-30"
         />
         <motion.div
-          className="max-w-7xl w-full z-10 grid md:grid-cols-2 gap-10 items-center"
+          style={{ x: useTransform(smoothX, [0, 1920], [30, -30]), y: useTransform(smoothY, [0, 1080], [20, -20]) }}
+          className="orb absolute orb-fuchsia w-[400px] h-[400px] -bottom-[100px] -right-[100px] opacity-20"
+        />
+
+        <motion.div
+          className="max-w-7xl mx-auto w-full z-20 grid lg:grid-cols-2 gap-12 items-center relative"
           variants={containerStagger}
           initial="hidden"
           animate="visible"
         >
-          <motion.div variants={fadeInUp} className="text-center md:text-left px-4">
-            <h1 className="text-5xl font-bold mb-6">
-              About <span className="text-blue-500">Axiino</span>
+          <motion.div variants={fadeInUp} className="text-center lg:text-left px-4">
+            <motion.div
+              className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-fuchsia-400/40 bg-fuchsia-950/50 text-fuchsia-200 text-sm font-semibold tracking-wide shadow-[0_0_15px_rgba(232,121,249,0.2)] mb-8"
+            >
+              <span className="w-2.5 h-2.5 rounded-full bg-fuchsia-400 shadow-[0_0_8px_#e879f9] animate-[pulse-glow_2s_infinite]" />
+              Who We Are
+            </motion.div>
+
+            <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6 text-white">
+              Behind <br />
+              <span className="gradient-text pb-2 inline-block">Axiino Labs</span>
             </h1>
-            <p className="text-gray-300 text-lg">
-              Axiino is a technology-first team delivering world-class solutions in web, mobile, and AI.
-              We believe in creating products that not only work but inspire.
+
+            <p className="text-slate-300 text-lg sm:text-xl leading-relaxed max-w-xl mx-auto lg:mx-0 font-light mb-10">
+              Axiino is an elite collective of software architects, designers, and strategists. We reject mediocrity, choosing instead to build systems that dominate markets.
             </p>
           </motion.div>
 
-          <motion.div variants={fadeInUp}>
-            <Lottie animationData={heroAnimation} loop={false} className="w-full h-[350px]"  />
+          <motion.div variants={fadeInUp} className="relative hidden md:block">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-[300px] h-[300px] rounded-full bg-gradient-to-tr from-fuchsia-500/30 to-sky-500/30 blur-[80px]" />
+            </div>
+            <Lottie animationData={heroAnimation} loop={true} className="w-full h-[500px] relative z-20 drop-shadow-2xl" />
           </motion.div>
         </motion.div>
       </section>
 
-      {/* Leadership Team */}
-<section className="bg-white text-blue-950 px-6 py-20">
-  <motion.div
-    className="text-center mb-16"
-    initial={{ opacity: 0, y: -20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6 }}
-  >
-    <h2 className="text-3xl font-bold">Meet Our Leadership</h2>
-    <p className="text-gray-600 mt-2 max-w-xl mx-auto">
-      Visionaries who guide Axiino’s mission with clarity, innovation, and purpose.
-    </p>
-  </motion.div>
+      {/* ── OUR STORY / MISSION ── */}
+      <section className="relative bg-[#030712] px-6 py-24 overflow-hidden z-10">
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center">
+          <motion.div
+            className="lg:w-1/2"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true, amount: 0.1 }}
+          >
+            <p className="text-sky-400 text-sm font-bold uppercase tracking-[0.2em] mb-4">The Origin</p>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
+              We started with a simple question: <span className="gradient-text pb-2 inline-block">Why compromise?</span>
+            </h2>
+            <div className="space-y-6 text-slate-300 text-lg leading-relaxed font-light">
+              <p>
+                Axiino Labs was born out of frustration with the standard agency model. We saw too many companies settling for slow delivery, bloated codebases, and disconnected communication. We wanted to build an engineering powerhouse that operated with the speed of a startup and the rigor of an enterprise.
+              </p>
+              <p>
+                Our mission is to eliminate technical debt before it's even written. We architect platforms that are secure by default, infinitely scalable, and relentlessly focused on the end-user experience.
+              </p>
+            </div>
 
-  <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 max-w-6xl mx-auto"
-          initial="hidden"
-          whileInView="visible"
-          
-          variants={containerStagger}
+            <div className="grid grid-cols-2 gap-8 mt-12 pt-12 border-t border-white/10">
+              <div>
+                <h4 className="text-4xl font-black text-white mb-2">10x</h4>
+                <p className="text-slate-400 text-sm font-semibold uppercase tracking-wider">Delivery Speed</p>
+              </div>
+              <div>
+                <h4 className="text-4xl font-black text-white mb-2">99.9%</h4>
+                <p className="text-slate-400 text-sm font-semibold uppercase tracking-wider">Uptime SLA</p>
+              </div>
+              <div>
+                <h4 className="text-4xl font-black text-white mb-2">Zero</h4>
+                <p className="text-slate-400 text-sm font-semibold uppercase tracking-wider">Compromises</p>
+              </div>
+              <div>
+                <h4 className="text-4xl font-black text-white mb-2">24/7</h4>
+                <p className="text-slate-400 text-sm font-semibold uppercase tracking-wider">Arch. Support</p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Abstract Image / Graphic side */}
+          <motion.div
+            className="lg:w-1/2 relative w-full"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true, amount: 0.1 }}
+          >
+            <div className="relative w-full max-w-md mx-auto aspect-square rounded-[40px] border border-white/10 bg-gradient-to-br from-[#0f172a] to-[#020617] p-8 shadow-2xl overflow-hidden card-glow group">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-sky-500/20 blur-[100px] rounded-full group-hover:bg-sky-500/30 transition-colors duration-500" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-fuchsia-500/20 blur-[100px] rounded-full group-hover:bg-fuchsia-500/30 transition-colors duration-500" />
+
+              <div className="relative z-10 w-full h-full border border-sky-500/20 rounded-2xl bg-[#030712]/80 backdrop-blur-sm p-6 flex flex-col gap-4 shadow-inner">
+                {/* Mock code blocks for aesthetic */}
+                <div className="flex items-center gap-2 mb-4 border-b border-white/5 pb-4">
+                  <div className="w-3 h-3 rounded-full bg-red-400/80 shadow-[0_0_10px_rgba(248,113,113,0.5)]" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-400/80 shadow-[0_0_10px_rgba(250,204,21,0.5)]" />
+                  <div className="w-3 h-3 rounded-full bg-green-400/80 shadow-[0_0_10px_rgba(74,222,128,0.5)]" />
+                </div>
+                <div className="w-3/4 h-6 bg-slate-800/50 rounded-md animate-pulse" />
+                <div className="w-full h-6 bg-slate-800/50 rounded-md animate-pulse" style={{ animationDelay: '0.2s' }} />
+                <div className="w-5/6 h-6 bg-sky-900/30 border border-sky-500/30 rounded-md shadow-[0_0_15px_rgba(56,189,248,0.1)] mt-4" />
+                <div className="w-1/2 h-6 bg-fuchsia-900/30 border border-fuchsia-500/30 rounded-md mt-auto shadow-[0_0_15px_rgba(232,121,249,0.1)]" />
+                <div className="w-full h-24 bg-gradient-to-t from-[#030712] to-transparent absolute bottom-0 left-0 rounded-b-2xl" />
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── OUR METHODOLOGY ── */}
+      <section className="relative bg-[#020617] px-6 py-24 overflow-hidden z-10 border-y border-white/5">
+        <div className="animated-grid absolute inset-0 opacity-10" />
+        <div className="orb absolute orb-blue w-[500px] h-[500px] -top-64 right-0 opacity-10 blur-[120px]" />
+
+        <div className="max-w-7xl mx-auto relative z-20">
+          <div className="text-center mb-16">
+            <p className="text-fuchsia-400 text-sm font-bold uppercase tracking-[0.2em] mb-4">The Workflow</p>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">Our Methodology</h2>
+            <p className="text-slate-300 text-lg max-w-2xl mx-auto leading-relaxed font-light">
+              We leverage an iterative, audit-driven development cycle that prioritizes structural integrity and high-fidelity output.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                step: "01",
+                title: "Architect",
+                desc: "We define the technical blueprint, ensuring zero-bottleneck data flows and secure-by-default logic.",
+                color: "from-sky-500 to-sky-400"
+              },
+              {
+                step: "02",
+                title: "Sprint",
+                desc: "Rapid delivery of high-impact features using CI/CD pipelines and automated integration testing.",
+                color: "from-fuchsia-500 to-fuchsia-400"
+              },
+              {
+                step: "03",
+                title: "Deploy",
+                desc: "Global distribution through edge-cached CDN networks and real-time monitoring of performance SLAs.",
+                color: "from-indigo-500 to-indigo-400"
+              }
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                className="relative group p-10 rounded-[32px] border border-white/5 bg-[#030712]/50 backdrop-blur-md hover:border-white/10 transition-all duration-500 overflow-hidden"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${item.color} opacity-[0.03] blur-2xl group-hover:opacity-[0.1] transition-opacity`} />
+                <span className="text-5xl font-black text-white/5 mb-6 block group-hover:text-white/10 transition-colors">{item.step}</span>
+                <h4 className="text-2xl font-bold text-white mb-4">{item.title}</h4>
+                <p className="text-slate-400 leading-relaxed font-light">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── GLOBAL VISION ── */}
+      <section className="relative bg-[#030712] px-6 py-24 overflow-hidden z-10">
+        <div className="orb absolute orb-indigo w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-10 blur-[150px]" />
+
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row-reverse gap-16 items-center relative z-20">
+          <motion.div
+            className="lg:w-1/2"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            <p className="text-indigo-400 text-sm font-bold uppercase tracking-[0.2em] mb-4">The Expansion</p>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
+              A Borderless <span className="gradient-text pb-2 inline-block">Architecture</span>
+            </h2>
+            <div className="space-y-6 text-slate-300 text-lg leading-relaxed font-light">
+              <p>
+                Axiino Labs isn't just local; we are built for the global economy. Our decentralized workforce and edge-optimized infrastructure allow us to serve elite clients across the United States, Europe, and Asia.
+              </p>
+              <p>
+                We believe the next generation of software won't care about where the server is located—it will care about where the user is. Our vision is to build a web that is as fast in Nairobi as it is in New York.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-4 mt-10">
+              <div className="px-6 py-3 rounded-full border border-white/5 bg-white/5 text-slate-200 text-sm font-semibold tracking-wide backdrop-blur-md">
+                US & EU Markets
+              </div>
+              <div className="px-6 py-3 rounded-full border border-white/5 bg-white/5 text-slate-200 text-sm font-semibold tracking-wide backdrop-blur-md">
+                24/7 Monitoring
+              </div>
+              <div className="px-6 py-3 rounded-full border border-white/5 bg-white/5 text-slate-200 text-sm font-semibold tracking-wide backdrop-blur-md">
+                Global Edge CDN
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Map Abstract side */}
+          <motion.div
+            className="lg:w-1/2 relative w-full"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            <div className="relative w-full max-w-md mx-auto aspect-video rounded-[32px] border border-white/5 bg-[#0a1122]/80 p-1 shadow-2xl overflow-hidden glass-card group">
+              <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
+              <div className="relative w-full h-full rounded-[31px] bg-[#030712] overflow-hidden flex items-center justify-center">
+                {/* Abstract "Map" Lines */}
+                <svg width="400" height="200" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-40">
+                  <path d="M50 100 Q100 50 200 100 T350 100" stroke="white" strokeWidth="0.5" strokeDasharray="5 5" />
+                  <path d="M100 150 Q200 200 300 150" stroke="white" strokeWidth="0.5" strokeDasharray="5 5" />
+                  <circle cx="50" cy="100" r="3" fill="#38bdf8" className="animate-pulse" />
+                  <circle cx="200" cy="100" r="3" fill="#e879f9" className="animate-pulse" style={{ animationDelay: '0.5s' }} />
+                  <circle cx="350" cy="100" r="3" fill="#818cf8" className="animate-pulse" style={{ animationDelay: '1s' }} />
+                </svg>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-transparent" />
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── LEADERSHIP TEAM ── */}
+      <section className="relative bg-[#020617] px-6 py-24 overflow-hidden z-10 border-y border-white/5">
+        <div className="animated-grid absolute inset-0 opacity-20" />
+        <div className="orb absolute orb-purple w-[500px] h-[500px] top-0 right-0 opacity-20 blur-[100px]" />
+
+        <div className="text-center mb-16 relative z-20">
+          <p className="text-sky-400 text-sm font-bold uppercase tracking-[0.2em] mb-4">The Brains</p>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">Meet the Leadership</h2>
+          <p className="text-slate-300 text-lg mt-2 max-w-2xl mx-auto leading-relaxed">
+            Decades of combined engineering and product design experience steering the ship toward technical excellence.
+          </p>
+        </div>
+
+        <div
+          className="flex flex-wrap justify-center gap-8 max-w-7xl mx-auto relative z-20"
         >
           {loading ? (
-            <p className="col-span-3 text-center text-gray-400">Loading team...</p>
+            <div className="flex justify-center w-full py-20">
+              <div className="w-10 h-10 border-4 border-sky-500/30 border-t-sky-400 rounded-full animate-spin" />
+            </div>
           ) : teamMembers.length === 0 ? (
-            <p className="col-span-3 text-center text-red-400">No team members found.</p>
+            <p className="text-center w-full text-slate-500 text-lg">Team assembly in progress...</p>
           ) : (
             teamMembers.map((member, i) => (
               <motion.div
-                key={i}
-                className="bg-gradient-to-tr from-blue-50 to-purple-100 p-6 rounded-2xl text-center shadow hover:shadow-xl transition"
-                variants={fadeInUp}
+                key={member.id || i}
+                className="card-glow p-8 rounded-3xl w-full sm:w-[350px] text-center flex flex-col items-center group cursor-default"
+                initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
               >
-                <div className="w-20 h-20 mx-auto bg-blue-200 rounded-full mb-4 flex items-center justify-center text-2xl font-semibold text-blue-800">
-                  {member.image ? (
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="rounded-full w-full h-full object-cover"
-                    />
-                  ) : (
-                    member.name.charAt(0)
-                  )}
+                <div className="relative w-28 h-28 mb-6">
+                  {/* Outer glow ring */}
+                  <div className="absolute inset-[-10px] rounded-full bg-gradient-to-br from-sky-400 to-fuchsia-500 blur-md opacity-30 group-hover:opacity-70 transition-opacity duration-500" />
+                  {/* Image container */}
+                  <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-[#0f172a] bg-[#1e293b] flex items-center justify-center text-3xl font-bold text-white shadow-xl">
+                    {member.image ? (
+                      <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+                    ) : (
+                      member.name ? member.name.charAt(0).toUpperCase() : "?"
+                    )}
+                  </div>
                 </div>
-                <h4 className="text-xl font-bold mb-1">{member.name}</h4>
-                <p className="text-sm text-gray-700">{member.designation}</p>
+                <h4 className="text-xl font-bold text-white mb-2">{member.name}</h4>
+                <p className="text-sm font-semibold text-sky-400 tracking-wide uppercase">{member.designation}</p>
+                <div className="w-12 h-1 bg-white/10 mt-5 rounded-full" />
               </motion.div>
             ))
           )}
-        </motion.div>
-</section>
-
-
-      {/* Our Mission */}
-      <section className="bg-white text-blue-950 px-6 py-20">
-        <motion.div
-          className="max-w-4xl mx-auto text-center"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-3xl font-bold mb-4">Our Mission</h2>
-          <p className="text-gray-600 text-lg">
-            To empower businesses through digital transformation by crafting scalable, intelligent,
-            and user-centric software solutions.
-          </p>
-        </motion.div>
+        </div>
       </section>
 
-      
+      {/* ── CORE BELIEFS ── */}
+      <section className="relative bg-[#050b14] px-6 py-24 overflow-hidden z-10">
+        <div className="orb absolute orb-fuchsia w-[600px] h-[600px] -bottom-[200px] -left-[200px] opacity-15" />
 
-      {/* Core Beliefs */}
-      <section className="bg-gradient-to-br from-blue-900 to-fuchsia-900 text-white px-6 py-20">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold">What We Stand For</h2>
-          <p className="text-gray-300 mt-2 max-w-xl mx-auto">
-            Axiino was built on strong values — and they guide every project we take on.
+        <div className="text-center mb-16 relative z-20">
+          <p className="text-fuchsia-400 text-sm font-bold uppercase tracking-[0.2em] mb-4">Philosophy</p>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">Our Operating Protocol</h2>
+          <p className="text-slate-300 text-lg mt-2 max-w-2xl mx-auto leading-relaxed">
+            These eight axioms govern every architectural decision, every sprint, and every deployment we execute.
           </p>
         </div>
 
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 max-w-6xl mx-auto"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto relative z-20"
           variants={containerStagger}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.1 }}
         >
-          {[
-            {
-              icon: <Users size={32} />,
-              title: "Teamwork",
-              desc: "We believe collaboration leads to the best outcomes — for clients and for us.",
-            },
-            {
-              icon: <Target size={32} />,
-              title: "Precision",
-              desc: "We pay attention to every detail to ensure product reliability and excellence.",
-            },
-            {
-              icon: <ShieldCheck size={32} />,
-              title: "Integrity",
-              desc: "Transparency and honesty form the foundation of our partnerships.",
-            },
-            {
-              icon: <Activity size={32} />,
-              title: "Innovation",
-              desc: "We push boundaries and adopt new tech to solve real-world challenges.",
-            },
-            {
-              icon: <BookOpenCheck size={32} />,
-              title: "Learning",
-              desc: "We stay curious, continuously evolving to deliver top-tier solutions.",
-            },
-            {
-              icon: <HeartHandshake size={32} />,
-              title: "Client Success",
-              desc: "We succeed only when our clients do. Their goals become ours.",
-            },
-          ].map((item, i) => (
+          {beliefs.map((item, i) => (
             <motion.div
               key={i}
-              className="inset-0 bg-white/5 backdrop-blur-lg p-6 rounded-2xl border border-white/10 hover:shadow-2xl transition group text-center"
+              className="card-glow p-8 rounded-3xl"
               variants={itemVariant}
             >
-              <div className="text-4xl text-white mb-4 group-hover:scale-110 transition">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-fuchsia-500/20 to-purple-500/20 border border-fuchsia-400/30 flex items-center justify-center text-fuchsia-300 shadow-[0_0_15px_rgba(232,121,249,0.2)] mb-6">
                 {item.icon}
               </div>
-              <h4 className="text-lg font-semibold text-gray-200 mb-2">{item.title}</h4>
-              <p className="text-gray-300 text-sm">{item.desc}</p>
+              <h4 className="text-xl font-bold text-white mb-4 leading-tight">{item.title}</h4>
+              <p className="text-slate-300 text-sm leading-loose">{item.desc}</p>
             </motion.div>
           ))}
         </motion.div>
       </section>
 
-      {/* Final CTA */}
-<section className="bg-white text-blue-900 py-20 px-6 text-center">
-        <motion.h2
-          className="text-3xl font-bold mb-4"
-          initial={{ opacity: 0, y: -10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          Meet the Minds Behind Axiino
-        </motion.h2>
-        <p className="mb-6 text-lg">
-          Passionate engineers, designers, and thinkers — all aligned to build something meaningful.
-        </p>
-        <a
-          href="/#/contact"
-          className="inline-block bg-blue-900 text-white font-semibold px-6 py-3 rounded-xl hover:bg-fuchsia-900 transition"
-        >
-          Get in Touch
-        </a>
+      {/* ── TECHNICAL EXPERTISE ── */}
+      <section className="relative bg-[#020617] px-6 py-24 overflow-hidden z-10 border-t border-white/5">
+        <div className="orb absolute orb-blue w-[400px] h-[400px] top-1/2 left-0 opacity-10 blur-[120px]" />
+
+        <div className="max-w-7xl mx-auto relative z-20">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <p className="text-sky-400 text-sm font-bold uppercase tracking-[0.2em] mb-4">Mastery</p>
+              <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-8 leading-tight">
+                Our Technical <br />
+                <span className="gradient-text pb-2 inline-block">Specialization</span>
+              </h2>
+              <div className="space-y-4">
+                {[
+                  "Microservices & Serverless Architectures",
+                  "Real-time Data Streaming (Kafka / WebSockets)",
+                  "Edge Computing & Global Content Delivery",
+                  "AI & Neural Network Integration",
+                  "Hyper-Secure Financial Grade APIs",
+                  "High-Performance Mobile Ecosystems"
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-4 text-slate-300">
+                    <div className="w-1.5 h-1.5 rounded-full bg-sky-400 shadow-[0_0_8px_rgb(56,189,248)]" />
+                    <span className="text-lg font-light">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="grid grid-cols-2 gap-4"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              {[
+                { label: "Frontend", val: "React / Next.js", color: "from-sky-500/20 to-sky-400/20" },
+                { label: "Backend", val: "Node / Go / Python", color: "from-fuchsia-500/20 to-fuchsia-400/20" },
+                { label: "Database", val: "Supabase / PG / Mongo", color: "from-indigo-500/20 to-indigo-400/20" },
+                { label: "Mobile", val: "React Native / Expo", color: "from-purple-500/20 to-purple-400/20" }
+              ].map((item, i) => (
+                <div key={i} className={`p-6 rounded-2xl border border-white/5 bg-gradient-to-br ${item.color} backdrop-blur-sm`}>
+                  <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2">{item.label}</p>
+                  <p className="text-white font-bold">{item.val}</p>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
       </section>
-    </>
+
+      {/* ── CTA ── */}
+      <section className="relative bg-[#020617] py-40 px-6 text-center overflow-hidden z-10 border-t border-white/5">
+        <div className="animated-grid absolute inset-0 opacity-40 mix-blend-screen" />
+        <div className="orb orb-purple w-[700px] h-[400px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20 blur-[150px]" />
+
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.5 }}
+          className="relative z-20 max-w-3xl mx-auto"
+        >
+          <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-8 leading-[1.1]">
+            Ready to Partner With <br />
+            <span className="gradient-text pb-2 inline-block">The Best?</span>
+          </h2>
+          <p className="mb-12 text-xl text-slate-300 font-light leading-relaxed">
+            Stop dealing with unreliable freelancers and slow agencies. Hire a proven engineering squad to scale your vision today.
+          </p>
+          <a
+            href="/#/contact"
+            className="glow-btn inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-fuchsia-600 to-purple-600 text-white text-lg font-bold rounded-2xl shadow-[0_0_40px_rgba(192,132,252,0.4)] hover:shadow-[0_0_60px_rgba(232,121,249,0.5)] transition-all duration-300"
+          >
+            Schedule a Discovery Call &rarr;
+          </a>
+        </motion.div>
+      </section>
+    </div>
   );
 }
 
