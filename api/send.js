@@ -1,4 +1,5 @@
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
+import supabase from '../lib/supabaseClient.js';
 
 /**
  * @swagger
@@ -47,7 +48,7 @@ const nodemailer = require('nodemailer');
  *         description: Failed to send email
  */
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', 'https://www.axiino.com'); // Secure for production
@@ -69,7 +70,6 @@ module.exports = async (req, res) => {
   }
 
   // Log to Supabase if configured
-  const supabase = require('../lib/supabaseClient');
   if (supabase) {
     try {
       await supabase.from('contacts').insert([

@@ -1,4 +1,4 @@
-const supabase = require('../lib/supabaseClient');
+import supabase from '../lib/supabaseClient.js';
 
 /**
  * @swagger
@@ -31,7 +31,7 @@ const supabase = require('../lib/supabaseClient');
  *         description: Failed to fetch team members
  */
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', 'https://www.axiino.com');
