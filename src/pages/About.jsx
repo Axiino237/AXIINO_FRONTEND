@@ -138,7 +138,8 @@ function AboutUs() {
     const fetchTeam = async () => {
       try {
         console.log("Fetching team from backend...");
-        const res = await fetch('http://localhost:3001/api/team-members', {
+        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+        const res = await fetch(`${apiUrl}/api/team-members`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -467,7 +468,7 @@ function AboutUs() {
                   </div>
                 </div>
                 <h4 className="text-xl font-bold text-white mb-2">{member.name}</h4>
-                <p className="text-sm font-semibold text-sky-400 tracking-wide uppercase">{member.designation}</p>
+                <p className="text-sm font-semibold text-sky-400 tracking-wide uppercase">{member.role}</p>
                 <div className="w-12 h-1 bg-white/10 mt-5 rounded-full" />
               </motion.div>
             ))

@@ -132,7 +132,8 @@ function Contact() {
     setStatus("loading");
     try {
       const payloadMessage = `Service Interest: ${formData.service}\n\n${formData.message}`;
-      const res = await fetch("http://localhost:3001/api/send", {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+      const res = await fetch(`${apiUrl}/api/send`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
