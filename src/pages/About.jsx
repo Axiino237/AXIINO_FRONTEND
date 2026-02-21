@@ -468,7 +468,7 @@ function AboutUs() {
                   </div>
                 </div>
                 <h4 className="text-xl font-bold text-white mb-2">{member.name}</h4>
-                <p className="text-sm font-semibold text-sky-400 tracking-wide uppercase">{member.role}</p>
+                <p className="text-sm font-semibold text-sky-400 tracking-wide uppercase">{member.role || member.designation}</p>
                 <div className="w-12 h-1 bg-white/10 mt-5 rounded-full" />
               </motion.div>
             ))
