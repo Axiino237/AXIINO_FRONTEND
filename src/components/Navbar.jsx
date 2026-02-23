@@ -7,6 +7,7 @@ import logo from "../assets/logo.png"
 const routes = [
   { path: "/", label: "Home" },
   { path: "/about", label: "About Us" },
+  { path: "/works", label: "Our Works" },
   { path: "/contact", label: "Contact Us" },
 ];
 
@@ -30,12 +31,12 @@ function Navbar() {
     >
       <div
         className={`max-w-6xl mx-auto px-6 py-3 flex justify-between items-center rounded-2xl border transition-all duration-300 ${scrolled
-            ? "bg-gray-950/90 border-white/10 shadow-lg shadow-black/40 backdrop-blur-xl"
-            : "bg-gray-950/60 border-white/5 backdrop-blur-md"
+          ? "bg-gray-950/90 border-white/10 shadow-lg shadow-black/40 backdrop-blur-xl"
+          : "bg-gray-950/60 border-white/5 backdrop-blur-md"
           }`}
       >
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3">
+        <a href="https://creativix-eight.vercel.app/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3">
           <div className="relative">
             <div className="absolute inset-0 bg-blue-500 rounded-full blur-md opacity-40" />
             <img src={logo} height="36" width="36" alt="Axiino" className="relative rounded-full" />
@@ -43,7 +44,7 @@ function Navbar() {
           <span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-fuchsia-400 bg-clip-text text-transparent tracking-wide">
             AXIINO
           </span>
-        </Link>
+        </a>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-1">
@@ -54,8 +55,8 @@ function Navbar() {
                 key={path}
                 to={path}
                 className={`relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${isActive
-                    ? "text-white"
-                    : "text-gray-400 hover:text-white hover:bg-white/5"
+                  ? "text-white"
+                  : "text-gray-400 hover:text-white hover:bg-white/5"
                   }`}
               >
                 {isActive && (
@@ -105,8 +106,8 @@ function Navbar() {
                   to={path}
                   onClick={() => setIsOpen(false)}
                   className={`flex items-center px-6 py-4 border-b border-white/5 text-sm font-medium transition-all ${isActive
-                      ? "text-blue-400 bg-blue-950/40"
-                      : "text-gray-300 hover:text-white hover:bg-white/5"
+                    ? "text-blue-400 bg-blue-950/40"
+                    : "text-gray-300 hover:text-white hover:bg-white/5"
                     }`}
                 >
                   {label}
