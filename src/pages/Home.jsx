@@ -126,6 +126,8 @@ const drivesUs = [
   { icon: <LayoutDashboard size={24} />, title: "Operational Excellence", desc: "We deliver absolutely clean, documented, and maintainable codebases for total peace of mind." },
 ];
 
+const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+
 function Home() {
   const [isLargeScreen, setIsLargeScreen] = useState(false);
 
@@ -152,7 +154,7 @@ function Home() {
         <div className="max-w-7xl mx-auto w-full flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10">
           <motion.div
             variants={containerStagger}
-            initial="hidden"
+            initial={isMobile ? false : "hidden"}
             animate="visible"
             className="flex flex-col items-start text-left lg:w-1/2"
           >
@@ -231,8 +233,8 @@ function Home() {
 
         <motion.div
           className="text-center max-w-4xl mx-auto mb-20 relative z-20"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={isMobile ? false : { opacity: 0, y: 30 }}
+          whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           viewport={{ once: true, amount: 0.01 }}
         >
@@ -247,8 +249,8 @@ function Home() {
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto relative z-20"
           variants={containerStagger}
-          initial="hidden"
-          whileInView="visible"
+          initial={isMobile ? false : "hidden"}
+          whileInView={isMobile ? undefined : "visible"}
           viewport={{ once: true, amount: 0.01 }}
         >
           {services.map((service, index) => (
@@ -307,8 +309,8 @@ function Home() {
         <motion.div
           className="grid grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto relative z-20"
           variants={containerStagger}
-          initial="hidden"
-          whileInView="visible"
+          initial={isMobile ? false : "hidden"}
+          whileInView={isMobile ? undefined : "visible"}
           viewport={{ once: true, amount: 0.01 }}
         >
           {coreValues.map((item, i) => (
@@ -351,8 +353,8 @@ function Home() {
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto relative z-20"
           variants={containerStagger}
-          initial="hidden"
-          whileInView="visible"
+          initial={isMobile ? false : "hidden"}
+          whileInView={isMobile ? undefined : "visible"}
           viewport={{ once: true, amount: 0.01 }}
         >
           {drivesUs.map((item, i) => (
@@ -388,8 +390,8 @@ function Home() {
         <motion.div
           className="flex flex-wrap justify-center gap-6 max-w-5xl mx-auto relative z-20"
           variants={containerStagger}
-          initial="hidden"
-          whileInView="visible"
+          initial={isMobile ? false : "hidden"}
+          whileInView={isMobile ? undefined : "visible"}
           viewport={{ once: true, amount: 0.01 }}
         >
           {techStack.map((tech) => (
@@ -412,8 +414,8 @@ function Home() {
         <div className="orb orb-blue w-[800px] h-[400px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20 blur-[150px]" />
 
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={isMobile ? false : { opacity: 0, y: 40 }}
+          whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true, amount: 0.01 }}
           className="relative z-20 max-w-4xl mx-auto"
