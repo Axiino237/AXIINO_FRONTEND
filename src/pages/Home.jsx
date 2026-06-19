@@ -200,7 +200,7 @@ function Home() {
                  className="w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-sky-500/30 to-fuchsia-500/30 blur-[80px]" 
                />
              </div>
-             <Lottie animationData={animationData} className="w-full max-w-[600px] h-[600px] relative z-20 drop-shadow-2xl object-right" loop={true} />
+             <Lottie animationData={animationData} className="w-full max-w-[600px] h-[600px] relative z-20 drop-shadow-2xl object-right" loop={true} rendererSettings={{ renderer: 'canvas' }} />
           </motion.div>
         </div>
 

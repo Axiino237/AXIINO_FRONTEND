@@ -94,6 +94,17 @@ const beliefs = [
   { icon: <Globe size={26} />, title: "Global Scale", desc: "We architect systems expecting them to go viral. We build for horizontal scaling from day one." },
 ];
 
+const floatingIcons = [
+  { icon: <Code2 size={24} />, top: '15%', left: '10%', delay: 0, speed: 20 },
+  { icon: <Cpu size={20} />, top: '25%', left: '85%', delay: 2, speed: 25 },
+  { icon: <Server size={22} />, top: '65%', left: '5%', delay: 4, speed: 22 },
+  { icon: <Database size={18} />, top: '85%', left: '80%', delay: 1, speed: 18 },
+  { icon: <Cloud size={24} />, top: '45%', left: '92%', delay: 3, speed: 30 },
+  { icon: <Bot size={22} />, top: '10%', left: '70%', delay: 5, speed: 24 },
+  { icon: <Globe size={20} />, top: '75%', left: '15%', delay: 2, speed: 28 },
+  { icon: <Layers size={18} />, top: '40%', left: '8%', delay: 6, speed: 26 },
+];
+
 function AboutUs() {
   const [teamMembers, setTeamMembers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -114,25 +125,16 @@ function AboutUs() {
     mouseY.set(e.clientY);
   };
 
-  const floatingIcons = [
-    { icon: <Code2 size={24} />, top: '15%', left: '10%', delay: 0, speed: 20 },
-    { icon: <Cpu size={20} />, top: '25%', left: '85%', delay: 2, speed: 25 },
-    { icon: <Server size={22} />, top: '65%', left: '5%', delay: 4, speed: 22 },
-    { icon: <Database size={18} />, top: '85%', left: '80%', delay: 1, speed: 18 },
-    { icon: <Cloud size={24} />, top: '45%', left: '92%', delay: 3, speed: 30 },
-    { icon: <Bot size={22} />, top: '10%', left: '70%', delay: 5, speed: 24 },
-    { icon: <Globe size={20} />, top: '75%', left: '15%', delay: 2, speed: 28 },
-    { icon: <Layers size={18} />, top: '40%', left: '8%', delay: 6, speed: 26 },
-  ];
-
-  const dustParticles = Array.from({ length: 20 }).map((_, i) => ({
-    id: i,
-    size: Math.random() * 3 + 1,
-    top: `${Math.random() * 100}%`,
-    left: `${Math.random() * 100}%`,
-    duration: Math.random() * 20 + 10,
-    delay: Math.random() * 5,
-  }));
+  const [dustParticles] = useState(() => 
+    Array.from({ length: 20 }).map((_, i) => ({
+      id: i,
+      size: Math.random() * 3 + 1,
+      top: `${Math.random() * 100}%`,
+      left: `${Math.random() * 100}%`,
+      duration: Math.random() * 20 + 10,
+      delay: Math.random() * 5,
+    }))
+  );
 
   useEffect(() => {
     const fetchTeam = async () => {
@@ -229,7 +231,7 @@ function AboutUs() {
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-[300px] h-[300px] rounded-full bg-gradient-to-tr from-fuchsia-500/30 to-sky-500/30 blur-[80px]" />
             </div>
-            <Lottie animationData={heroAnimation} loop={true} className="w-full h-[500px] relative z-20 drop-shadow-2xl" />
+            <Lottie animationData={heroAnimation} loop={true} className="w-full h-[500px] relative z-20 drop-shadow-2xl" rendererSettings={{ renderer: 'canvas' }} />
           </motion.div>
         </motion.div>
       </section>
