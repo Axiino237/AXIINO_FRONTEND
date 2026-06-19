@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import Lottie from "lottie-react";
 import { Users, Target, ShieldCheck, Activity, BookOpenCheck, HeartHandshake, Zap, Globe, Code2, Cpu, Server, Database, Cloud, Bot, Layers } from "lucide-react";
 import { useEffect, useState, memo } from "react";
+import { Link } from "react-router-dom";
 // Removed direct supabase import since we use the local API now
 
 const BackgroundParticle = memo(({ size, top, left, duration, delay }) => {
@@ -445,12 +446,12 @@ function AboutUs() {
           <p className="mb-12 text-xl text-slate-300 font-light leading-relaxed">
             Stop dealing with unreliable freelancers and slow agencies. Hire a proven engineering squad to scale your vision today.
           </p>
-          <a
-            href="/#/contact"
+          <Link
+            to="/contact"
             className="glow-btn inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-fuchsia-600 to-purple-600 text-white text-lg font-bold rounded-2xl shadow-[0_0_40px_rgba(192,132,252,0.4)] hover:shadow-[0_0_60px_rgba(232,121,249,0.5)] transition-all duration-300"
           >
             Schedule a Discovery Call &rarr;
-          </a>
+          </Link>
         </div>
       </section>
     </div>
