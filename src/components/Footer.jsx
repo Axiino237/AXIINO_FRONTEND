@@ -18,11 +18,14 @@ function Footer() {
   useEffect(() => {
     async function handleCounter() {
       const storageKey = "axiino_unique_visitor_v1";
-      const isNewVisitor = !localStorage.getItem(storageKey);
-
-      // Pre-emptively set storage key to avoid double increment on simultaneous calls or failures
-      if (isNewVisitor) {
-        localStorage.setItem(storageKey, "true");
+      let isNewVisitor = true;
+      try {
+        isNewVisitor = !localStorage.getItem(storageKey);
+        if (isNewVisitor) {
+          localStorage.setItem(storageKey, "true");
+        }
+      } catch (e) {
+        console.warn("Storage access error:", e);
       }
 
       try {

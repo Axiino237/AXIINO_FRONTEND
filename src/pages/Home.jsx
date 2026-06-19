@@ -224,7 +224,7 @@ function Home() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.01 }}
         >
           <p className="text-sky-400 text-sm font-bold uppercase tracking-[0.2em] mb-4">Our Expertise</p>
           <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">Comprehensive Engineering</h2>
@@ -239,7 +239,7 @@ function Home() {
           variants={containerStagger}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
+          viewport={{ once: true, amount: 0.01 }}
         >
           {services.map((service, index) => (
             <motion.div
@@ -299,7 +299,7 @@ function Home() {
           variants={containerStagger}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.01 }}
         >
           {coreValues.map((item, i) => (
             <motion.div
@@ -343,7 +343,7 @@ function Home() {
           variants={containerStagger}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
+          viewport={{ once: true, amount: 0.01 }}
         >
           {drivesUs.map((item, i) => (
             <motion.div
@@ -380,7 +380,7 @@ function Home() {
           variants={containerStagger}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.01 }}
         >
           {techStack.map((tech) => (
             <motion.div
@@ -405,7 +405,7 @@ function Home() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true, amount: 0.5 }}
+          viewport={{ once: true, amount: 0.01 }}
           className="relative z-20 max-w-4xl mx-auto"
         >
           <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-8 leading-[1.1]">

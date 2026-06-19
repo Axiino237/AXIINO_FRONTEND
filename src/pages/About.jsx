@@ -244,7 +244,7 @@ function AboutUs() {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            viewport={{ once: true, amount: 0.1 }}
+            viewport={{ once: true, amount: 0.01 }}
           >
             <p className="text-sky-400 text-sm font-bold uppercase tracking-[0.2em] mb-4">The Origin</p>
             <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
@@ -285,7 +285,7 @@ function AboutUs() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true, amount: 0.1 }}
+            viewport={{ once: true, amount: 0.01 }}
           >
             <div className="relative w-full max-w-md mx-auto aspect-square rounded-[40px] border border-white/10 bg-gradient-to-br from-[#0f172a] to-[#020617] p-8 shadow-2xl overflow-hidden card-glow group">
               <div className="absolute top-0 right-0 w-64 h-64 bg-sky-500/20 blur-[100px] rounded-full group-hover:bg-sky-500/30 transition-colors duration-500" />
@@ -372,7 +372,7 @@ function AboutUs() {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.01 }}
           >
             <p className="text-indigo-400 text-sm font-bold uppercase tracking-[0.2em] mb-4">The Expansion</p>
             <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
@@ -406,7 +406,7 @@ function AboutUs() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.01 }}
           >
             <div className="relative w-full max-w-md mx-auto aspect-video rounded-[32px] border border-white/5 bg-[#0a1122]/80 p-1 shadow-2xl overflow-hidden glass-card group">
               <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
@@ -496,7 +496,7 @@ function AboutUs() {
           variants={containerStagger}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
+          viewport={{ once: true, amount: 0.01 }}
         >
           {beliefs.map((item, i) => (
             <motion.div
@@ -582,7 +582,7 @@ function AboutUs() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true, amount: 0.5 }}
+          viewport={{ once: true, amount: 0.01 }}
           className="relative z-20 max-w-3xl mx-auto"
         >
           <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-8 leading-[1.1]">
