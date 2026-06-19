@@ -58,6 +58,7 @@ function Chatbot() {
 
     // 2. Trigger Typing Animation
     setIsTyping(true);
+    const inputLower = textToSend.toLowerCase();
 
     setTimeout(() => {
       // 3. Find matching response or default response
