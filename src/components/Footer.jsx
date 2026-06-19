@@ -17,50 +17,26 @@ function Footer() {
 
   useEffect(() => {
     async function handleCounter() {
-      const storageKey = "axiino_device_counted_v3";
-      const localViewsKey = "axiino_mock_views_v3";
-      const dbResetKey = "axiino_db_reset_v3";
+      const storageKey = "axiino_unique_visitor_v1";
       const isNewVisitor = !localStorage.getItem(storageKey);
 
       try {
-        // One-time DB reset to clear the old count
-        if (!localStorage.getItem(dbResetKey)) {
-          await supabase.from("page_views").update({ count: 0 }).eq("id", 1);
-          localStorage.setItem(dbResetKey, "true");
+        const url = isNewVisitor
+          ? "https://api.counterapi.dev/v1/axiino_unique_views/views/up"
+          : "https://api.counterapi.dev/v1/axiino_unique_views/views";
+
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data && typeof data.count === "number") {
+          setViews(data.count);
+          if (isNewVisitor) {
+            localStorage.setItem(storageKey, "true");
+          }
         }
-
-        // Fetch current count from Supabase
-        const { data, error } = await supabase
-          .from("page_views")
-          .select("count")
-          .eq("id", 1)
-          .single();
-
-        if (error) throw error;
-
-        let currentCount = data?.count || 0;
-
-        if (isNewVisitor) {
-          currentCount += 1;
-          await supabase
-            .from("page_views")
-            .update({ count: currentCount })
-            .eq("id", 1);
-          localStorage.setItem(storageKey, "true");
-        }
-
-        setViews(currentCount);
       } catch (err) {
-        // Fallback to local storage count simulation
-        let localViews = parseInt(localStorage.getItem(localViewsKey)) || 0;
-
-        if (isNewVisitor) {
-          localViews += 1;
-          localStorage.setItem(localViewsKey, localViews.toString());
-          localStorage.setItem(storageKey, "true");
-        }
-
-        setViews(localViews);
+        console.error("Counter API error:", err);
+        setViews(150); // Fallback view count
       }
     }
 
