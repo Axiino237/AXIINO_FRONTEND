@@ -60,6 +60,17 @@ const floatingIcons = [
   { icon: <Cpu size={18} />, top: '40%', left: '5%', delay: 6, speed: 26 },
 ];
 
+const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+
+const dustParticles = Array.from({ length: 15 }).map((_, i) => ({
+  id: i,
+  size: Math.random() * 3 + 1,
+  top: `${Math.random() * 100}%`,
+  left: `${Math.random() * 100}%`,
+  duration: Math.random() * 20 + 10,
+  delay: Math.random() * 5,
+}));
+
 function Contact() {
   const [formData, setFormData] = useState({
     name: "",
@@ -73,17 +84,6 @@ function Contact() {
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-
-  const [dustParticles] = useState(() =>
-    Array.from({ length: 15 }).map((_, i) => ({
-      id: i,
-      size: Math.random() * 3 + 1,
-      top: `${Math.random() * 100}%`,
-      left: `${Math.random() * 100}%`,
-      duration: Math.random() * 20 + 10,
-      delay: Math.random() * 5,
-    }))
-  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -150,7 +150,7 @@ function Contact() {
           {/* Header directly animated instead of whileInView so it loads instantly */}
           <motion.div
             className="text-center mb-16 max-w-3xl mx-auto"
-            initial="hidden"
+            initial={isMobile ? false : "hidden"}
             animate="visible"
             variants={containerVariants}
           >
@@ -175,7 +175,7 @@ function Contact() {
             {/* Contact Info Cards */}
             <motion.div
               className="lg:col-span-2 space-y-6"
-              initial="hidden"
+              initial={isMobile ? false : "hidden"}
               animate="visible"
               variants={containerVariants}
             >
@@ -216,7 +216,7 @@ function Contact() {
             <motion.form
               onSubmit={handleSubmit}
               className="lg:col-span-3 card-glow p-8 md:p-10 rounded-3xl space-y-6"
-              initial="hidden"
+              initial={isMobile ? false : "hidden"}
               animate="visible"
               variants={containerVariants}
             >

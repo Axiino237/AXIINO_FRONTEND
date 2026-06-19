@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import Lottie from "lottie-react";
 import heroAnimation from "../assets/about.json";
 import { Users, Target, ShieldCheck, Activity, BookOpenCheck, HeartHandshake, Zap, Globe, Code2, Cpu, Server, Database, Cloud, Bot, Layers } from "lucide-react";
@@ -77,9 +77,18 @@ const floatingIcons = [
   { icon: <Layers size={18} />, top: '40%', left: '8%', delay: 6, speed: 26 },
 ];
 
+const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+
+const dustParticles = Array.from({ length: 15 }).map((_, i) => ({
+  id: i,
+  size: Math.random() * 3 + 1,
+  top: `${Math.random() * 100}%`,
+  left: `${Math.random() * 100}%`,
+  duration: Math.random() * 20 + 10,
+  delay: Math.random() * 5,
+}));
+
 function AboutUs() {
-  const [teamMembers, setTeamMembers] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [isMediumScreen, setIsMediumScreen] = useState(false);
 
   useEffect(() => {
@@ -89,69 +98,8 @@ function AboutUs() {
     return () => window.removeEventListener("resize", checkSize);
   }, []);
 
-  // Mouse move parallax effect
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const springConfig = { damping: 25, stiffness: 150 };
-  const smoothX = useSpring(mouseX, springConfig);
-  const smoothY = useSpring(mouseY, springConfig);
-
-  const orbX = useTransform(smoothX, [0, 1920], [-30, 30]);
-  const orbY = useTransform(smoothY, [0, 1080], [-20, 20]);
-
-  const handleMouseMove = (e) => {
-    mouseX.set(e.clientX);
-    mouseY.set(e.clientY);
-  };
-
-  const [dustParticles] = useState(() => 
-    Array.from({ length: 20 }).map((_, i) => ({
-      id: i,
-      size: Math.random() * 3 + 1,
-      top: `${Math.random() * 100}%`,
-      left: `${Math.random() * 100}%`,
-      duration: Math.random() * 20 + 10,
-      delay: Math.random() * 5,
-    }))
-  );
-
-  useEffect(() => {
-    const fetchTeam = async () => {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 2000);
-      try {
-        console.log("Fetching team from backend...");
-        const apiUrl = import.meta.env.DEV ? (import.meta.env.VITE_API_URL || 'http://localhost:3001') : '';
-        const res = await fetch(`${apiUrl}/api/team-members`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          signal: controller.signal
-        });
-        clearTimeout(timeoutId);
-
-        const data = await res.json();
-        console.log("Backend response:", data);
-
-        if (!res.ok) throw new Error(data.error || 'Failed to fetch team');
-
-        // Ensure data is always an array
-        setTeamMembers(Array.isArray(data) ? data : []);
-      } catch (err) {
-        console.error("Failed to fetch team members:", err.message);
-      } finally {
-        clearTimeout(timeoutId);
-        setLoading(false);
-      }
-    };
-    fetchTeam();
-  }, []);
-
   return (
-    <div onMouseMove={handleMouseMove} className="w-full bg-[#050b14] relative selection:bg-sky-500/30">
+    <div className="w-full bg-[#050b14] relative selection:bg-sky-500/30">
       {/* ── PERSISTENT BACKGROUND ELEMENTS ── */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         {/* Dust Particles */}
@@ -159,8 +107,6 @@ function AboutUs() {
           <BackgroundParticle
             key={`dust-${p.id}`}
             {...p}
-            smoothX={smoothX}
-            smoothY={smoothY}
           />
         ))}
 
@@ -169,9 +115,6 @@ function AboutUs() {
           <FloatingBackgroundIcon
             key={`icon-${i}`}
             {...item}
-            index={i}
-            smoothX={smoothX}
-            smoothY={smoothY}
           />
         ))}
       </div>
@@ -179,19 +122,13 @@ function AboutUs() {
       {/* ── HERO ── */}
       <section className="relative bg-[#050b14] px-6 pt-8 pb-12 overflow-hidden z-10 w-full">
         <div className="animated-grid absolute inset-0 opacity-40 mix-blend-screen" />
-        <motion.div
-          style={{ x: orbX, y: orbY }}
-          className="orb absolute orb-blue w-[600px] h-[600px] -top-[200px] -left-[200px] opacity-30"
-        />
-        <motion.div
-          style={{ x: useTransform(smoothX, [0, 1920], [30, -30]), y: useTransform(smoothY, [0, 1080], [20, -20]) }}
-          className="orb absolute orb-fuchsia w-[400px] h-[400px] -bottom-[100px] -right-[100px] opacity-20"
-        />
+        <div className="orb absolute orb-blue w-[600px] h-[600px] -top-[200px] -left-[200px] opacity-30" />
+        <div className="orb absolute orb-fuchsia w-[400px] h-[400px] -bottom-[100px] -right-[100px] opacity-20" />
 
         <motion.div
           className="max-w-7xl mx-auto w-full z-20 grid lg:grid-cols-2 gap-12 items-center relative"
           variants={containerStagger}
-          initial="hidden"
+          initial={isMobile ? false : "hidden"}
           animate="visible"
         >
           <motion.div variants={fadeInUp} className="text-center lg:text-left px-4">
@@ -226,8 +163,8 @@ function AboutUs() {
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center">
           <motion.div
             className="lg:w-1/2"
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={isMobile ? false : { opacity: 0, x: -30 }}
+            whileInView={isMobile ? undefined : { opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true, amount: 0.01 }}
           >
@@ -267,8 +204,8 @@ function AboutUs() {
           {/* Abstract Image / Graphic side */}
           <motion.div
             className="lg:w-1/2 relative w-full"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={isMobile ? false : { opacity: 0, scale: 0.9 }}
+            whileInView={isMobile ? undefined : { opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true, amount: 0.01 }}
           >
@@ -332,8 +269,8 @@ function AboutUs() {
               <motion.div
                 key={i}
                 className="relative group p-10 rounded-[32px] border border-white/5 bg-[#030712]/50 backdrop-blur-md hover:border-white/10 transition-all duration-500 overflow-hidden"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={isMobile ? false : { opacity: 0, y: 30 }}
+                whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 viewport={{ once: true }}
               >
@@ -354,8 +291,8 @@ function AboutUs() {
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row-reverse gap-16 items-center relative z-20">
           <motion.div
             className="lg:w-1/2"
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={isMobile ? false : { opacity: 0, x: 30 }}
+            whileInView={isMobile ? undefined : { opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true, amount: 0.01 }}
           >
@@ -388,8 +325,8 @@ function AboutUs() {
           {/* Map Abstract side */}
           <motion.div
             className="lg:w-1/2 relative w-full"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={isMobile ? false : { opacity: 0, scale: 0.9 }}
+            whileInView={isMobile ? undefined : { opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true, amount: 0.01 }}
           >
@@ -434,8 +371,8 @@ function AboutUs() {
             <motion.div
               key={i}
               className="card-glow p-8 rounded-3xl text-center flex flex-col items-center group cursor-default"
-              initial={{ opacity: 0, y: 30, scale: 0.95 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              initial={isMobile ? false : { opacity: 0, y: 30, scale: 0.95 }}
+              whileInView={isMobile ? undefined : { opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
               whileHover={{ y: -8, scale: 1.02 }}
@@ -479,8 +416,8 @@ function AboutUs() {
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto relative z-20"
           variants={containerStagger}
-          initial="hidden"
-          whileInView="visible"
+          initial={isMobile ? false : "hidden"}
+          whileInView={isMobile ? undefined : "visible"}
           viewport={{ once: true, amount: 0.01 }}
         >
           {beliefs.map((item, i) => (
@@ -508,8 +445,8 @@ function AboutUs() {
         <div className="max-w-7xl mx-auto relative z-20">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={isMobile ? false : { opacity: 0, x: -30 }}
+              whileInView={isMobile ? undefined : { opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
@@ -537,8 +474,8 @@ function AboutUs() {
 
             <motion.div
               className="grid grid-cols-2 gap-4"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={isMobile ? false : { opacity: 0, scale: 0.9 }}
+              whileInView={isMobile ? undefined : { opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
             >
@@ -564,8 +501,8 @@ function AboutUs() {
         <div className="orb orb-purple w-[700px] h-[400px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20 blur-[150px]" />
 
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={isMobile ? false : { opacity: 0, y: 40 }}
+          whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true, amount: 0.01 }}
           className="relative z-20 max-w-3xl mx-auto"
