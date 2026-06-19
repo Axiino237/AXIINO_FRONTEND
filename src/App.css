@@ -1,3 +1,10 @@
+@import "tailwindcss";
+
+@theme {
+  --font-outfit: "Outfit", sans-serif;
+  --color-axiino: #0f172a;
+}
+
 /* ─── Reset / Base ─────────────────────────────────────────────────────────── */
 *,
 *::before,
