@@ -110,6 +110,8 @@ function AboutUs() {
 
   useEffect(() => {
     const fetchTeam = async () => {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 2000);
       try {
         console.log("Fetching team from backend...");
         const apiUrl = import.meta.env.DEV ? (import.meta.env.VITE_API_URL || 'http://localhost:3001') : '';
@@ -118,8 +120,10 @@ function AboutUs() {
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
-          }
+          },
+          signal: controller.signal
         });
+        clearTimeout(timeoutId);
 
         const data = await res.json();
         console.log("Backend response:", data);
@@ -131,6 +135,7 @@ function AboutUs() {
       } catch (err) {
         console.error("Failed to fetch team members:", err.message);
       } finally {
+        clearTimeout(timeoutId);
         setLoading(false);
       }
     };

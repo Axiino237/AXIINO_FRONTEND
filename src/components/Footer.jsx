@@ -28,11 +28,15 @@ function Footer() {
         console.warn("Storage access error:", e);
       }
 
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 2000);
+
       try {
         const apiUrl = import.meta.env.DEV ? (import.meta.env.VITE_API_URL || 'http://localhost:3001') : '';
         const url = `${apiUrl}/api/views?update=${isNewVisitor}`;
 
-        const response = await fetch(url);
+        const response = await fetch(url, { signal: controller.signal });
+        clearTimeout(timeoutId);
         const data = await response.json();
 
         if (data && typeof data.count === "number") {
@@ -43,6 +47,8 @@ function Footer() {
       } catch (err) {
         console.error("Counter API error:", err);
         setViews(185); // Fallback view count
+      } finally {
+        clearTimeout(timeoutId);
       }
     }
 
