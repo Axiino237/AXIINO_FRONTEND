@@ -149,7 +149,10 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px); /* Safari support */
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  transform: translate3d(0, 0, 0); /* Force GPU acceleration */
+  will-change: transform;
 }
 
 .card-glow:hover {
@@ -163,8 +166,11 @@ body {
   position: absolute !important;
   border-radius: 50%;
   filter: blur(90px);
+  -webkit-filter: blur(90px); /* Safari support */
   pointer-events: none;
   z-index: 0;
+  transform: translate3d(0, 0, 0); /* Force GPU acceleration */
+  will-change: transform;
 }
 
 /* Brighter but softer orbs */
@@ -189,6 +195,8 @@ body {
     linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
   background-size: 40px 40px;
   animation: grid-scroll 10s linear infinite;
+  transform: translate3d(0, 0, 0); /* Force GPU acceleration */
+  will-change: transform;
 }
 
 /* Button Glow Effect */
