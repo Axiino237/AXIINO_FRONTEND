@@ -234,3 +234,16 @@ body {
 .pulse-ring {
   animation: pulse-glow 3s ease-in-out infinite;
 }
+
+/* Optimize Mobile/Safari: Disable expensive GPU/CPU animation loops on small viewports */
+@media (max-w: 767px) {
+  .orb-blue,
+  .orb-purple,
+  .orb-fuchsia,
+  .orb {
+    animation: none !important;
+  }
+  .animated-grid {
+    animation: none !important;
+  }
+}
