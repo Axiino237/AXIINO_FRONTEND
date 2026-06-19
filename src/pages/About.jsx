@@ -138,7 +138,7 @@ function AboutUs() {
     const fetchTeam = async () => {
       try {
         console.log("Fetching team from backend...");
-        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+        const apiUrl = import.meta.env.DEV ? (import.meta.env.VITE_API_URL || 'http://localhost:3001') : '';
         const res = await fetch(`${apiUrl}/api/team-members`, {
           method: 'GET',
           headers: {
