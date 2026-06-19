@@ -20,23 +20,26 @@ function Footer() {
       const storageKey = "axiino_unique_visitor_v1";
       const isNewVisitor = !localStorage.getItem(storageKey);
 
+      // Pre-emptively set storage key to avoid double increment on simultaneous calls or failures
+      if (isNewVisitor) {
+        localStorage.setItem(storageKey, "true");
+      }
+
       try {
-        const url = isNewVisitor
-          ? "https://api.counterapi.dev/v1/axiino_unique_views/views/up"
-          : "https://api.counterapi.dev/v1/axiino_unique_views/views";
+        const apiUrl = import.meta.env.VITE_API_URL || '';
+        const url = `${apiUrl}/api/views?update=${isNewVisitor}`;
 
         const response = await fetch(url);
         const data = await response.json();
 
         if (data && typeof data.count === "number") {
           setViews(data.count);
-          if (isNewVisitor) {
-            localStorage.setItem(storageKey, "true");
-          }
+        } else {
+          setViews(210);
         }
       } catch (err) {
         console.error("Counter API error:", err);
-        setViews(150); // Fallback view count
+        setViews(185); // Fallback view count
       }
     }
 
