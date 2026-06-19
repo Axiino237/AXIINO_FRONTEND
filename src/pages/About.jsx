@@ -23,63 +23,35 @@ const itemVariant = {
   visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
-const BackgroundParticle = ({ size, top, left, duration, delay, smoothX, smoothY }) => {
-  const [offsetX] = useState(() => Math.random() * 40 - 20);
-  const [offsetY] = useState(() => Math.random() * 40 - 20);
-  const x = useTransform(smoothX, [0, 1920], [-offsetX, offsetX]);
-  const y = useTransform(smoothY, [0, 1080], [-offsetY, offsetY]);
-
+const BackgroundParticle = ({ size, top, left, duration, delay }) => {
   return (
-    <motion.div
-      className="absolute rounded-full bg-white/10"
+    <div
+      className="absolute rounded-full bg-white/10 pointer-events-none"
       style={{
         width: size,
         height: size,
         top,
         left,
-        x,
-        y,
-      }}
-      animate={{
-        y: [0, -100, 0],
-        opacity: [0.1, 0.4, 0.1],
-      }}
-      transition={{
-        duration,
-        repeat: Infinity,
-        ease: "linear",
-        delay,
+        animation: `float-particle ${duration}s linear infinite`,
+        animationDelay: `${delay}s`,
       }}
     />
   );
 };
 
-const FloatingBackgroundIcon = ({ icon, top, left, delay, speed, index, smoothX, smoothY }) => {
-  const x = useTransform(smoothX, [0, 1920], [(index % 2 === 0 ? 1 : -1) * 40, (index % 2 === 0 ? -1 : 1) * 40]);
-  const y = useTransform(smoothY, [0, 1080], [(index % 3 === 0 ? 1 : -1) * 30, (index % 3 === 0 ? -1 : 1) * 30]);
-
+const FloatingBackgroundIcon = ({ icon, top, left, delay, speed }) => {
   return (
-    <motion.div
-      className="absolute text-white/5 hover:text-white/10 transition-colors"
+    <div
+      className="absolute text-white/5 hover:text-white/10 transition-colors pointer-events-none"
       style={{
         top,
         left,
-        x,
-        y,
-      }}
-      animate={{
-        y: [0, -20, 0],
-        rotate: [0, 10, -10, 0],
-      }}
-      transition={{
-        duration: speed,
-        repeat: Infinity,
-        ease: "easeInOut",
-        delay,
+        animation: `float-icon ${speed}s ease-in-out infinite`,
+        animationDelay: `${delay}s`,
       }}
     >
       {icon}
-    </motion.div>
+    </div>
   );
 };
 
