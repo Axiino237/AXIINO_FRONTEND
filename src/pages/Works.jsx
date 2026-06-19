@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Globe, ArrowRight } from "lucide-react";
 import creativixImage from "../assets/creativix_portfolio.png";
+import umshivImage from "../assets/umshiv_portfolio.png";
+import firstStepImage from "../assets/firststep_portfolio.png";
 
 const categories = ["All", "Branding & Web Design"];
 
@@ -15,6 +17,24 @@ const projects = [
         image: creativixImage,
         url: "https://creativix-eight.vercel.app/"
     },
+    {
+        id: 2,
+        title: "UMSHIV Group",
+        category: "Branding & Web Design",
+        description: "A multi-brand corporate portal built for UMSHIV Group of Companies, showcasing their diverse portfolio of services across technology, travel, design, events, and branding.",
+        icon: <Globe className="text-sky-400" />,
+        image: umshivImage,
+        url: "https://www.umshiv.com/"
+    },
+    {
+        id: 3,
+        title: "The First Step Solutions",
+        category: "Branding & Web Design",
+        description: "An interactive digital presence and brand activation website for a premium event management and stall fabrication company, showcasing experiential design and corporate events.",
+        icon: <Globe className="text-sky-400" />,
+        image: firstStepImage,
+        url: "https://thefirstsetpsolution.com"
+    }
 ];
 
 const containerVariants = {
@@ -98,7 +118,7 @@ const Works = () => {
                     initial="hidden"
                     animate="visible"
                     layout
-                    className="flex justify-center px-2 md:px-0"
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center px-2 md:px-0"
                 >
                     <AnimatePresence mode="popLayout">
                         {filteredProjects.map((project) => (

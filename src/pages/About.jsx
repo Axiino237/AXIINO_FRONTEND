@@ -437,42 +437,43 @@ function AboutUs() {
           </p>
         </div>
 
-        <div
-          className="flex flex-wrap justify-center gap-8 max-w-7xl mx-auto relative z-20"
-        >
-          {loading ? (
-            <div className="flex justify-center w-full py-20">
-              <div className="w-10 h-10 border-4 border-sky-500/30 border-t-sky-400 rounded-full animate-spin" />
-            </div>
-          ) : teamMembers.length === 0 ? (
-            <p className="text-center w-full text-slate-500 text-lg">Team assembly in progress...</p>
-          ) : (
-            teamMembers.map((member, i) => (
-              <motion.div
-                key={member.id || i}
-                className="card-glow p-8 rounded-3xl w-full sm:w-[350px] text-center flex flex-col items-center group cursor-default"
-                initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
-              >
-                <div className="relative w-28 h-28 mb-6">
-                  {/* Outer glow ring */}
-                  <div className="absolute inset-[-10px] rounded-full bg-gradient-to-br from-sky-400 to-fuchsia-500 blur-md opacity-30 group-hover:opacity-70 transition-opacity duration-500" />
-                  {/* Image container */}
-                  <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-[#0f172a] bg-[#1e293b] flex items-center justify-center text-3xl font-bold text-white shadow-xl">
-                    {member.image ? (
-                      <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
-                    ) : (
-                      member.name ? member.name.charAt(0).toUpperCase() : "?"
-                    )}
-                  </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto relative z-20 w-full">
+          {[
+            { name: "Aravindhan R", role: "Founder & CEO", initials: "AR", glow: "from-blue-500 to-indigo-500" },
+            { name: "Vijay", role: "Co Founder", initials: "VJ", glow: "from-fuchsia-500 to-pink-500" },
+            { name: "Sujitha", role: "CTO", initials: "SJ", glow: "from-sky-500 to-teal-500" },
+            { name: "Saran", role: "AI & Software Solutions", initials: "SR", glow: "from-purple-500 to-indigo-500" }
+          ].map((member, i) => (
+            <motion.div
+              key={i}
+              className="card-glow p-8 rounded-3xl text-center flex flex-col items-center group cursor-default"
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
+              whileHover={{ y: -8, scale: 1.02 }}
+            >
+              <div className="relative w-24 h-24 mb-6">
+                {/* Outer glow ring */}
+                <div className={`absolute inset-[-6px] rounded-full bg-gradient-to-br ${member.glow} blur-md opacity-30 group-hover:opacity-75 transition-opacity duration-500`} />
+                {/* Avatar container */}
+                <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-white/10 bg-[#0a1122] flex items-center justify-center text-2xl font-black text-white shadow-xl">
+                  <span className={`bg-gradient-to-r ${member.glow} bg-clip-text text-transparent`}>
+                    {member.initials}
+                  </span>
                 </div>
-                <h4 className="text-xl font-bold text-white mb-2">{member.name}</h4>
-                <p className="text-sm font-semibold text-sky-400 tracking-wide uppercase">{member.role || member.designation}</p>
-                <div className="w-12 h-1 bg-white/10 mt-5 rounded-full" />
-              </motion.div>
-            ))
-          )}
+              </div>
+              
+              <h4 className="text-xl font-bold text-white mb-2 group-hover:text-sky-400 transition-colors">
+                {member.name}
+              </h4>
+              <p className="text-xs font-semibold text-slate-400 tracking-wider uppercase">
+                {member.role}
+              </p>
+              
+              <div className="w-12 h-0.5 bg-white/5 group-hover:bg-sky-500/30 mt-6 rounded-full transition-colors" />
+            </motion.div>
+          ))}
         </div>
       </section>
 
@@ -500,6 +501,8 @@ function AboutUs() {
               key={i}
               className="card-glow p-8 rounded-3xl"
               variants={itemVariant}
+              whileHover={{ y: -8, scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
               <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-fuchsia-500/20 to-purple-500/20 border border-fuchsia-400/30 flex items-center justify-center text-fuchsia-300 shadow-[0_0_15px_rgba(232,121,249,0.2)] mb-6">
                 {item.icon}

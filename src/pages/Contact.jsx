@@ -74,7 +74,7 @@ const FloatingBackgroundIcon = ({ icon, top, left, delay, speed, index, smoothX,
 
 const contactInfo = [
   { icon: <Mail size={22} />, label: "Email Us", value: "axiino237@gmail.com", subValue: "Replies within 2 hours" },
-  { icon: <Phone size={22} />, label: "Call Us", value: "+91 7397349160", subValue: "Mon-Fri, 9am - 6pm EST" },
+  { icon: <Phone size={22} />, label: "Call Us", value: "+91 93613 95699", subValue: "Mon-Sat, 9am - 7pm IST" },
   { icon: <MapPin size={22} />, label: "Headquarters", value: "Chennai, Tamil Nadu", subValue: "India" },
 ];
 
@@ -208,7 +208,7 @@ function Contact() {
               <span className="w-2.5 h-2.5 rounded-full bg-sky-400 shadow-[0_0_8px_#38bdf8] animate-[pulse-glow_2s_infinite]" />
               Fast-Track Your Product
             </motion.div>
-            <motion.h2 variants={fadeInUp} className="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight leading-[1.1]">
+            <motion.h2 variants={fadeInUp} className="text-3xl sm:text-5xl md:text-6xl font-extrabold mb-6 tracking-tight leading-[1.1]">
               Let's Start a <br className="hidden md:block" />
               <span className="gradient-text pb-2 inline-block">Conversation</span>
             </motion.h2>

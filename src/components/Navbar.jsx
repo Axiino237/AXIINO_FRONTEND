@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 import logo from "../assets/logo.png"
 
 const routes = [
@@ -70,6 +70,18 @@ function Navbar() {
               </Link>
             );
           })}
+          <a
+            href="https://www.umshiv.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-3 relative inline-block p-[1px] rounded-full bg-gradient-to-r from-emerald-500 via-teal-500 to-amber-500 hover:scale-105 transition-transform duration-300 group"
+          >
+            <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#050b14]/90 text-white text-xs font-semibold tracking-wide transition duration-300 group-hover:bg-[#050b14]/75">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]" />
+              Go to the Tree
+              <ArrowUpRight size={13} className="text-amber-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+            </span>
+          </a>
           <Link
             to="/contact"
             className="ml-3 px-4 py-2 bg-gradient-to-r from-blue-600 to-fuchsia-600 text-white text-sm font-semibold rounded-xl hover:opacity-90 transition shadow-lg shadow-blue-900/40"
@@ -121,6 +133,19 @@ function Navbar() {
             >
               Get Started →
             </Link>
+            <a
+              href="https://www.umshiv.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsOpen(false)}
+              className="flex items-center justify-between px-6 py-4 border-t border-white/5 text-sm font-semibold text-emerald-400 hover:text-white transition"
+            >
+              <span className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]" />
+                Go to the Tree
+              </span>
+              <ArrowUpRight size={16} className="text-amber-400" />
+            </a>
           </motion.div>
         )}
       </AnimatePresence>

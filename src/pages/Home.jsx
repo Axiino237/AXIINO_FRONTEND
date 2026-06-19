@@ -192,11 +192,15 @@ function Home() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
           >
-            {/* Glow ring behind Lottie */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-sky-500/30 to-fuchsia-500/30 blur-[80px]" />
-            </div>
-            <Lottie animationData={animationData} className="w-full max-w-[600px] h-[600px] relative z-20 drop-shadow-2xl object-right" loop={true} />
+             {/* Glow ring behind Lottie */}
+             <div className="absolute inset-0 flex items-center justify-center">
+               <motion.div 
+                 animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.65, 0.4] }}
+                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                 className="w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-sky-500/30 to-fuchsia-500/30 blur-[80px]" 
+               />
+             </div>
+             <Lottie animationData={animationData} className="w-full max-w-[600px] h-[600px] relative z-20 drop-shadow-2xl object-right" loop={true} />
           </motion.div>
         </div>
 
@@ -242,6 +246,8 @@ function Home() {
               key={index}
               className="card-glow p-8 rounded-3xl flex flex-col h-full cursor-default"
               variants={itemVariant}
+              whileHover={{ y: -8, scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-500/20 to-fuchsia-500/20 border border-sky-400/30 flex items-center justify-center text-sky-300 shadow-[0_0_15px_rgba(56,189,248,0.2)]">
@@ -344,6 +350,8 @@ function Home() {
               key={item.title}
               className="card-glow p-8 rounded-3xl"
               variants={itemVariant}
+              whileHover={{ y: -8, scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
               <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-fuchsia-500/20 border border-purple-400/30 flex items-center justify-center text-purple-300 shadow-[0_0_15px_rgba(192,132,252,0.2)] mb-6">
                 {item.icon}
@@ -407,12 +415,16 @@ function Home() {
           <p className="mb-12 text-xl text-slate-300 font-light leading-relaxed max-w-2xl mx-auto">
             Axiino is ready to transform your complex business requirements into elegant, high-performance software. Let's start the conversation.
           </p>
-          <a
-            href="/#/contact"
-            className="glow-btn inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-sky-500 to-fuchsia-600 text-white text-lg font-bold rounded-2xl shadow-[0_0_40px_rgba(56,189,248,0.4)] hover:shadow-[0_0_60px_rgba(192,132,252,0.6)] transition-all duration-300"
-          >
-            Contact Our Team &rarr;
-          </a>
+           <motion.a
+             href="/#/contact"
+             whileHover={{ scale: 1.05, y: -2 }}
+             whileTap={{ scale: 0.95 }}
+             animate={{ boxShadow: ["0 0 25px rgba(56, 189, 248, 0.3)", "0 0 45px rgba(192, 132, 252, 0.5)", "0 0 25px rgba(56, 189, 248, 0.3)"] }}
+             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+             className="glow-btn inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-sky-500 to-fuchsia-600 text-white text-lg font-bold rounded-2xl border border-white/20"
+           >
+             Contact Our Team &rarr;
+           </motion.a>
         </motion.div>
       </section>
     </>

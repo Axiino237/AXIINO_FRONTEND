@@ -7,10 +7,13 @@ import Works from "./pages/Works";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
+import Chatbot from "./components/Chatbot";
+import SEO from "./components/SEO";
 
 function App() {
   return (
     <Router>
+      <SEO />
       <Navbar />
       <ScrollToTop />
       <Routes>
@@ -21,6 +24,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
       </Routes>
 
+      <Chatbot />
       <Footer />
     </Router>
   );
