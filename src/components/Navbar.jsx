@@ -23,12 +23,7 @@ function Navbar() {
   }, []);
 
   return (
-    <motion.nav
-      initial={{ y: -30, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed top-4 inset-x-0 z-50 px-4"
-    >
+    <nav className="fixed top-4 inset-x-0 z-50 px-4">
       <div
         className={`max-w-6xl mx-auto px-6 py-3 flex justify-between items-center rounded-2xl border transition-all duration-300 ${scrolled
           ? "bg-gray-950/90 border-white/10 shadow-lg shadow-black/40 backdrop-blur-xl"
@@ -101,55 +96,47 @@ function Navbar() {
       </div>
 
       {/* Mobile Dropdown */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -8, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -8, scale: 0.98 }}
-            transition={{ duration: 0.2 }}
-            className="mt-2 max-w-6xl mx-auto rounded-2xl border border-white/10 bg-gray-950/95 backdrop-blur-xl shadow-xl overflow-hidden"
+      {isOpen && (
+        <div className="mt-2 max-w-6xl mx-auto rounded-2xl border border-white/10 bg-gray-950/95 backdrop-blur-xl shadow-xl overflow-hidden transition-all duration-150 ease-out">
+          {routes.map(({ path, label }) => {
+            const isActive = pathname === path;
+            return (
+              <Link
+                key={path}
+                to={path}
+                onClick={() => setIsOpen(false)}
+                className={`flex items-center px-6 py-4 border-b border-white/5 text-sm font-medium transition-all ${isActive
+                  ? "text-blue-400 bg-blue-950/40"
+                  : "text-gray-300 hover:text-white hover:bg-white/5"
+                  }`}
+              >
+                {label}
+              </Link>
+            );
+          })}
+          <Link
+            to="/contact"
+            onClick={() => setIsOpen(false)}
+            className="flex items-center px-6 py-4 text-sm font-semibold text-blue-400 hover:text-white transition"
           >
-            {routes.map(({ path, label }) => {
-              const isActive = pathname === path;
-              return (
-                <Link
-                  key={path}
-                  to={path}
-                  onClick={() => setIsOpen(false)}
-                  className={`flex items-center px-6 py-4 border-b border-white/5 text-sm font-medium transition-all ${isActive
-                    ? "text-blue-400 bg-blue-950/40"
-                    : "text-gray-300 hover:text-white hover:bg-white/5"
-                    }`}
-                >
-                  {label}
-                </Link>
-              );
-            })}
-            <Link
-              to="/contact"
-              onClick={() => setIsOpen(false)}
-              className="flex items-center px-6 py-4 text-sm font-semibold text-blue-400 hover:text-white transition"
-            >
-              Get Started →
-            </Link>
-            <a
-              href="https://www.umshiv.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setIsOpen(false)}
-              className="flex items-center justify-between px-6 py-4 border-t border-white/5 text-sm font-semibold text-emerald-400 hover:text-white transition"
-            >
-              <span className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]" />
-                Go to the Tree
-              </span>
-              <ArrowUpRight size={16} className="text-amber-400" />
-            </a>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.nav>
+            Get Started →
+          </Link>
+          <a
+            href="https://www.umshiv.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setIsOpen(false)}
+            className="flex items-center justify-between px-6 py-4 border-t border-white/5 text-sm font-semibold text-emerald-400 hover:text-white transition"
+          >
+            <span className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]" />
+              Go to the Tree
+            </span>
+            <ArrowUpRight size={16} className="text-amber-400" />
+          </a>
+        </div>
+      )}
+    </nav>
   );
 }
 
