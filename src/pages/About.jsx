@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import Lottie from "lottie-react";
-import heroAnimation from "../assets/about.json";
 import { Users, Target, ShieldCheck, Activity, BookOpenCheck, HeartHandshake, Zap, Globe, Code2, Cpu, Server, Database, Cloud, Bot, Layers } from "lucide-react";
 import { useEffect, useState, memo } from "react";
 // Removed direct supabase import since we use the local API now
@@ -94,6 +93,7 @@ const PersistentBackground = memo(({ isMobile }) => {
 function AboutUs() {
   const [isMediumScreen, setIsMediumScreen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [heroAnimation, setHeroAnimation] = useState(null);
 
   useEffect(() => {
     const checkSize = () => {
@@ -102,6 +102,12 @@ function AboutUs() {
     };
     checkSize();
     window.addEventListener("resize", checkSize);
+
+    // Dynamically load Lottie JSON to optimize main bundle size
+    import("../assets/about.json").then((data) => {
+      setHeroAnimation(data.default);
+    });
+
     return () => window.removeEventListener("resize", checkSize);
   }, []);
 
@@ -137,7 +143,7 @@ function AboutUs() {
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-[300px] h-[300px] rounded-full bg-gradient-to-tr from-fuchsia-500/30 to-sky-500/30 blur-[80px]" />
             </div>
-            {isMediumScreen && <Lottie animationData={heroAnimation} loop={true} className="w-full h-[500px] relative z-20 drop-shadow-2xl" rendererSettings={{ renderer: 'canvas' }} />}
+            {isMediumScreen && heroAnimation && <Lottie animationData={heroAnimation} loop={true} className="w-full h-[500px] relative z-20 drop-shadow-2xl" rendererSettings={{ renderer: 'canvas' }} />}
           </div>
         </div>
       </section>
