@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Facebook, Twitter, Linkedin, Instagram, Mail, Phone, MapPin, X, Eye } from "lucide-react";
 import logo from "../assets/logo.png";
-import { supabase } from "../lib/supabase";
 
 const socialLinks = [
   // { icon: <Facebook size={18} />, href: "#" },
