@@ -2,28 +2,10 @@ import { motion } from "framer-motion";
 import Lottie from "lottie-react";
 import heroAnimation from "../assets/about.json";
 import { Users, Target, ShieldCheck, Activity, BookOpenCheck, HeartHandshake, Zap, Globe, Code2, Cpu, Server, Database, Cloud, Bot, Layers } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 // Removed direct supabase import since we use the local API now
 
-const containerStagger = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 }
-  },
-};
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
-};
-
-const itemVariant = {
-  hidden: { opacity: 0, y: 20, scale: 0.95 },
-  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
-};
-
-const BackgroundParticle = ({ size, top, left, duration, delay }) => {
+const BackgroundParticle = memo(({ size, top, left, duration, delay }) => {
   return (
     <div
       className="absolute rounded-full bg-white/10 pointer-events-none"
@@ -37,9 +19,9 @@ const BackgroundParticle = ({ size, top, left, duration, delay }) => {
       }}
     />
   );
-};
+});
 
-const FloatingBackgroundIcon = ({ icon, top, left, delay, speed }) => {
+const FloatingBackgroundIcon = memo(({ icon, top, left, delay, speed }) => {
   return (
     <div
       className="absolute text-white/5 hover:text-white/10 transition-colors pointer-events-none"
@@ -53,7 +35,7 @@ const FloatingBackgroundIcon = ({ icon, top, left, delay, speed }) => {
       {icon}
     </div>
   );
-};
+});
 
 const beliefs = [
   { icon: <Users size={26} />, title: "Collaborative Unity", desc: "We believe cross-functional teamwork leads to the most resilient architectures and best client outcomes." },
@@ -77,8 +59,6 @@ const floatingIcons = [
   { icon: <Layers size={18} />, top: '40%', left: '8%', delay: 6, speed: 26 },
 ];
 
-const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-
 const dustParticles = Array.from({ length: 15 }).map((_, i) => ({
   id: i,
   size: Math.random() * 3 + 1,
@@ -88,11 +68,38 @@ const dustParticles = Array.from({ length: 15 }).map((_, i) => ({
   delay: Math.random() * 5,
 }));
 
+const PersistentBackground = memo(({ isMobile }) => {
+  if (isMobile) return null;
+  return (
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+      {/* Dust Particles */}
+      {dustParticles.map((p) => (
+        <BackgroundParticle
+          key={`dust-${p.id}`}
+          {...p}
+        />
+      ))}
+
+      {/* Floating IT Icons */}
+      {floatingIcons.map((item, i) => (
+        <FloatingBackgroundIcon
+          key={`icon-${i}`}
+          {...item}
+        />
+      ))}
+    </div>
+  );
+});
+
 function AboutUs() {
   const [isMediumScreen, setIsMediumScreen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkSize = () => setIsMediumScreen(window.innerWidth >= 768);
+    const checkSize = () => {
+      setIsMediumScreen(window.innerWidth >= 768);
+      setIsMobile(window.innerWidth < 768);
+    };
     checkSize();
     window.addEventListener("resize", checkSize);
     return () => window.removeEventListener("resize", checkSize);
@@ -101,23 +108,7 @@ function AboutUs() {
   return (
     <div className="w-full bg-[#050b14] relative selection:bg-sky-500/30">
       {/* ── PERSISTENT BACKGROUND ELEMENTS ── */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        {/* Dust Particles */}
-        {dustParticles.map((p) => (
-          <BackgroundParticle
-            key={`dust-${p.id}`}
-            {...p}
-          />
-        ))}
-
-        {/* Floating IT Icons */}
-        {floatingIcons.map((item, i) => (
-          <FloatingBackgroundIcon
-            key={`icon-${i}`}
-            {...item}
-          />
-        ))}
-      </div>
+      <PersistentBackground isMobile={isMobile} />
 
       {/* ── HERO ── */}
       <section className="relative bg-[#050b14] px-6 pt-8 pb-12 overflow-hidden z-10 w-full">

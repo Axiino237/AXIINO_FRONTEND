@@ -1,18 +1,7 @@
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, memo } from "react";
 import { Mail, Phone, MapPin, Send, MessageSquare, Shield, Lock, Globe, Database, Cpu } from "lucide-react";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
-};
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
-};
-
-const BackgroundParticle = ({ size, top, left, duration, delay }) => {
+const BackgroundParticle = memo(({ size, top, left, duration, delay }) => {
   return (
     <div
       className="absolute rounded-full bg-white/10 pointer-events-none"
@@ -26,9 +15,9 @@ const BackgroundParticle = ({ size, top, left, duration, delay }) => {
       }}
     />
   );
-};
+});
 
-const FloatingBackgroundIcon = ({ icon, top, left, delay, speed }) => {
+const FloatingBackgroundIcon = memo(({ icon, top, left, delay, speed }) => {
   return (
     <div
       className="absolute text-white/5 pointer-events-none"
@@ -42,7 +31,7 @@ const FloatingBackgroundIcon = ({ icon, top, left, delay, speed }) => {
       {icon}
     </div>
   );
-};
+});
 
 const contactInfo = [
   { icon: <Mail size={22} />, label: "Email Us", value: "axiino237@gmail.com", subValue: "Replies within 2 hours" },
@@ -60,8 +49,6 @@ const floatingIcons = [
   { icon: <Cpu size={18} />, top: '40%', left: '5%', delay: 6, speed: 26 },
 ];
 
-const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-
 const dustParticles = Array.from({ length: 15 }).map((_, i) => ({
   id: i,
   size: Math.random() * 3 + 1,
@@ -71,7 +58,31 @@ const dustParticles = Array.from({ length: 15 }).map((_, i) => ({
   delay: Math.random() * 5,
 }));
 
+const PersistentBackground = memo(({ isMobile }) => {
+  if (isMobile) return null;
+  return (
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+      {/* Dust Particles */}
+      {dustParticles.map((p) => (
+        <BackgroundParticle
+          key={`dust-${p.id}`}
+          {...p}
+        />
+      ))}
+
+      {/* Floating IT Icons */}
+      {floatingIcons.map((item, i) => (
+        <FloatingBackgroundIcon
+          key={`icon-${i}`}
+          {...item}
+        />
+      ))}
+    </div>
+  );
+});
+
 function Contact() {
+  const [isMobile, setIsMobile] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -80,6 +91,13 @@ function Contact() {
     message: "",
   });
   const [status, setStatus] = useState(null);
+
+  useEffect(() => {
+    const checkSize = () => setIsMobile(window.innerWidth < 768);
+    checkSize();
+    window.addEventListener("resize", checkSize);
+    return () => window.removeEventListener("resize", checkSize);
+  }, []);
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -120,23 +138,7 @@ function Contact() {
   return (
     <div className="w-full relative selection:bg-sky-500/30">
       {/* ── PERSISTENT BACKGROUND ELEMENTS ── */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        {/* Dust Particles */}
-        {dustParticles.map((p) => (
-          <BackgroundParticle
-            key={`dust-${p.id}`}
-            {...p}
-          />
-        ))}
-
-        {/* Floating IT Icons */}
-        {floatingIcons.map((item, i) => (
-          <FloatingBackgroundIcon
-            key={`icon-${i}`}
-            {...item}
-          />
-        ))}
-      </div>
+      <PersistentBackground isMobile={isMobile} />
 
       <section className="relative w-full bg-[#050b14] text-white overflow-hidden pb-32 pt-40">
         {/* Background styling for contrast */}
