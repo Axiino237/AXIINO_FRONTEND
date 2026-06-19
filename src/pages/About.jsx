@@ -125,19 +125,12 @@ function AboutUs() {
         <div className="orb absolute orb-blue w-[600px] h-[600px] -top-[200px] -left-[200px] opacity-30" />
         <div className="orb absolute orb-fuchsia w-[400px] h-[400px] -bottom-[100px] -right-[100px] opacity-20" />
 
-        <motion.div
-          className="max-w-7xl mx-auto w-full z-20 grid lg:grid-cols-2 gap-12 items-center relative"
-          variants={containerStagger}
-          initial={isMobile ? false : "hidden"}
-          animate="visible"
-        >
-          <motion.div variants={fadeInUp} className="text-center lg:text-left px-4">
-            <motion.div
-              className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-fuchsia-400/40 bg-fuchsia-950/50 text-fuchsia-200 text-sm font-semibold tracking-wide shadow-[0_0_15px_rgba(232,121,249,0.2)] mb-8"
-            >
+        <div className="max-w-7xl mx-auto w-full z-20 grid lg:grid-cols-2 gap-12 items-center relative">
+          <div className="text-center lg:text-left px-4">
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-fuchsia-400/40 bg-fuchsia-950/50 text-fuchsia-200 text-sm font-semibold tracking-wide shadow-[0_0_15px_rgba(232,121,249,0.2)] mb-8">
               <span className="w-2.5 h-2.5 rounded-full bg-fuchsia-400 shadow-[0_0_8px_#e879f9] animate-[pulse-glow_2s_infinite]" />
               Who We Are
-            </motion.div>
+            </div>
 
             <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6 text-white">
               Behind <br />
@@ -147,27 +140,21 @@ function AboutUs() {
             <p className="text-slate-300 text-lg sm:text-xl leading-relaxed max-w-xl mx-auto lg:mx-0 font-light mb-10">
               Axiino is an elite collective of software architects, designers, and strategists. We reject mediocrity, choosing instead to build systems that dominate markets.
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div variants={fadeInUp} className="relative hidden md:block">
+          <div className="relative hidden md:block">
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-[300px] h-[300px] rounded-full bg-gradient-to-tr from-fuchsia-500/30 to-sky-500/30 blur-[80px]" />
             </div>
             {isMediumScreen && <Lottie animationData={heroAnimation} loop={true} className="w-full h-[500px] relative z-20 drop-shadow-2xl" rendererSettings={{ renderer: 'canvas' }} />}
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </section>
 
       {/* ── OUR STORY / MISSION ── */}
       <section className="relative bg-[#030712] px-6 py-24 overflow-hidden z-10">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center">
-          <motion.div
-            className="lg:w-1/2"
-            initial={isMobile ? false : { opacity: 0, x: -30 }}
-            whileInView={isMobile ? undefined : { opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true, amount: 0.01 }}
-          >
+          <div className="lg:w-1/2">
             <p className="text-sky-400 text-sm font-bold uppercase tracking-[0.2em] mb-4">The Origin</p>
             <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
               We started with a simple question: <span className="gradient-text pb-2 inline-block">Why compromise?</span>
@@ -199,16 +186,10 @@ function AboutUs() {
                 <p className="text-slate-400 text-sm font-semibold uppercase tracking-wider">Arch. Support</p>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Abstract Image / Graphic side */}
-          <motion.div
-            className="lg:w-1/2 relative w-full"
-            initial={isMobile ? false : { opacity: 0, scale: 0.9 }}
-            whileInView={isMobile ? undefined : { opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true, amount: 0.01 }}
-          >
+          <div className="lg:w-1/2 relative w-full">
             <div className="relative w-full max-w-md mx-auto aspect-square rounded-[40px] border border-white/10 bg-gradient-to-br from-[#0f172a] to-[#020617] p-8 shadow-2xl overflow-hidden card-glow group">
               <div className="absolute top-0 right-0 w-64 h-64 bg-sky-500/20 blur-[100px] rounded-full group-hover:bg-sky-500/30 transition-colors duration-500" />
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-fuchsia-500/20 blur-[100px] rounded-full group-hover:bg-fuchsia-500/30 transition-colors duration-500" />
@@ -227,7 +208,7 @@ function AboutUs() {
                 <div className="w-full h-24 bg-gradient-to-t from-[#030712] to-transparent absolute bottom-0 left-0 rounded-b-2xl" />
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -266,19 +247,15 @@ function AboutUs() {
                 color: "from-indigo-500 to-indigo-400"
               }
             ].map((item, i) => (
-              <motion.div
+              <div
                 key={i}
-                className="relative group p-10 rounded-[32px] border border-white/5 bg-[#030712]/50 backdrop-blur-md hover:border-white/10 transition-all duration-500 overflow-hidden"
-                initial={isMobile ? false : { opacity: 0, y: 30 }}
-                whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                viewport={{ once: true }}
+                className="relative group p-10 rounded-[32px] border border-white/5 bg-[#030712]/50 backdrop-blur-md hover:border-white/10 transition-all duration-500 overflow-hidden hover:-translate-y-2 hover:scale-[1.02]"
               >
                 <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${item.color} opacity-[0.03] blur-2xl group-hover:opacity-[0.1] transition-opacity`} />
                 <span className="text-5xl font-black text-white/5 mb-6 block group-hover:text-white/10 transition-colors">{item.step}</span>
                 <h4 className="text-2xl font-bold text-white mb-4">{item.title}</h4>
                 <p className="text-slate-400 leading-relaxed font-light">{item.desc}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -289,13 +266,7 @@ function AboutUs() {
         <div className="orb absolute orb-indigo w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-10 blur-[150px]" />
 
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row-reverse gap-16 items-center relative z-20">
-          <motion.div
-            className="lg:w-1/2"
-            initial={isMobile ? false : { opacity: 0, x: 30 }}
-            whileInView={isMobile ? undefined : { opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true, amount: 0.01 }}
-          >
+          <div className="lg:w-1/2">
             <p className="text-indigo-400 text-sm font-bold uppercase tracking-[0.2em] mb-4">The Expansion</p>
             <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
               A Borderless <span className="gradient-text pb-2 inline-block">Architecture</span>
@@ -320,16 +291,10 @@ function AboutUs() {
                 Global Edge CDN
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Map Abstract side */}
-          <motion.div
-            className="lg:w-1/2 relative w-full"
-            initial={isMobile ? false : { opacity: 0, scale: 0.9 }}
-            whileInView={isMobile ? undefined : { opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true, amount: 0.01 }}
-          >
+          <div className="lg:w-1/2 relative w-full">
             <div className="relative w-full max-w-md mx-auto aspect-video rounded-[32px] border border-white/5 bg-[#0a1122]/80 p-1 shadow-2xl overflow-hidden glass-card group">
               <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
               <div className="relative w-full h-full rounded-[31px] bg-[#030712] overflow-hidden flex items-center justify-center">
@@ -344,7 +309,7 @@ function AboutUs() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-transparent" />
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -368,14 +333,9 @@ function AboutUs() {
             { name: "Sujitha", role: "CTO", initials: "SJ", glow: "from-sky-500 to-teal-500" },
             { name: "Saran", role: "AI & Software Solutions", initials: "SR", glow: "from-purple-500 to-indigo-500" }
           ].map((member, i) => (
-            <motion.div
+            <div
               key={i}
-              className="card-glow p-8 rounded-3xl text-center flex flex-col items-center group cursor-default"
-              initial={isMobile ? false : { opacity: 0, y: 30, scale: 0.95 }}
-              whileInView={isMobile ? undefined : { opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
-              whileHover={{ y: -8, scale: 1.02 }}
+              className="card-glow p-8 rounded-3xl text-center flex flex-col items-center group cursor-default hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300"
             >
               <div className="relative w-24 h-24 mb-6">
                 {/* Outer glow ring */}
@@ -396,7 +356,7 @@ function AboutUs() {
               </p>
               
               <div className="w-12 h-0.5 bg-white/5 group-hover:bg-sky-500/30 mt-6 rounded-full transition-colors" />
-            </motion.div>
+            </div>
           ))}
         </div>
       </section>
@@ -413,29 +373,20 @@ function AboutUs() {
           </p>
         </div>
 
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto relative z-20"
-          variants={containerStagger}
-          initial={isMobile ? false : "hidden"}
-          whileInView={isMobile ? undefined : "visible"}
-          viewport={{ once: true, amount: 0.01 }}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto relative z-20">
           {beliefs.map((item, i) => (
-            <motion.div
+            <div
               key={i}
-              className="card-glow p-8 rounded-3xl"
-              variants={itemVariant}
-              whileHover={{ y: -8, scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="card-glow p-8 rounded-3xl hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300"
             >
               <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-fuchsia-500/20 to-purple-500/20 border border-fuchsia-400/30 flex items-center justify-center text-fuchsia-300 shadow-[0_0_15px_rgba(232,121,249,0.2)] mb-6">
                 {item.icon}
               </div>
               <h4 className="text-xl font-bold text-white mb-4 leading-tight">{item.title}</h4>
               <p className="text-slate-300 text-sm leading-loose">{item.desc}</p>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </section>
 
       {/* ── TECHNICAL EXPERTISE ── */}
@@ -444,12 +395,7 @@ function AboutUs() {
 
         <div className="max-w-7xl mx-auto relative z-20">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={isMobile ? false : { opacity: 0, x: -30 }}
-              whileInView={isMobile ? undefined : { opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
+            <div>
               <p className="text-sky-400 text-sm font-bold uppercase tracking-[0.2em] mb-4">Mastery</p>
               <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-8 leading-tight">
                 Our Technical <br />
@@ -470,15 +416,9 @@ function AboutUs() {
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              className="grid grid-cols-2 gap-4"
-              initial={isMobile ? false : { opacity: 0, scale: 0.9 }}
-              whileInView={isMobile ? undefined : { opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
+            <div className="grid grid-cols-2 gap-4">
               {[
                 { label: "Frontend", val: "React / Next.js", color: "from-sky-500/20 to-sky-400/20" },
                 { label: "Backend", val: "Node / Go / Python", color: "from-fuchsia-500/20 to-fuchsia-400/20" },
@@ -490,7 +430,7 @@ function AboutUs() {
                   <p className="text-white font-bold">{item.val}</p>
                 </div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -500,13 +440,7 @@ function AboutUs() {
         <div className="animated-grid absolute inset-0 opacity-40 mix-blend-screen" />
         <div className="orb orb-purple w-[700px] h-[400px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20 blur-[150px]" />
 
-        <motion.div
-          initial={isMobile ? false : { opacity: 0, y: 40 }}
-          whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true, amount: 0.01 }}
-          className="relative z-20 max-w-3xl mx-auto"
-        >
+        <div className="relative z-20 max-w-3xl mx-auto">
           <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-8 leading-[1.1]">
             Ready to Partner With <br />
             <span className="gradient-text pb-2 inline-block">The Best?</span>
@@ -520,7 +454,7 @@ function AboutUs() {
           >
             Schedule a Discovery Call &rarr;
           </a>
-        </motion.div>
+        </div>
       </section>
     </div>
   );
