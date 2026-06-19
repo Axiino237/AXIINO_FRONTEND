@@ -152,37 +152,23 @@ function Home() {
 
         {/* Hero Content Flex */}
         <div className="max-w-7xl mx-auto w-full flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10">
-          <motion.div
-            variants={containerStagger}
-            initial={isMobile ? false : "hidden"}
-            animate="visible"
-            className="flex flex-col items-start text-left lg:w-1/2"
-          >
+          <div className="flex flex-col items-start text-left lg:w-1/2">
             {/* Badge */}
-            <motion.div
-              className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-sky-400/40 bg-sky-950/50 text-sky-200 text-sm font-semibold tracking-wide shadow-[0_0_15px_rgba(56,189,248,0.2)] mb-8"
-              variants={fadeInUp}
-            >
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-sky-400/40 bg-sky-950/50 text-sky-200 text-sm font-semibold tracking-wide shadow-[0_0_15px_rgba(56,189,248,0.2)] mb-8">
               <span className="w-2.5 h-2.5 rounded-full bg-sky-400 shadow-[0_0_8px_#38bdf8] animate-[pulse-glow_2s_infinite]" />
               Premium Digital Agency
-            </motion.div>
+            </div>
 
-            <motion.h1
-              className="text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6 text-white"
-              variants={fadeInUp}
-            >
+            <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6 text-white">
               We Engineer <br />
               <span className="gradient-text pb-2 inline-block">Digital Futures</span>
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              className="text-xl text-slate-300 mb-10 leading-relaxed font-light max-w-xl"
-              variants={fadeInUp}
-            >
+            <p className="text-xl text-slate-300 mb-10 leading-relaxed font-light max-w-xl">
               Axiino architects scalable, highly-performant, and AI-driven platforms that empower modern startups and enterprise leaders.
-            </motion.p>
+            </p>
 
-            <motion.div className="flex flex-wrap gap-5" variants={fadeInUp}>
+            <div className="flex flex-wrap gap-5">
               <a
                 href="/#/contact"
                 className="glow-btn px-8 py-4 bg-gradient-to-r from-sky-500 to-fuchsia-500 text-white font-bold rounded-xl shadow-[0_0_30px_rgba(192,132,252,0.4)] hover:shadow-[0_0_40px_rgba(56,189,248,0.6)] transition-all duration-300 border border-white/20"
@@ -195,35 +181,22 @@ function Home() {
               >
                 Discover Axiino
               </a>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
-          <motion.div
-            className="relative hidden lg:flex lg:w-1/2 items-center justify-end"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
-          >
+          <div className="relative hidden lg:flex lg:w-1/2 items-center justify-end">
              {/* Glow ring behind Lottie */}
              <div className="absolute inset-0 flex items-center justify-center">
-               <motion.div 
-                 animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.65, 0.4] }}
-                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                 className="w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-sky-500/30 to-fuchsia-500/30 blur-[80px]" 
-               />
+               <div className="w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-sky-500/30 to-fuchsia-500/30 blur-[80px]" />
              </div>
              {isLargeScreen && <Lottie animationData={animationData} className="w-full max-w-[600px] h-[600px] relative z-20 drop-shadow-2xl object-right" loop={true} rendererSettings={{ renderer: 'canvas' }} />}
-          </motion.div>
+          </div>
         </div>
 
         {/* Scroll indicator */}
-        <motion.div
-          animate={{ y: [0, 15, 0] }}
-          transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-sky-400 opacity-80 z-20"
-        >
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-sky-400 opacity-80 z-20 animate-bounce">
           <ChevronDown size={36} />
-        </motion.div>
+        </div>
       </section>
 
       {/* ── SECTION HEADER: What We Do Best (EXPANDED) ── */}
@@ -231,35 +204,20 @@ function Home() {
         <div className="animated-grid absolute inset-0 opacity-40 mix-blend-screen" />
         <div className="orb orb-blue w-[500px] h-[500px] top-0 right-0 opacity-20" />
 
-        <motion.div
-          className="text-center max-w-4xl mx-auto mb-20 relative z-20"
-          initial={isMobile ? false : { opacity: 0, y: 30 }}
-          whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true, amount: 0.01 }}
-        >
+        <div className="text-center max-w-4xl mx-auto mb-20 relative z-20">
           <p className="text-sky-400 text-sm font-bold uppercase tracking-[0.2em] mb-4">Our Expertise</p>
           <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">Comprehensive Engineering</h2>
           <p className="text-slate-300 text-lg leading-relaxed">
             We don't just write code. We deliver complete, robust technological ecosystems across the entire stack.
           </p>
-        </motion.div>
+        </div>
 
         {/* Expanded Services Grid */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto relative z-20"
-          variants={containerStagger}
-          initial={isMobile ? false : "hidden"}
-          whileInView={isMobile ? undefined : "visible"}
-          viewport={{ once: true, amount: 0.01 }}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto relative z-20">
           {services.map((service, index) => (
-            <motion.div
+            <div
               key={index}
-              className="card-glow p-8 rounded-3xl flex flex-col h-full cursor-default"
-              variants={itemVariant}
-              whileHover={{ y: -8, scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="card-glow p-8 rounded-3xl flex flex-col h-full cursor-default hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300"
             >
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-500/20 to-fuchsia-500/20 border border-sky-400/30 flex items-center justify-center text-sky-300 shadow-[0_0_15px_rgba(56,189,248,0.2)]">
@@ -289,9 +247,9 @@ function Home() {
                   <p className="text-xs font-semibold text-fuchsia-300">{service.tech}</p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </section>
 
       {/* ── WHY AXIINO ── */}
@@ -306,19 +264,11 @@ function Home() {
           </p>
         </div>
 
-        <motion.div
-          className="grid grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto relative z-20"
-          variants={containerStagger}
-          initial={isMobile ? false : "hidden"}
-          whileInView={isMobile ? undefined : "visible"}
-          viewport={{ once: true, amount: 0.01 }}
-        >
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto relative z-20">
           {coreValues.map((item, i) => (
-            <motion.div
+            <div
               key={i}
-              className="group relative p-8 rounded-[32px] border border-white/5 bg-[#0a1122]/40 backdrop-blur-xl hover:border-white/10 transition-all duration-500 overflow-hidden flex flex-col items-center text-center justify-center gap-6"
-              variants={itemVariant}
-              whileHover={{ y: -8, scale: 1.02 }}
+              className="group relative p-8 rounded-[32px] border border-white/5 bg-[#0a1122]/40 backdrop-blur-xl hover:border-white/10 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 overflow-hidden flex flex-col items-center text-center justify-center gap-6"
             >
               {/* Animated Inner Glow */}
               <div className="absolute inset-x-0 h-px top-0 bg-gradient-to-r from-transparent via-sky-500/50 to-transparent scale-0 group-hover:scale-100 transition-transform duration-700" />
@@ -332,9 +282,9 @@ function Home() {
               </div>
 
               <h4 className="font-bold text-slate-100 text-lg tracking-tight group-hover:text-white transition-colors">{item.title}</h4>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </section>
 
       {/* ── WHAT DRIVES US ── */}
@@ -350,29 +300,20 @@ function Home() {
           </p>
         </div>
 
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto relative z-20"
-          variants={containerStagger}
-          initial={isMobile ? false : "hidden"}
-          whileInView={isMobile ? undefined : "visible"}
-          viewport={{ once: true, amount: 0.01 }}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto relative z-20">
           {drivesUs.map((item, i) => (
-            <motion.div
+            <div
               key={item.title}
-              className="card-glow p-8 rounded-3xl"
-              variants={itemVariant}
-              whileHover={{ y: -8, scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="card-glow p-8 rounded-3xl hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300"
             >
               <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-fuchsia-500/20 border border-purple-400/30 flex items-center justify-center text-purple-300 shadow-[0_0_15px_rgba(192,132,252,0.2)] mb-6">
                 {item.icon}
               </div>
               <h4 className="text-xl font-bold text-white mb-4">{item.title}</h4>
               <p className="text-slate-300 text-sm leading-loose">{item.desc}</p>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </section>
 
       {/* ── TECH STACK ── */}
@@ -387,25 +328,17 @@ function Home() {
           </p>
         </div>
 
-        <motion.div
-          className="flex flex-wrap justify-center gap-6 max-w-5xl mx-auto relative z-20"
-          variants={containerStagger}
-          initial={isMobile ? false : "hidden"}
-          whileInView={isMobile ? undefined : "visible"}
-          viewport={{ once: true, amount: 0.01 }}
-        >
+        <div className="flex flex-wrap justify-center gap-6 max-w-5xl mx-auto relative z-20">
           {techStack.map((tech) => (
-            <motion.div
+            <div
               key={tech.name}
-              className="card-glow p-6 rounded-2xl w-36 h-36 flex flex-col items-center justify-center gap-4 bg-[#0a1122]/50"
-              variants={itemVariant}
-              whileHover={{ scale: 1.05, y: -5 }}
+              className="card-glow p-6 rounded-2xl w-36 h-36 flex flex-col items-center justify-center gap-4 bg-[#0a1122]/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300"
             >
               <img src={tech.img} alt={tech.name} className="h-14 w-14 object-contain filter drop-shadow-lg" />
               <span className="text-sm text-slate-200 font-bold tracking-wide">{tech.name}</span>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </section>
 
       {/* ── CTA ── */}
@@ -413,13 +346,7 @@ function Home() {
         <div className="animated-grid absolute inset-0 opacity-40 mix-blend-screen" />
         <div className="orb orb-blue w-[800px] h-[400px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20 blur-[150px]" />
 
-        <motion.div
-          initial={isMobile ? false : { opacity: 0, y: 40 }}
-          whileInView={isMobile ? undefined : { opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true, amount: 0.01 }}
-          className="relative z-20 max-w-4xl mx-auto"
-        >
+        <div className="relative z-20 max-w-4xl mx-auto">
           <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-8 leading-[1.1]">
             Ready to Build <br />
             <span className="gradient-text pb-2 inline-block">The Future?</span>
@@ -427,17 +354,13 @@ function Home() {
           <p className="mb-12 text-xl text-slate-300 font-light leading-relaxed max-w-2xl mx-auto">
             Axiino is ready to transform your complex business requirements into elegant, high-performance software. Let's start the conversation.
           </p>
-           <motion.a
+           <a
              href="/#/contact"
-             whileHover={{ scale: 1.05, y: -2 }}
-             whileTap={{ scale: 0.95 }}
-             animate={{ boxShadow: ["0 0 25px rgba(56, 189, 248, 0.3)", "0 0 45px rgba(192, 132, 252, 0.5)", "0 0 25px rgba(56, 189, 248, 0.3)"] }}
-             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-             className="glow-btn inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-sky-500 to-fuchsia-600 text-white text-lg font-bold rounded-2xl border border-white/20"
+             className="glow-btn inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-sky-500 to-fuchsia-600 text-white text-lg font-bold rounded-2xl border border-white/20 shadow-[0_0_25px_rgba(56,189,248,0.3)] hover:shadow-[0_0_45px_rgba(192,132,252,0.5)] transition-all duration-300"
            >
              Contact Our Team &rarr;
-           </motion.a>
-        </motion.div>
+           </a>
+        </div>
       </section>
     </>
   );
