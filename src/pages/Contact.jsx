@@ -147,43 +147,29 @@ function Contact() {
 
         <div className="relative z-20 max-w-7xl mx-auto px-6">
 
-          {/* Header directly animated instead of whileInView so it loads instantly */}
-          <motion.div
-            className="text-center mb-16 max-w-3xl mx-auto"
-            initial={isMobile ? false : "hidden"}
-            animate="visible"
-            variants={containerVariants}
-          >
-            <motion.div
-              className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-sky-400/40 bg-sky-950/50 text-sky-200 text-sm font-semibold tracking-wide shadow-[0_0_15px_rgba(56,189,248,0.2)] mb-8"
-              variants={fadeInUp}
-            >
+          {/* Header directly rendered statically so it loads instantly */}
+          <div className="text-center mb-16 max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-sky-400/40 bg-sky-950/50 text-sky-200 text-sm font-semibold tracking-wide shadow-[0_0_15px_rgba(56,189,248,0.2)] mb-8">
               <span className="w-2.5 h-2.5 rounded-full bg-sky-400 shadow-[0_0_8px_#38bdf8] animate-[pulse-glow_2s_infinite]" />
               Fast-Track Your Product
-            </motion.div>
-            <motion.h2 variants={fadeInUp} className="text-3xl sm:text-5xl md:text-6xl font-extrabold mb-6 tracking-tight leading-[1.1]">
+            </div>
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold mb-6 tracking-tight leading-[1.1] text-white">
               Let's Start a <br className="hidden md:block" />
               <span className="gradient-text pb-2 inline-block">Conversation</span>
-            </motion.h2>
-            <motion.p variants={fadeInUp} className="text-slate-300 text-lg sm:text-xl font-light leading-relaxed">
+            </h2>
+            <p className="text-slate-300 text-lg sm:text-xl font-light leading-relaxed">
               Fill out the form below or drop us an email. Our engineering leaders are ready to discuss your architecture, strategy, and roadmap.
-            </motion.p>
-          </motion.div>
+            </p>
+          </div>
 
           <div className="grid lg:grid-cols-5 gap-12 lg:gap-8 items-start">
 
             {/* Contact Info Cards */}
-            <motion.div
-              className="lg:col-span-2 space-y-6"
-              initial={isMobile ? false : "hidden"}
-              animate="visible"
-              variants={containerVariants}
-            >
+            <div className="lg:col-span-2 space-y-6">
               {contactInfo.map((info, i) => (
-                <motion.div
+                <div
                   key={i}
                   className="card-glow p-6 rounded-2xl flex items-start gap-6 group cursor-default"
-                  variants={fadeInUp}
                 >
                   <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-500/20 to-fuchsia-500/20 border border-sky-400/30 flex items-center justify-center text-sky-400 shadow-[0_0_15px_rgba(56,189,248,0.2)] flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
                     {info.icon}
@@ -193,14 +179,11 @@ function Contact() {
                     <p className="text-white font-bold text-lg">{info.value}</p>
                     <p className="text-slate-400 text-sm mt-1">{info.subValue}</p>
                   </div>
-                </motion.div>
+                </div>
               ))}
 
               {/* Decorative SLA card */}
-              <motion.div
-                className="p-8 rounded-2xl mt-8 border border-sky-500/30 bg-gradient-to-br from-[#0f172a] to-[#020617] relative overflow-hidden"
-                variants={fadeInUp}
-              >
+              <div className="p-8 rounded-2xl mt-8 border border-sky-500/30 bg-gradient-to-br from-[#0f172a] to-[#020617] relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-sky-500/10 blur-[50px] rounded-full" />
                 <div className="flex items-center gap-3 mb-4">
                   <MessageSquare className="text-sky-400" size={24} />
@@ -209,16 +192,13 @@ function Contact() {
                 <p className="text-slate-300 text-sm leading-relaxed">
                   When you reach out to Axiino, you won't get an automated bot response. You'll speak directly with a technical architect who understands your product requirements.
                 </p>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
 
             {/* Form */}
-            <motion.form
+            <form
               onSubmit={handleSubmit}
               className="lg:col-span-3 card-glow p-8 md:p-10 rounded-3xl space-y-6"
-              initial={isMobile ? false : "hidden"}
-              animate="visible"
-              variants={containerVariants}
             >
               <div className="flex items-center justify-between mb-4 border-b border-slate-700 pb-4">
                 <h3 className="text-2xl font-bold text-white">Project Inquiry</h3>
@@ -226,7 +206,7 @@ function Contact() {
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
-                <motion.div variants={fadeInUp}>
+                <div>
                   <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 ml-1">Full Name</label>
                   <input
                     type="text"
@@ -238,9 +218,9 @@ function Contact() {
                     placeholder="E.g. Elon Musk"
                     required
                   />
-                </motion.div>
+                </div>
 
-                <motion.div variants={fadeInUp}>
+                <div>
                   <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 ml-1">Work Email</label>
                   <input
                     type="email"
@@ -252,11 +232,11 @@ function Contact() {
                     placeholder="founder@startup.com"
                     required
                   />
-                </motion.div>
+                </div>
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
-                <motion.div variants={fadeInUp}>
+                <div>
                   <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 ml-1">Phone Number</label>
                   <input
                     type="tel"
@@ -270,9 +250,9 @@ function Contact() {
                     required
                     title="Enter a valid 10-digit mobile number"
                   />
-                </motion.div>
+                </div>
 
-                <motion.div variants={fadeInUp}>
+                <div>
                   <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 ml-1">Primary Interest</label>
                   <select
                     name="service"
@@ -288,10 +268,10 @@ function Contact() {
                     <option value="UI/UX Design">Product UI/UX Design</option>
                     <option value="Other">Other Consulting Services</option>
                   </select>
-                </motion.div>
+                </div>
               </div>
 
-              <motion.div variants={fadeInUp}>
+              <div>
                 <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 ml-1">Project Details</label>
                 <textarea
                   id="message"
@@ -303,22 +283,17 @@ function Contact() {
                   placeholder="Describe your architecture requirements, timeline, and current challenges..."
                   required
                 />
-              </motion.div>
+              </div>
 
-              <motion.button
+              <button
                 type="submit"
                 className="glow-btn w-full flex items-center justify-center gap-3 py-4 bg-gradient-to-r from-sky-500 to-fuchsia-600 text-white text-lg font-bold rounded-xl shadow-[0_0_30px_rgba(56,189,248,0.3)] hover:shadow-[0_0_50px_rgba(192,132,252,0.5)] transition-all duration-300 disabled:opacity-50 mt-4"
                 disabled={status === "loading"}
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.98 }}
-                variants={fadeInUp}
               >
                 {status === "loading" ? (
                   <>
-                    <motion.div
-                      className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
-                      animate={{ rotate: 360 }}
-                      transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}
+                    <div
+                      className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"
                     />
                     Transmitting...
                   </>
@@ -328,27 +303,23 @@ function Contact() {
                     Send Secure Inquiry
                   </>
                 )}
-              </motion.button>
+              </button>
 
               {status === "success" && (
-                <motion.p
+                <p
                   className="text-[#34d399] font-bold text-base text-center bg-[#064e3b]/40 border border-[#059669]/50 rounded-xl py-4"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
                 >
                   ✅ Transmission successful. An architect will contact you shortly.
-                </motion.p>
+                </p>
               )}
               {status === "error" && (
-                <motion.p
+                <p
                   className="text-[#f87171] font-bold text-base text-center bg-[#7f1d1d]/40 border border-[#b91c1c]/50 rounded-xl py-4"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
                 >
                   ❌ Transmission failed. Please verify your connection and try again.
-                </motion.p>
+                </p>
               )}
-            </motion.form>
+            </form>
           </div>
         </div>
       </section>
