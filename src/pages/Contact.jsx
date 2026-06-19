@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send, MessageSquare, Shield, Lock, Globe, Database, Cpu } from "lucide-react";
 
 const containerVariants = {
@@ -50,6 +50,16 @@ const contactInfo = [
   { icon: <MapPin size={22} />, label: "Headquarters", value: "Chennai, Tamil Nadu", subValue: "India" },
 ];
 
+const floatingIcons = [
+  { icon: <Mail size={22} />, top: '15%', left: '12%', delay: 0, speed: 22 },
+  { icon: <Shield size={20} />, top: '25%', left: '88%', delay: 2, speed: 25 },
+  { icon: <Lock size={22} />, top: '65%', left: '8%', delay: 4, speed: 20 },
+  { icon: <Globe size={18} />, top: '85%', left: '75%', delay: 1, speed: 18 },
+  { icon: <Database size={20} />, top: '45%', left: '90%', delay: 3, speed: 28 },
+  { icon: <MessageSquare size={22} />, top: '10%', left: '75%', delay: 5, speed: 24 },
+  { icon: <Cpu size={18} />, top: '40%', left: '5%', delay: 6, speed: 26 },
+];
+
 function Contact() {
   const [formData, setFormData] = useState({
     name: "",
@@ -64,40 +74,16 @@ function Contact() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  // Mouse move parallax effect
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const springConfig = { damping: 25, stiffness: 150 };
-  const smoothX = useSpring(mouseX, springConfig);
-  const smoothY = useSpring(mouseY, springConfig);
-
-  const handleMouseMove = (e) => {
-    mouseX.set(e.clientX);
-    mouseY.set(e.clientY);
-  };
-
-  const floatingIcons = [
-    { icon: <Mail size={22} />, top: '15%', left: '12%', delay: 0, speed: 22 },
-    { icon: <Shield size={20} />, top: '25%', left: '88%', delay: 2, speed: 25 },
-    { icon: <Lock size={22} />, top: '65%', left: '8%', delay: 4, speed: 20 },
-    { icon: <Globe size={18} />, top: '85%', left: '75%', delay: 1, speed: 18 },
-    { icon: <Database size={20} />, top: '45%', left: '90%', delay: 3, speed: 28 },
-    { icon: <MessageSquare size={22} />, top: '10%', left: '75%', delay: 5, speed: 24 },
-    { icon: <Cpu size={18} />, top: '40%', left: '5%', delay: 6, speed: 26 },
-  ];
-
-  const [dustParticles, setDustParticles] = useState([]);
-  useEffect(() => {
-    setDustParticles(Array.from({ length: 15 }).map((_, i) => ({
+  const [dustParticles] = useState(() =>
+    Array.from({ length: 15 }).map((_, i) => ({
       id: i,
       size: Math.random() * 3 + 1,
       top: `${Math.random() * 100}%`,
       left: `${Math.random() * 100}%`,
       duration: Math.random() * 20 + 10,
       delay: Math.random() * 5,
-    })));
-  }, []);
+    }))
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -132,7 +118,7 @@ function Contact() {
     "w-full px-5 py-4 rounded-xl bg-[#0f172a] border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 focus:bg-[#1e293b] transition-all duration-300 text-base shadow-inner";
 
   return (
-    <div onMouseMove={handleMouseMove} className="w-full relative selection:bg-sky-500/30">
+    <div className="w-full relative selection:bg-sky-500/30">
       {/* ── PERSISTENT BACKGROUND ELEMENTS ── */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         {/* Dust Particles */}
@@ -140,8 +126,6 @@ function Contact() {
           <BackgroundParticle
             key={`dust-${p.id}`}
             {...p}
-            smoothX={smoothX}
-            smoothY={smoothY}
           />
         ))}
 
@@ -150,9 +134,6 @@ function Contact() {
           <FloatingBackgroundIcon
             key={`icon-${i}`}
             {...item}
-            index={i}
-            smoothX={smoothX}
-            smoothY={smoothY}
           />
         ))}
       </div>
