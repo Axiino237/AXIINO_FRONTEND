@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import Lottie from "lottie-react";
 import { ChevronDown, Code2, Brain, Smartphone, Server, Bot, Layers, LayoutDashboard, Target, ShieldCheck, Handshake, Rocket, Lightbulb, Cloud, PenTool, Database, Search, TrendingUp, Cpu } from "lucide-react";
-
-import animationData from "../assets/tech-hero.json";
 
 import reactnative from "../assets/tech/reactnative.png";
 import reactjs from "../assets/tech/reactjs.webp";
@@ -12,24 +9,6 @@ import nest from "../assets/tech/nest.svg";
 import python from "../assets/tech/python.png";
 import mysql from "../assets/tech/mysql.svg";
 import postgres from "../assets/tech/postgres.png";
-
-const containerStagger = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 }
-  },
-};
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
-};
-
-const itemVariant = {
-  hidden: { opacity: 0, y: 20, scale: 0.95 },
-  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
-};
 
 const techStack = [
   { name: "React.js", img: reactjs },
@@ -130,11 +109,18 @@ const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
 
 function Home() {
   const [isLargeScreen, setIsLargeScreen] = useState(false);
+  const [animationData, setAnimationData] = useState(null);
 
   useEffect(() => {
     const checkSize = () => setIsLargeScreen(window.innerWidth >= 1024);
     checkSize();
     window.addEventListener("resize", checkSize);
+    
+    // Dynamically load Lottie JSON to optimize main bundle size
+    import("../assets/tech-hero.json").then((data) => {
+      setAnimationData(data.default);
+    });
+
     return () => window.removeEventListener("resize", checkSize);
   }, []);
 
