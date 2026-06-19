@@ -111,6 +111,7 @@ const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
 function Home() {
   const [isLargeScreen, setIsLargeScreen] = useState(false);
   const [animationData, setAnimationData] = useState(null);
+  const [showLottie, setShowLottie] = useState(false);
 
   useEffect(() => {
     const checkSize = () => setIsLargeScreen(window.innerWidth >= 1024);
@@ -122,7 +123,15 @@ function Home() {
       setAnimationData(data.default);
     });
 
-    return () => window.removeEventListener("resize", checkSize);
+    // Defer Lottie initialization to prevent page transition click delays
+    const timer = setTimeout(() => {
+      setShowLottie(true);
+    }, 400);
+
+    return () => {
+      window.removeEventListener("resize", checkSize);
+      clearTimeout(timer);
+    };
   }, []);
 
   return (
@@ -176,7 +185,7 @@ function Home() {
              <div className="absolute inset-0 flex items-center justify-center">
                <div className="w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-sky-500/30 to-fuchsia-500/30 blur-[80px]" />
              </div>
-             {isLargeScreen && <Lottie animationData={animationData} className="w-full max-w-[600px] h-[600px] relative z-20 drop-shadow-2xl object-right" loop={true} rendererSettings={{ renderer: 'canvas' }} />}
+             {isLargeScreen && showLottie && animationData && <Lottie animationData={animationData} className="w-full max-w-[600px] h-[600px] relative z-20 drop-shadow-2xl object-right" loop={true} rendererSettings={{ renderer: 'canvas' }} />}
           </div>
         </div>
 

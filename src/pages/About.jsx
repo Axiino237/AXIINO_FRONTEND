@@ -95,6 +95,7 @@ function AboutUs() {
   const [isMediumScreen, setIsMediumScreen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [heroAnimation, setHeroAnimation] = useState(null);
+  const [showLottie, setShowLottie] = useState(false);
 
   useEffect(() => {
     const checkSize = () => {
@@ -109,7 +110,15 @@ function AboutUs() {
       setHeroAnimation(data.default);
     });
 
-    return () => window.removeEventListener("resize", checkSize);
+    // Defer Lottie rendering to prevent transition click delays
+    const timer = setTimeout(() => {
+      setShowLottie(true);
+    }, 400);
+
+    return () => {
+      window.removeEventListener("resize", checkSize);
+      clearTimeout(timer);
+    };
   }, []);
 
   return (
@@ -144,7 +153,7 @@ function AboutUs() {
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-[300px] h-[300px] rounded-full bg-gradient-to-tr from-fuchsia-500/30 to-sky-500/30 blur-[80px]" />
             </div>
-            {isMediumScreen && heroAnimation && <Lottie animationData={heroAnimation} loop={true} className="w-full h-[500px] relative z-20 drop-shadow-2xl" rendererSettings={{ renderer: 'canvas' }} />}
+            {isMediumScreen && showLottie && heroAnimation && <Lottie animationData={heroAnimation} loop={true} className="w-full h-[500px] relative z-20 drop-shadow-2xl" rendererSettings={{ renderer: 'canvas' }} />}
           </div>
         </div>
       </section>
