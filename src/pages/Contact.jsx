@@ -36,7 +36,7 @@ const FloatingBackgroundIcon = memo(({ icon, top, left, delay, speed }) => {
 const contactInfo = [
   { icon: <Mail size={22} />, label: "Email Us", value: "axiino237@gmail.com", subValue: "Replies within 2 hours" },
   { icon: <Phone size={22} />, label: "Call Us", value: "+91 93613 95699", subValue: "Mon-Sat, 9am - 7pm IST" },
-  { icon: <MapPin size={22} />, label: "Headquarters", value: "Chennai, Tamil Nadu", subValue: "India" },
+  { icon: <MapPin size={22} />, label: "Headquarters", value: "Ramapuram, Chennai", subValue: "Flat No. 27, 1st Street, Kothari Nagar, Annai Sathya Nagar Main Road, Chennai 600089" },
 ];
 
 const floatingIcons = [
@@ -322,6 +322,28 @@ function Contact() {
                 </p>
               )}
             </form>
+          </div>
+
+          {/* Map Embed Section */}
+          <div className="mt-20 w-full relative rounded-3xl overflow-hidden border border-white/5 card-glow p-1 bg-[#0a1122]/40 backdrop-blur-xl">
+            <div className="relative w-full h-[450px] rounded-2xl overflow-hidden shadow-2xl">
+              {/* Google Maps Iframe */}
+              <iframe
+                title="Axiino Office Location Map"
+                src="https://maps.google.com/maps?q=13.036214732907844,80.18460287544686&z=16&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0, filter: "invert(90%) hue-rotate(180deg) contrast(1.1) brightness(0.9)" }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+              {/* Custom Dark overlay border & coordinates text */}
+              <div className="absolute bottom-4 left-4 px-4 py-2 rounded-lg bg-[#030712]/90 border border-white/10 text-xs text-sky-400 font-mono shadow-md flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-[pulse-glow_2s_infinite]" />
+                <span>13.0362° N, 80.1846° E • Ramapuram, Chennai</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -320,6 +320,59 @@ function AboutUs() {
         </div>
       </section>
 
+      {/* ── AXIINO PRODUCT ENGINEERING ECOSYSTEM ── */}
+      <section className="relative bg-[#050b14] px-6 py-24 overflow-hidden z-10 border-t border-white/5">
+        <div className="animated-grid absolute inset-0 opacity-15" />
+        <div className="orb absolute orb-fuchsia w-[500px] h-[500px] top-1/2 left-0 -translate-y-1/2 opacity-10 blur-[120px]" />
+
+        <div className="max-w-7xl mx-auto relative z-20">
+          <div className="text-center mb-16">
+            <p className="text-sky-400 text-sm font-bold uppercase tracking-[0.2em] mb-4">Product Suite</p>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">Our Engineering Ecosystem</h2>
+            <p className="text-slate-300 text-lg max-w-2xl mx-auto leading-relaxed font-light">
+              We design and manage a suite of specialized digital products engineered for efficiency, compliance, and seamless operational flow.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Workforce Analytics & HRMS",
+                desc: "Adapt systems dynamically as you expand. Centralized employee profiles, automated attendance tracking, and self-service portals streamline HR workflows securely."
+              },
+              {
+                title: "Document Control & EDMS",
+                desc: "Centralized file vault featuring customized metadata tagging, document linking, automated retention controls, version tracking, and secure e-signatures."
+              },
+              {
+                title: "Online LMS Platforms",
+                desc: "Accommodate diverse learning styles with responsive e-learning platforms. Automated quizzes, user onboarding, and progress tracking dashboards simplify training."
+              },
+              {
+                title: "Procurement & SRM",
+                desc: "Optimize supplier onboarding, tendering processes, and RFx bidding tracking. Live budget control, contract draft automation, and milestone tracking."
+              },
+              {
+                title: "Lab Management & LIMS",
+                desc: "Barcoding systems, sample tracking, automated instrument data acquisition, and database integrity checks ensure complete traceability and compliance."
+              },
+              {
+                title: "Clinical Care Systems (ISMS)",
+                desc: "AI video preprocessing (using body landmark and motion detectors) drafts assessments and structures diagnostic support reports while complying with health regulations."
+              }
+            ].map((prod, i) => (
+              <div
+                key={i}
+                className="p-8 rounded-[32px] border border-white/5 bg-[#030712]/40 backdrop-blur-md hover:border-white/10 transition-all duration-300 hover:-translate-y-1"
+              >
+                <h4 className="text-xl font-bold text-white mb-3">{prod.title}</h4>
+                <p className="text-slate-400 text-sm leading-relaxed font-light">{prod.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── LEADERSHIP TEAM ── */}
       <section className="relative bg-[#020617] px-6 py-24 overflow-hidden z-10 border-y border-white/5">
         <div className="animated-grid absolute inset-0 opacity-20" />
@@ -396,6 +449,61 @@ function AboutUs() {
         </div>
       </section>
 
+      {/* ── RESOURCE L&D PROGRAM ── */}
+      <section className="relative bg-[#030712] px-6 py-24 overflow-hidden z-10 border-t border-white/5">
+        <div className="orb absolute orb-blue w-[600px] h-[600px] top-1/2 right-0 -translate-y-1/2 opacity-15" />
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center relative z-20">
+          <div>
+            <p className="text-sky-400 text-sm font-bold uppercase tracking-[0.2em] mb-4">L&D Ecosystem</p>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
+              Focusing on Continuous <br />
+              <span className="gradient-text pb-2 inline-block">Talent & Skill Growth</span>
+            </h2>
+            <p className="text-slate-300 text-lg leading-relaxed font-light mb-8">
+              At Axiino, we constantly improve our performance by investing heavily in the training, development, and career trajectories of our engineering teams. A stronger team results in more resilient code and exceptional client outcomes.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {[
+                { title: "Structured Career Growth", desc: "Personalized development plans with clear milestones and transparent appraisal reviews." },
+                { title: "Continuous Mentorship", desc: "One-on-one guidance and support from senior architects and tech leads." },
+                { title: "Professional Training", desc: "Interactive training sessions and support to participate in industry hackathons & conferences." },
+                { title: "Result-Aligned Appraisals", desc: "Regular performance assessments to align compensation increases with client results." }
+              ].map((item, idx) => (
+                <div key={idx} className="flex gap-4">
+                  <div className="w-1.5 h-1.5 rounded-full bg-sky-400 mt-2.5 shrink-0" />
+                  <div>
+                    <h4 className="font-bold text-white mb-1">{item.title}</h4>
+                    <p className="text-slate-400 text-sm font-light leading-relaxed">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-tr from-sky-500/10 to-fuchsia-500/10 blur-[80px] rounded-full" />
+            <div className="card-glow p-8 rounded-3xl border border-white/5 bg-[#0a1122]/40 backdrop-blur-xl">
+              <h4 className="text-xl font-bold text-white mb-4">Ecosystem Objectives</h4>
+              <p className="text-slate-300 text-sm font-light leading-relaxed mb-6">
+                We believe that a modern digital agency shouldn't just deliver products—we must cultivate technical excellence. By structuring internal learning loops, we establish a robust engineering talent baseline.
+              </p>
+              <div className="space-y-4">
+                {[
+                  "Maximize project delivery efficiency",
+                  "Integrate AI-assisted development tools responsibly",
+                  "Enforce robust data privacy and GDPR/HIPAA compliance standards",
+                  "Encourage peer-led technology masterclasses"
+                ].map((bullet, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <Zap size={16} className="text-fuchsia-400 shrink-0" />
+                    <span className="text-slate-200 text-sm font-medium">{bullet}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── TECHNICAL EXPERTISE ── */}
       <section className="relative bg-[#020617] px-6 py-24 overflow-hidden z-10 border-t border-white/5">
         <div className="orb absolute orb-blue w-[400px] h-[400px] top-1/2 left-0 opacity-10 blur-[120px]" />
@@ -412,10 +520,12 @@ function AboutUs() {
                 {[
                   "Microservices & Serverless Architectures",
                   "Real-time Data Streaming (Kafka / WebSockets)",
-                  "Edge Computing & Global Content Delivery",
-                  "AI & Neural Network Integration",
-                  "Hyper-Secure Financial Grade APIs",
-                  "High-Performance Mobile Ecosystems"
+                  "MLOps & AI Lifecycle Management (Drift Detection, Retraining)",
+                  "NLP & Computer Vision Solutions (Mediapipe, OCR)",
+                  "Zoho CRM Suite Consulting & Custom Integrations",
+                  "Omnichannel Digital Strategy & Campaign Growth",
+                  "Hyper-Secure Financial Grade APIs & GDPR/HIPAA Compliance",
+                  "High-Performance Mobile & Web Ecosystems"
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-4 text-slate-300">
                     <div className="w-1.5 h-1.5 rounded-full bg-sky-400 shadow-[0_0_8px_rgb(56,189,248)]" />
@@ -430,7 +540,9 @@ function AboutUs() {
                 { label: "Frontend", val: "React / Next.js", color: "from-sky-500/20 to-sky-400/20" },
                 { label: "Backend", val: "Node / Go / Python", color: "from-fuchsia-500/20 to-fuchsia-400/20" },
                 { label: "Database", val: "Supabase / PG / Mongo", color: "from-indigo-500/20 to-indigo-400/20" },
-                { label: "Mobile", val: "React Native / Expo", color: "from-purple-500/20 to-purple-400/20" }
+                { label: "Mobile", val: "React Native / Expo", color: "from-purple-500/20 to-purple-400/20" },
+                { label: "Enterprise Apps", val: "Zoho CRM / Custom ERPs", color: "from-amber-500/20 to-orange-400/20" },
+                { label: "Growth Engine", val: "SEO / PPC / Marketing Automation", color: "from-teal-500/20 to-emerald-400/20" }
               ].map((item, i) => (
                 <div key={i} className={`p-6 rounded-2xl border border-white/5 bg-gradient-to-br ${item.color} backdrop-blur-sm`}>
                   <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2">{item.label}</p>

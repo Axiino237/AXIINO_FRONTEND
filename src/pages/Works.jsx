@@ -37,6 +37,51 @@ const projects = [
     }
 ];
 
+/*
+// =========================================================================
+// ADDITIONAL CASE STUDIES & ENTERPRISE PROJECTS (FOR REFERENCE / COMING SOON)
+// =========================================================================
+// Below is the context of enterprise software deployments (LIMS, HRMS, LMS, EDMS, SRM)
+// built with regulatory frameworks and integrated platforms.
+const upcomingProjects = [
+    {
+        id: 4,
+        title: "Centralized Document & Workflow Portal (EDMS)",
+        category: "Enterprise Software",
+        description: "An electronic document management system featuring automated retention routing, multilingual Google Vision OCR file scanning, custom metadata tagging, and integrated e-signature approvals for secure document compliance.",
+        techStack: ["Node.js", "NestJS", "React", "PostgreSQL", "Google Vision API"]
+    },
+    {
+        id: 5,
+        title: "Automated Laboratory Information Management System (LIMS)",
+        category: "Automation & Enterprise Systems",
+        description: "A comprehensive sample tracking and barcode automation system designed in partnership with lab managers. Integrates with data acquisition instruments to minimize manual entries and automatically logs industry-compliant audit trails.",
+        techStack: ["React.js", "Python", "Flask", "SQL-Server", "ERP integration"]
+    },
+    {
+        id: 6,
+        title: "AI-Powered Intervention and Care Management (ISMS)",
+        category: "AI & Machine Learning",
+        description: "An AI-powered video analytics and motion landmark tracking platform supporting care for neurodivergent individuals. Leverages MediaPipe and LLMs to accelerate assessment reviews and automatically draft diagnostics.",
+        techStack: ["Python", "TensorFlow", "MediaPipe", "LLaVA", "PostgreSQL (pgvector)"]
+    },
+    {
+        id: 7,
+        title: "Supplier Relations & E-Procurement Hub (SRM)",
+        category: "Enterprise Systems",
+        description: "An end-to-end supplier onboarding, contract drafting, and bidding portal. Enables role-based approval routing, live budget tracking, RFx tender management, and seamless ERP sync.",
+        techStack: ["React", "NestJS", "PostgreSQL", "SAP Integration"]
+    },
+    {
+        id: 8,
+        title: "Corporate Talent Management & HRMS Platform",
+        category: "Enterprise Systems",
+        description: "A centralized workforce directory managing profiles, leave tracker workflows, payroll systems, and structured appraisal cycles with self-service dashboard capabilities.",
+        techStack: ["React.js", "Node.js", "MongoDB", "Express"]
+    }
+];
+*/
+
 const containerVariants = {
     hidden: { opacity: 0 },
     visible: {

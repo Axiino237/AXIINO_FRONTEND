@@ -124,14 +124,14 @@ function Footer() {
                 <span>+91 93613 95699</span>
               </motion.a>
               <motion.a 
-                href="https://maps.google.com/?q=Chennai,+Tamil+Nadu,+India"
+                href="https://maps.google.com/?q=13.036214732907844,80.18460287544686"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-xs text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer w-fit"
                 whileHover={{ x: 5, color: "#818cf8" }}
               >
                 <MapPin size={14} className="text-purple-400 shrink-0" />
-                <span>Chennai, Tamil Nadu, India</span>
+                <span>Flat No. 27, 1st Street, Kothari Nagar, Ramapuram, Chennai - 600089</span>
               </motion.a>
             </div>
           </motion.div>

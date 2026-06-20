@@ -86,6 +86,20 @@ const services = [
     features: ["Payment Gateways", "CRM Sync", "Webhook Handlers"],
     tech: "Stripe, Salesforce, REST"
   },
+  {
+    title: "Digital Marketing & Growth",
+    description: "Strategic search engine optimization, pay-per-click ads, and marketing automation to amplify visibility and boost conversions.",
+    icon: <TrendingUp size={26} />,
+    features: ["SEO & SEM campaigns", "CRO & Funnel audits", "Omnichannel SMM"],
+    tech: "Google Analytics, HubSpot, Meta Ads"
+  },
+  {
+    title: "Zoho Suite & ERP Integration",
+    description: "End-to-end consulting, setup, custom CRM workflows, and seamless integrations utilizing the Zoho suite of business apps.",
+    icon: <Layers size={26} />,
+    features: ["Custom Module Dev", "ERP & CRM migration", "Automated Workflows"],
+    tech: "Zoho CRM, Creator, Deluge scripting"
+  },
 ];
 
 const coreValues = [
@@ -242,6 +256,88 @@ function Home() {
                   <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">Stack Highlights</p>
                   <p className="text-xs font-semibold text-fuchsia-300">{service.tech}</p>
                 </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── FLAGSHIP ENTERPRISE PRODUCT SUITE ── */}
+      <section className="relative bg-[#020617] py-32 px-6 overflow-hidden z-10 border-t border-white/5">
+        <div className="animated-grid absolute inset-0 opacity-30 mix-blend-screen" />
+        <div className="orb orb-purple w-[600px] h-[600px] top-[10%] left-[-200px] opacity-20" />
+
+        <div className="text-center max-w-4xl mx-auto mb-20 relative z-20">
+          <p className="text-fuchsia-400 text-sm font-bold uppercase tracking-[0.2em] mb-4">Enterprise SaaS Products</p>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">Our Custom Digital Products</h2>
+          <p className="text-slate-300 text-lg leading-relaxed">
+            In addition to custom consulting, we engineer ready-to-scale enterprise products that automate operations, compliance, and clinical research.
+          </p>
+        </div>
+
+        {/* Enterprise Products Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto relative z-20">
+          {[
+            {
+              title: "Axiino Core HRMS",
+              subtitle: "Workforce & Talent Lifecycle Management",
+              desc: "A comprehensive solution to manage the full employee lifecycle. Simplifies onboarding, tracks attendance, automates payroll, and runs appraisal cycles efficiently.",
+              features: ["Automated Attendance & Leave", "Structured Performance reviews", "Self-service employee portal"]
+            },
+            {
+              title: "Axiino Secure EDMS",
+              subtitle: "Compliance-First Document Automation",
+              desc: "A centralized, secure digital document management system. Features Google Vision OCR, custom metadata tagging, and e-signatures while staying GDPR & HIPAA compliant.",
+              features: ["Multilingual OCR & Search", "E-signature approvals", "Detailed Version control & audit logs"]
+            },
+            {
+              title: "Axiino LMS",
+              subtitle: "Scalable E-Learning Platform",
+              desc: "Deliver training, compliance courses, and certifications seamlessly. Supports multimedia content hosting, interactive assessments, and granular reporting dashboards.",
+              features: ["Role-based content access", "Tailored quizzes & automated grading", "Detailed Learner analytics"]
+            },
+            {
+              title: "Axiino SRM",
+              subtitle: "Supplier Relationship & E-Procurement",
+              desc: "Optimize vendor onboarding, RFx bidding processes, and contract lifecycle management. Features budget controls, automatic renewals, and cost-efficiency dashboards.",
+              features: ["Tendering & Secure bidding", "Smart Contract clause templates", "Vendor performance metrics"]
+            },
+            {
+              title: "Axiino LIMS",
+              subtitle: "Laboratory Information Management",
+              desc: "Centralize and automate lab workflows. Enhances sample tracking accuracy, barcode scanning, instrument data acquisition, and strict regulatory compliance.",
+              features: ["Barcode sample tracking", "Automated Instrument integration", "Detailed activity audit trails"]
+            },
+            {
+              title: "Axiino Clinical ISMS",
+              subtitle: "AI-Powered Developmental Care tracking",
+              desc: "Designed to support personalized therapeutic care. Uses AI video landmark detection and MediaPipe to track developmental progress and draft assessment reports.",
+              features: ["MediaPipe landmark tracking", "LLaVA & Ollama report drafts", "HIPAA-compliant secure storage"]
+            }
+          ].map((prod, index) => (
+            <div
+              key={index}
+              className="card-glow p-8 rounded-3xl flex flex-col h-full cursor-default hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 bg-[#0a1122]/30 backdrop-blur-xl"
+            >
+              <div className="mb-6">
+                <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block mb-2">{prod.subtitle}</span>
+                <h4 className="text-2xl font-bold text-white leading-tight">{prod.title}</h4>
+              </div>
+
+              <p className="text-slate-300 text-sm leading-relaxed mb-6 flex-grow">
+                {prod.desc}
+              </p>
+
+              <div className="mt-auto space-y-3 pt-4 border-t border-white/10">
+                <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Features</p>
+                <ul className="space-y-2">
+                  {prod.features.map((feat, i) => (
+                    <li key={i} className="text-xs font-medium text-slate-200 flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-fuchsia-400" />
+                      {feat}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           ))}
