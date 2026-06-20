@@ -3,24 +3,24 @@ import { useLocation } from "react-router-dom";
 
 const seoConfig = {
   "/": {
-    title: "Axiino | IT Services & AI Development | Business Website Solutions",
-    description: "Axiino is a premier IT services company specializing in AI development, business website development, custom mobile applications, and enterprise software engineering.",
-    keywords: "IT Services, AI Development, Business Website Development, Custom Software Engineering, All IT Services, Mobile App Development, Web Development Company, AI Solutions Agency, React Developer, Node.js development"
+    title: "Axiino Technologies | Premium IT Services & AI Development Chennai",
+    description: "Axiino Technologies is a leading software consulting & AI development agency in Chennai. We design custom enterprise solutions, web apps, and Zoho setups.",
+    keywords: "Axiino, Axiino Technologies, Axiino Chennai, IT Services, AI Development, Custom Software Engineering, Mobile App Development, Web Development Company, AI Solutions Agency, Zoho Partner"
   },
   "/about": {
-    title: "About Axiino | Top IT Consultants & AI Software Architects",
-    description: "Meet the elite IT engineers and AI architects behind Axiino. We deliver state-of-the-art software solutions, business web design, and digital transformation.",
-    keywords: "Top IT Consultants, AI Software Architects, Axiino team, software development company, Sujitha CTO, Aravindhan CEO, Vijay Axiino, Saran Axiino"
+    title: "About Axiino Technologies | Elite IT Engineers & AI Architects",
+    description: "Learn about Axiino Technologies (Axiino Labs). Meet our leadership team and explore our advanced software development processes and engineering methodologies.",
+    keywords: "About Axiino, Axiino Technologies team, AI Software Architects, Axiino CEO Aravindhan, Axiino CTO Sujitha, software engineering team"
   },
   "/works": {
-    title: "Our Works | Custom Web Development & IT Case Studies",
-    description: "Explore our portfolio of successful business website development, custom AI implementations, and corporate web platforms designed by Axiino.",
-    keywords: "business website design portfolio, AI project examples, custom web development, IT case studies, Creativix Agency, UMSHIV Group, The First Step Solutions"
+    title: "Axiino Works | Custom Web Apps & AI Project Case Studies",
+    description: "Explore the project portfolio of Axiino Technologies. View case studies of our premium business web designs, custom AI tools, and enterprise deployments.",
+    keywords: "Axiino works, Axiino portfolio, business website design, AI project case studies, custom web development Chennai"
   },
   "/contact": {
-    title: "Contact Axiino | Hire IT & AI Development Experts",
-    description: "Partner with Axiino for all IT services, business website development, and custom artificial intelligence setups. Schedule a call with our IT team.",
-    keywords: "Hire IT services, Hire AI developers, Business website development experts, IT consulting Chennai, Get started with software project"
+    title: "Contact Axiino Technologies | Hire Custom Software & AI Experts",
+    description: "Get in touch with Axiino Technologies located in Ramapuram, Chennai. Discuss your custom software roadmap, CRM requirements, or AI integrations with us.",
+    keywords: "Contact Axiino, Axiino Technologies phone, Axiino address Chennai, hire software developers Chennai, AI consultants"
   }
 };
 
