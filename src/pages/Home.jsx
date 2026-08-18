@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Lottie from "lottie-react";
-import { ChevronDown, Code2, Brain, Smartphone, Server, Bot, Layers, LayoutDashboard, Target, ShieldCheck, Handshake, Rocket, Lightbulb, Cloud, PenTool, Database, Search, TrendingUp, Cpu } from "lucide-react";
+import { ChevronDown, Code2, Brain, Smartphone, Server, Bot, Layers, LayoutDashboard, Target, ShieldCheck, Handshake, Rocket, Lightbulb, Cloud, PenTool, Database, Search, TrendingUp, Cpu, Globe, Zap, Shield, GitBranch } from "lucide-react";
 
 import reactnative from "../assets/tech/reactnative.png";
 import reactjs from "../assets/tech/reactjs.webp";
@@ -122,30 +121,193 @@ const drivesUs = [
 
 const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
 
+// ── Orbiting tech icon data ──
+const orbitIcons = [
+  { icon: <Code2 size={18} />, label: "React", color: "#38bdf8", angle: 0,   radius: 150, speed: 18 },
+  { icon: <Server size={18} />, label: "Node",  color: "#a78bfa", angle: 60,  radius: 150, speed: 18 },
+  { icon: <Brain size={18} />,  label: "AI",    color: "#f472b6", angle: 120, radius: 150, speed: 18 },
+  { icon: <Cloud size={18} />,  label: "Cloud", color: "#34d399", angle: 180, radius: 150, speed: 18 },
+  { icon: <Database size={18} />, label: "DB",  color: "#fbbf24", angle: 240, radius: 150, speed: 18 },
+  { icon: <Shield size={18} />, label: "Sec",   color: "#60a5fa", angle: 300, radius: 150, speed: 18 },
+];
+
+const outerOrbitIcons = [
+  { icon: <Smartphone size={14} />, label: "Mobile", color: "#a78bfa", angle: 30,  radius: 215, speed: 30 },
+  { icon: <Globe size={14} />,      label: "Web",    color: "#38bdf8", angle: 120, radius: 215, speed: 30 },
+  { icon: <Zap size={14} />,        label: "Fast",   color: "#fbbf24", angle: 210, radius: 215, speed: 30 },
+  { icon: <GitBranch size={14} />,  label: "Git",    color: "#34d399", angle: 300, radius: 215, speed: 30 },
+];
+
+function AIHeroVisual() {
+  return (
+    <div className="relative w-[500px] h-[500px] flex items-center justify-center select-none">
+
+      {/* ── Ambient glow blobs ── */}
+      <div className="absolute w-[320px] h-[320px] rounded-full bg-sky-500/10 blur-[80px] animate-pulse" />
+      <div className="absolute w-[200px] h-[200px] rounded-full bg-fuchsia-500/15 blur-[60px]"
+        style={{ animation: "pulse 3s ease-in-out infinite 1s" }} />
+
+      {/* ── Outer orbit ring ── */}
+      <div className="absolute w-[430px] h-[430px] rounded-full border border-white/5" />
+
+      {/* ── Inner orbit ring ── */}
+      <div
+        className="absolute w-[300px] h-[300px] rounded-full border border-sky-400/20"
+        style={{ animation: "spin 18s linear infinite" }}
+      />
+
+      {/* ── Outer orbit ring (counter) ── */}
+      <div
+        className="absolute w-[430px] h-[430px] rounded-full border border-fuchsia-400/10"
+        style={{ animation: "spin 30s linear infinite reverse" }}
+      />
+
+      {/* ── Inner orbit icons ── */}
+      {orbitIcons.map((item, i) => (
+        <div
+          key={i}
+          className="absolute w-[300px] h-[300px]"
+          style={{ animation: `spin ${item.speed}s linear infinite` }}
+        >
+          <div
+            className="absolute"
+            style={{
+              top: "50%",
+              left: "50%",
+              transform: `rotate(${item.angle}deg) translateX(${item.radius}px) rotate(-${item.angle}deg)`,
+              marginTop: "-20px",
+              marginLeft: "-20px",
+            }}
+          >
+            <div
+              className="w-10 h-10 rounded-xl flex items-center justify-center backdrop-blur-sm shadow-lg"
+              style={{
+                background: `${item.color}18`,
+                border: `1px solid ${item.color}40`,
+                boxShadow: `0 0 15px ${item.color}25`,
+                color: item.color,
+                animation: `spin ${item.speed}s linear infinite reverse`,
+              }}
+            >
+              {item.icon}
+            </div>
+          </div>
+        </div>
+      ))}
+
+      {/* ── Outer orbit icons ── */}
+      {outerOrbitIcons.map((item, i) => (
+        <div
+          key={i}
+          className="absolute w-[430px] h-[430px]"
+          style={{ animation: `spin ${item.speed}s linear infinite reverse` }}
+        >
+          <div
+            className="absolute"
+            style={{
+              top: "50%",
+              left: "50%",
+              transform: `rotate(${item.angle}deg) translateX(${item.radius}px) rotate(-${item.angle}deg)`,
+              marginTop: "-16px",
+              marginLeft: "-16px",
+            }}
+          >
+            <div
+              className="w-8 h-8 rounded-lg flex items-center justify-center"
+              style={{
+                background: `${item.color}12`,
+                border: `1px solid ${item.color}30`,
+                color: item.color,
+                animation: `spin ${item.speed}s linear infinite`,
+              }}
+            >
+              {item.icon}
+            </div>
+          </div>
+        </div>
+      ))}
+
+      {/* ── Central AI Core ── */}
+      <div className="relative z-20 flex items-center justify-center">
+        {/* Outer pulse rings */}
+        <div className="absolute w-36 h-36 rounded-full border border-sky-400/20 animate-ping" style={{ animationDuration: "2.5s" }} />
+        <div className="absolute w-28 h-28 rounded-full border border-fuchsia-400/20 animate-ping" style={{ animationDuration: "2s", animationDelay: "0.5s" }} />
+
+        {/* Core sphere */}
+        <div
+          className="relative w-24 h-24 rounded-full flex items-center justify-center"
+          style={{
+            background: "radial-gradient(circle at 35% 35%, #38bdf8, #7c3aed, #0f172a)",
+            boxShadow: "0 0 40px rgba(56,189,248,0.35), 0 0 80px rgba(124,58,237,0.2), inset 0 0 30px rgba(255,255,255,0.05)",
+          }}
+        >
+          {/* Inner shine */}
+          <div className="absolute top-3 left-4 w-8 h-5 rounded-full bg-white/15 blur-sm" />
+          {/* AI brain icon */}
+          <Brain size={36} className="text-white drop-shadow-lg relative z-10" />
+        </div>
+
+        {/* Core label */}
+        <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap">
+          <span className="text-[10px] font-bold tracking-[0.2em] text-sky-400/80 uppercase">Axiino AI Core</span>
+        </div>
+      </div>
+
+      {/* ── Floating data points ── */}
+      {[...Array(8)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute w-1 h-1 rounded-full bg-sky-400/60"
+          style={{
+            top: `${15 + Math.sin(i * 45 * Math.PI / 180) * 38 + 38}%`,
+            left: `${15 + Math.cos(i * 45 * Math.PI / 180) * 38 + 38}%`,
+            animation: `pulse ${2 + (i % 3)}s ease-in-out infinite`,
+            animationDelay: `${i * 0.3}s`,
+            boxShadow: "0 0 6px #38bdf8",
+          }}
+        />
+      ))}
+
+      {/* ── Stats cards ── */}
+      <div
+        className="absolute top-4 right-0 bg-[#0a1122]/80 border border-sky-400/20 rounded-2xl px-4 py-2.5 backdrop-blur-md"
+        style={{ animation: "float 4s ease-in-out infinite" }}
+      >
+        <p className="text-[9px] text-slate-400 uppercase tracking-widest">Projects Shipped</p>
+        <p className="text-lg font-extrabold text-white leading-tight">20+ <span className="text-sky-400 text-xs">✓</span></p>
+      </div>
+
+      <div
+        className="absolute bottom-8 left-0 bg-[#0a1122]/80 border border-fuchsia-400/20 rounded-2xl px-4 py-2.5 backdrop-blur-md"
+        style={{ animation: "float 5s ease-in-out infinite 1s" }}
+      >
+        <p className="text-[9px] text-slate-400 uppercase tracking-widest">AI Integrations</p>
+        <p className="text-lg font-extrabold text-white leading-tight">10+ <span className="text-fuchsia-400 text-xs">↑</span></p>
+      </div>
+
+      <style>{`
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to   { transform: rotate(360deg); }
+        }
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50%       { transform: translateY(-10px); }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+
 function Home() {
   const [isLargeScreen, setIsLargeScreen] = useState(false);
-  const [animationData, setAnimationData] = useState(null);
-  const [showLottie, setShowLottie] = useState(false);
 
   useEffect(() => {
     const checkSize = () => setIsLargeScreen(window.innerWidth >= 1024);
     checkSize();
     window.addEventListener("resize", checkSize);
-    
-    // Dynamically load Lottie JSON to optimize main bundle size
-    import("../assets/tech-hero.json").then((data) => {
-      setAnimationData(data.default);
-    });
-
-    // Defer Lottie initialization to prevent page transition click delays
-    const timer = setTimeout(() => {
-      setShowLottie(true);
-    }, 400);
-
-    return () => {
-      window.removeEventListener("resize", checkSize);
-      clearTimeout(timer);
-    };
+    return () => window.removeEventListener("resize", checkSize);
   }, []);
 
   return (
@@ -194,13 +356,13 @@ function Home() {
             </div>
           </div>
 
-          <div className="relative hidden lg:flex lg:w-1/2 items-center justify-end">
-             {/* Glow ring behind Lottie */}
-             <div className="absolute inset-0 flex items-center justify-center">
-               <div className="w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-sky-500/30 to-fuchsia-500/30 blur-[80px]" />
-             </div>
-             {isLargeScreen && showLottie && animationData && <Lottie animationData={animationData} className="w-full max-w-[600px] h-[600px] relative z-20 drop-shadow-2xl object-right" loop={true} rendererSettings={{ renderer: 'canvas' }} />}
+          {/* ── AI HERO VISUAL ── */}
+          {isLargeScreen && (
+          <div className="relative hidden lg:flex lg:w-1/2 items-center justify-center">
+            <AIHeroVisual />
           </div>
+          )}
+
         </div>
 
         {/* Scroll indicator */}
@@ -408,11 +570,11 @@ function Home() {
         </div>
       </section>
 
-      {/* ── TECH STACK ── */}
-      <section className="relative bg-[#050b14] py-32 px-6 overflow-hidden z-10">
+      {/* ── TECH STACK (INFINITE SCROLL MARQUEE) ── */}
+      <section className="relative bg-[#050b14] py-32 overflow-hidden z-10">
         <div className="orb orb-blue w-[600px] h-[300px] bottom-0 left-1/2 -translate-x-1/2 opacity-20 blur-[120px]" />
 
-        <div className="text-center mb-16 relative z-20">
+        <div className="text-center mb-16 px-6 relative z-20">
           <p className="text-sky-400 text-sm font-bold uppercase tracking-[0.2em] mb-4">Foundation</p>
           <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">Enterprise Tech Stack</h2>
           <p className="text-slate-300 text-lg max-w-xl mx-auto leading-relaxed">
@@ -420,16 +582,29 @@ function Home() {
           </p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-6 max-w-5xl mx-auto relative z-20">
-          {techStack.map((tech) => (
-            <div
-              key={tech.name}
-              className="card-glow p-6 rounded-2xl w-36 h-36 flex flex-col items-center justify-center gap-4 bg-[#0a1122]/50 hover:scale-105 hover:-translate-y-1 transition-all duration-300"
-            >
-              <img src={tech.img} alt={tech.name} className="h-14 w-14 object-contain filter drop-shadow-lg" />
-              <span className="text-sm text-slate-200 font-bold tracking-wide">{tech.name}</span>
-            </div>
-          ))}
+        {/* Scrollable Marquee Container with Left & Right Gradient Fade */}
+        <div className="relative w-full overflow-hidden py-4">
+          {/* Left Fade Gradient */}
+          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-r from-[#050b14] via-[#050b14]/80 to-transparent z-20" />
+          
+          {/* Right Fade Gradient */}
+          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-l from-[#050b14] via-[#050b14]/80 to-transparent z-20" />
+
+          {/* Marquee Track */}
+          <div className="animate-marquee flex items-center gap-8 px-4">
+            {[...techStack, ...techStack, ...techStack, ...techStack].map((tech, idx) => (
+              <div
+                key={`${tech.name}-${idx}`}
+                className="card-glow p-6 rounded-2xl w-40 h-40 shrink-0 flex flex-col items-center justify-center gap-4 bg-[#0a1122]/60 hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-pointer group border border-white/10 hover:border-sky-400/40"
+              >
+                <div className="relative w-16 h-16 flex items-center justify-center">
+                  <div className="absolute inset-0 bg-sky-500/10 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <img src={tech.img} alt={tech.name} className="h-14 w-14 object-contain filter drop-shadow-lg relative z-10 transition-transform group-hover:scale-110 duration-300" />
+                </div>
+                <span className="text-sm text-slate-200 font-bold tracking-wide group-hover:text-sky-300 transition-colors whitespace-nowrap">{tech.name}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

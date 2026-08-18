@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import Lottie from "lottie-react";
-import { Users, Target, ShieldCheck, Activity, BookOpenCheck, HeartHandshake, Zap, Globe, Code2, Cpu, Server, Database, Cloud, Bot, Layers } from "lucide-react";
+import { Users, Target, ShieldCheck, Activity, BookOpenCheck, HeartHandshake, Zap, Globe, Code2, Cpu, Server, Database, Cloud, Bot, Layers, Brain, Smartphone, GitBranch, Terminal, Wifi } from "lucide-react";
 import { useEffect, useState, memo } from "react";
 import { Link } from "react-router-dom";
+// Removed direct supabase import since we use the local API now
 // Removed direct supabase import since we use the local API now
 
 const BackgroundParticle = memo(({ size, top, left, duration, delay }) => {
@@ -91,11 +91,157 @@ const PersistentBackground = memo(({ isMobile }) => {
   );
 });
 
+// ── About Hero Visual ──
+const techBadges = [
+  { label: "React.js",   color: "#38bdf8", icon: <Code2 size={12} /> },
+  { label: "Node.js",    color: "#4ade80", icon: <Server size={12} /> },
+  { label: "Python",     color: "#fbbf24", icon: <Terminal size={12} /> },
+  { label: "AI / LLM",   color: "#f472b6", icon: <Brain size={12} /> },
+  { label: "Cloud",      color: "#818cf8", icon: <Cloud size={12} /> },
+  { label: "React Native",color: "#a78bfa", icon: <Smartphone size={12} /> },
+  { label: "PostgreSQL", color: "#60a5fa", icon: <Database size={12} /> },
+  { label: "DevOps",     color: "#34d399", icon: <GitBranch size={12} /> },
+];
+
+const teamMembers = [
+  { initials: "AR", color: "#38bdf8", role: "CEO" },
+  { initials: "SJ", color: "#f472b6", role: "CTO" },
+  { initials: "KV", color: "#a78bfa", role: "Dev" },
+  { initials: "RK", color: "#4ade80", role: "Dev" },
+];
+
+const activityBars = [40, 65, 45, 80, 55, 90, 70, 85, 60, 95, 75, 88];
+
+function AboutHeroVisual() {
+  return (
+    <div className="relative w-[440px] h-[480px] flex items-center justify-center select-none">
+
+      {/* Ambient glow */}
+      <div className="absolute w-[300px] h-[300px] rounded-full bg-fuchsia-500/10 blur-[80px] animate-pulse" />
+      <div className="absolute w-[200px] h-[200px] rounded-full bg-sky-500/10 blur-[60px] top-10 right-10"
+        style={{ animation: "pulse 4s ease-in-out infinite 1.5s" }} />
+
+      {/* Main card */}
+      <div
+        className="relative z-10 w-[380px] bg-[#070e1d]/90 rounded-[2rem] border border-white/10 backdrop-blur-xl overflow-hidden shadow-2xl"
+        style={{ boxShadow: "0 0 60px rgba(124,58,237,0.15), 0 0 120px rgba(56,189,248,0.08)" }}
+      >
+        {/* Top neon line */}
+        <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-fuchsia-500 to-transparent opacity-70" />
+
+        {/* Card Header */}
+        <div className="px-6 py-4 flex items-center justify-between border-b border-white/5">
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-red-500" />
+            <div className="w-2 h-2 rounded-full bg-yellow-400" />
+            <div className="w-2 h-2 rounded-full bg-green-400" />
+          </div>
+          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Axiino Dashboard</span>
+          <div className="flex items-center gap-1 text-green-400">
+            <Wifi size={11} />
+            <span className="text-[9px] font-bold">LIVE</span>
+          </div>
+        </div>
+
+        {/* Team row */}
+        <div className="px-6 pt-5 pb-4 flex items-center justify-between border-b border-white/5">
+          <div>
+            <p className="text-[9px] text-slate-500 uppercase tracking-widest mb-2">Core Team</p>
+            <div className="flex items-center gap-2">
+              {teamMembers.map((m, i) => (
+                <div key={i} className="flex flex-col items-center gap-1">
+                  <div
+                    className="w-9 h-9 rounded-xl flex items-center justify-center text-xs font-extrabold text-white"
+                    style={{ background: `${m.color}22`, border: `1.5px solid ${m.color}50`, boxShadow: `0 0 12px ${m.color}20` }}
+                  >
+                    {m.initials}
+                  </div>
+                  <span className="text-[8px] text-slate-500">{m.role}</span>
+                </div>
+              ))}
+              <div className="w-9 h-9 rounded-xl flex items-center justify-center text-xs font-bold text-slate-400 border border-white/10 bg-white/5">
+                +2
+              </div>
+            </div>
+          </div>
+          <div className="text-right">
+            <p className="text-[9px] text-slate-500 uppercase tracking-widest mb-1">Projects Done</p>
+            <p className="text-3xl font-black text-white">20<span className="text-fuchsia-400 text-lg">+</span></p>
+          </div>
+        </div>
+
+        {/* Activity chart */}
+        <div className="px-6 py-4 border-b border-white/5">
+          <div className="flex items-center justify-between mb-3">
+            <p className="text-[9px] text-slate-500 uppercase tracking-widest">Delivery Activity</p>
+            <span className="text-[9px] font-bold text-green-400">↑ 94% on-time</span>
+          </div>
+          <div className="flex items-end gap-1 h-14">
+            {activityBars.map((h, i) => (
+              <div
+                key={i}
+                className="flex-1 rounded-t-sm"
+                style={{
+                  height: `${h}%`,
+                  background: i === activityBars.length - 1
+                    ? "linear-gradient(to top, #7c3aed, #38bdf8)"
+                    : `rgba(56,189,248,${0.15 + (h / 100) * 0.35})`,
+                  boxShadow: i === activityBars.length - 1 ? "0 0 10px rgba(56,189,248,0.4)" : "none",
+                  animation: `pulse ${1.5 + i * 0.1}s ease-in-out infinite`,
+                  animationDelay: `${i * 0.08}s`,
+                }}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Tech badges */}
+        <div className="px-6 py-4">
+          <p className="text-[9px] text-slate-500 uppercase tracking-widest mb-3">Technology Stack</p>
+          <div className="flex flex-wrap gap-2">
+            {techBadges.map((t, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-semibold"
+                style={{
+                  background: `${t.color}12`,
+                  border: `1px solid ${t.color}30`,
+                  color: t.color,
+                }}
+              >
+                {t.icon}
+                {t.label}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom neon line */}
+        <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-sky-500 to-transparent opacity-50" />
+      </div>
+
+      {/* Floating badge */}
+      <div
+        className="absolute -top-4 -right-4 bg-[#0a1122]/90 border border-fuchsia-400/30 rounded-2xl px-4 py-2.5 backdrop-blur-md z-20"
+        style={{ animation: "float 4s ease-in-out infinite", boxShadow: "0 0 20px rgba(232,121,249,0.15)" }}
+      >
+        <p className="text-[9px] text-slate-400 uppercase tracking-widest">Client Rating</p>
+        <p className="text-base font-extrabold text-white">⭐ 5.0 <span className="text-fuchsia-400 text-xs">/ 5</span></p>
+      </div>
+
+      <style>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50%       { transform: translateY(-10px); }
+        }
+      `}</style>
+    </div>
+  );
+}
+
 function AboutUs() {
   const [isMediumScreen, setIsMediumScreen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [heroAnimation, setHeroAnimation] = useState(null);
-  const [showLottie, setShowLottie] = useState(false);
 
   useEffect(() => {
     const checkSize = () => {
@@ -104,21 +250,7 @@ function AboutUs() {
     };
     checkSize();
     window.addEventListener("resize", checkSize);
-
-    // Dynamically load Lottie JSON to optimize main bundle size
-    import("../assets/about.json").then((data) => {
-      setHeroAnimation(data.default);
-    });
-
-    // Defer Lottie rendering to prevent transition click delays
-    const timer = setTimeout(() => {
-      setShowLottie(true);
-    }, 400);
-
-    return () => {
-      window.removeEventListener("resize", checkSize);
-      clearTimeout(timer);
-    };
+    return () => window.removeEventListener("resize", checkSize);
   }, []);
 
   return (
@@ -149,11 +281,8 @@ function AboutUs() {
             </p>
           </div>
 
-          <div className="relative hidden md:block">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-[300px] h-[300px] rounded-full bg-gradient-to-tr from-fuchsia-500/30 to-sky-500/30 blur-[80px]" />
-            </div>
-            {isMediumScreen && showLottie && heroAnimation && <Lottie animationData={heroAnimation} loop={true} className="w-full h-[500px] relative z-20 drop-shadow-2xl" rendererSettings={{ renderer: 'canvas' }} />}
+          <div className="relative hidden md:flex items-center justify-center">
+            <AboutHeroVisual />
           </div>
         </div>
       </section>
@@ -256,10 +385,10 @@ function AboutUs() {
             ].map((item, i) => (
               <div
                 key={i}
-                className="relative group p-10 rounded-[32px] border border-white/5 bg-[#030712]/50 backdrop-blur-md hover:border-white/10 transition-all duration-500 overflow-hidden hover:-translate-y-2 hover:scale-[1.02]"
+                className={`relative group p-10 rounded-[32px] border border-white/5 bg-[#030912]/60 backdrop-blur-md hover:border-white/15 transition-all duration-500 overflow-hidden hover:-translate-y-2 hover:scale-[1.02]`}
               >
-                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${item.color} opacity-[0.03] blur-2xl group-hover:opacity-[0.1] transition-opacity`} />
-                <span className="text-5xl font-black text-white/5 mb-6 block group-hover:text-white/10 transition-colors">{item.step}</span>
+                <div className={`absolute top-0 right-0 w-48 h-48 bg-gradient-to-br ${item.color} opacity-[0.07] blur-2xl group-hover:opacity-[0.15] transition-opacity`} />
+                <span className={`text-6xl font-black mb-6 block bg-gradient-to-br ${item.color} bg-clip-text text-transparent drop-shadow-lg`}>{item.step}</span>
                 <h4 className="text-2xl font-bold text-white mb-4">{item.title}</h4>
                 <p className="text-slate-400 leading-relaxed font-light">{item.desc}</p>
               </div>
