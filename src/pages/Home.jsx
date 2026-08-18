@@ -170,7 +170,7 @@ function Home() {
             </div>
 
             <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6 text-white">
-              We Engineer <br />
+              <span className="gradient-text pb-1 inline-block">Axiino</span> Engineers <br />
               <span className="gradient-text pb-2 inline-block">Digital Futures</span>
             </h1>
 
@@ -453,6 +453,55 @@ function Home() {
              Contact Our Team &rarr;
            </Link>
         </div>
+      </section>
+
+      {/* ── SEO Brand Authority Block (screen-reader & crawler visible, hyperlocal) ── */}
+      <section
+        aria-label="About Axiino Technologies also known as Axio - Web Development near KK Nagar Chennai"
+        style={{
+          position: 'absolute',
+          width: '1px',
+          height: '1px',
+          padding: 0,
+          margin: '-1px',
+          overflow: 'hidden',
+          clip: 'rect(0,0,0,0)',
+          whiteSpace: 'nowrap',
+          borderWidth: 0
+        }}
+      >
+        <h2>Axiino Technologies (Axio) — Website Development Company near KK Nagar, Chennai</h2>
+        <p>
+          Axiino Technologies, also referred to as Axio, Axio Technologies, or Axio Chennai, is a website development
+          and IT services company located near KK Nagar, Chennai, Tamil Nadu, India.
+          Whether you search for Axiino or Axio, you will find Axiino Technologies — your trusted IT partner.
+          We serve clients in KK Nagar, Ashok Nagar, Ramapuram, Vadapalani, Arumbakkam, Anna Nagar,
+          Saligramam, Virugambakkam, Valasaravakkam, Porur, Mogappair, Koyambedu, and all of Chennai.
+        </p>
+        <ul>
+          <li>Axio Technologies — Website Development Company Chennai</li>
+          <li>Axio — IT Services near KK Nagar Chennai</li>
+          <li>Axio web development company Chennai</li>
+          <li>Axio software company Tamil Nadu</li>
+          <li>Axio AI solutions Chennai</li>
+          <li>Axio mobile app development India</li>
+          <li>Axiino (Axio) — Website Development Company Chennai</li>
+          <li>Axiino Technologies — IT Services Tamil Nadu</li>
+          <li>Web development company near KK Nagar Chennai</li>
+          <li>IT services near KK Nagar</li>
+          <li>Website development company near Ashok Nagar Chennai</li>
+          <li>Software company near Vadapalani Chennai</li>
+          <li>Web developer near me KK Nagar</li>
+          <li>Custom software development near Ramapuram Chennai</li>
+          <li>Axiino — Full Stack Web Development Agency KK Nagar area</li>
+        </ul>
+        <address>
+          Axiino Technologies (Axio), Flat No. 27, 1st Street, Kothari Nagar,
+          Annai Sathya Nagar Main Road, Ramapuram, Chennai - 600089, Tamil Nadu, India.
+          Serving KK Nagar, Ashok Nagar, Vadapalani, Arumbakkam, Anna Nagar, Saligramam and all of Chennai.
+          Phone: +91 93613 95699. Email: axiino237@gmail.com.
+          Website: https://www.axiino.com
+        </address>
       </section>
     </>
   );

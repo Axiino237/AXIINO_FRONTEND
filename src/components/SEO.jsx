@@ -3,24 +3,81 @@ import { useLocation } from "react-router-dom";
 
 const seoConfig = {
   "/": {
-    title: "Axiino Technologies | Premium IT Services & AI Development Chennai",
-    description: "Axiino Technologies is a leading software consulting & AI development agency in Chennai. We design custom enterprise solutions, web apps, and Zoho setups.",
-    keywords: "Axiino, Axiino Technologies, Axiino Chennai, IT Services, AI Development, Custom Software Engineering, Mobile App Development, Web Development Company, AI Solutions Agency, Zoho Partner"
+    title: "Axiino | Axio | Axiino Technologies | Web Development near KK Nagar Chennai | IT Services & AI Solutions",
+    description: "Axiino Technologies (also known as Axio, Axio Tech) — website development company near KK Nagar, Ashok Nagar, Ramapuram, Chennai. Custom web apps, mobile apps, AI & IT services. Free consultation!",
+    keywords: "Axiino, Axio, Axio Technologies, Axio Chennai, Axio IT, Axio Tech, Axio website development, Axio software, Axiino Technologies, Axiino Tech, Axiino Chennai, axiino.com, web development near KK Nagar, IT company near KK Nagar Chennai, website development KK Nagar, software company KK Nagar, web developer near me KK Nagar, IT services KK Nagar Chennai, website development Ashok Nagar, web development Ramapuram, web development Vadapalani, web development Arumbakkam, web development Anna Nagar, IT company near me Chennai, website development company Chennai, mobile app development Chennai, AI development Chennai, full stack development Chennai"
   },
   "/about": {
-    title: "About Axiino Technologies | Elite IT Engineers & AI Architects",
-    description: "Learn about Axiino Technologies (Axiino Labs). Meet our leadership team and explore our advanced software development processes and engineering methodologies.",
-    keywords: "About Axiino, Axiino Technologies team, AI Software Architects, Axiino CEO Aravindhan, Axiino CTO Sujitha, software engineering team"
+    title: "About Axiino Technologies | Elite IT Engineers & AI Architects in Chennai",
+    description: "Meet the team behind Axiino Technologies — Chennai's rising IT company. Expert software engineers, AI architects, and full-stack developers building future-ready digital solutions.",
+    keywords: "about Axiino Technologies, Axiino team Chennai, IT engineers Chennai, AI architects India, software development team, Axiino CEO Aravindhan, full stack engineers Chennai, software company about us, Axiino Labs"
   },
   "/works": {
-    title: "Axiino Works | Custom Web Apps & AI Project Case Studies",
-    description: "Explore the project portfolio of Axiino Technologies. View case studies of our premium business web designs, custom AI tools, and enterprise deployments.",
-    keywords: "Axiino works, Axiino portfolio, business website design, AI project case studies, custom web development Chennai"
+    title: "Axiino Works | Web App & AI Project Portfolio | Chennai IT Company",
+    description: "Explore Axiino Technologies' project portfolio — premium business websites, custom AI tools, mobile apps, and enterprise software built for clients in Chennai and across India.",
+    keywords: "Axiino portfolio, web development projects Chennai, IT company case studies, AI project portfolio India, custom web app development, business website Chennai, mobile app portfolio, enterprise software projects"
   },
   "/contact": {
-    title: "Contact Axiino Technologies | Hire Custom Software & AI Experts",
-    description: "Get in touch with Axiino Technologies located in Ramapuram, Chennai. Discuss your custom software roadmap, CRM requirements, or AI integrations with us.",
-    keywords: "Contact Axiino, Axiino Technologies phone, Axiino address Chennai, hire software developers Chennai, AI consultants"
+    title: "Contact Axiino Technologies | Hire Web Developers & IT Experts in Chennai",
+    description: "Get in touch with Axiino Technologies in Ramapuram, Chennai. Discuss your web development, mobile app, AI, or IT service needs. Call +91 93613 95699 or email axiino237@gmail.com.",
+    keywords: "contact Axiino Technologies, hire web developers Chennai, IT company contact Ramapuram, software development inquiry Chennai, Axiino phone number, Axiino address Chennai, hire AI developers India, website development quote Chennai"
+  }
+};
+
+// Per-page JSON-LD for pages
+const pageSchemas = {
+  "/": null, // Handled in index.html
+  "/about": {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "url": "https://www.axiino.com/about",
+    "name": "About Axiino Technologies",
+    "description": "Learn about Axiino Technologies — Chennai's premier IT services and software development company.",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "Axiino Technologies",
+      "url": "https://www.axiino.com",
+      "foundingDate": "2024",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Chennai",
+        "addressRegion": "Tamil Nadu",
+        "addressCountry": "IN"
+      }
+    }
+  },
+  "/works": {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "url": "https://www.axiino.com/works",
+    "name": "Axiino Technologies Portfolio",
+    "description": "Project portfolio of Axiino Technologies — custom web apps, AI tools, and mobile apps for businesses.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Axiino Technologies",
+      "url": "https://www.axiino.com"
+    }
+  },
+  "/contact": {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "url": "https://www.axiino.com/contact",
+    "name": "Contact Axiino Technologies",
+    "description": "Contact Axiino Technologies for website development, mobile apps, and IT services in Chennai.",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "Axiino Technologies",
+      "telephone": "+919361395699",
+      "email": "axiino237@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Flat No. 27, 1st Street, Kothari Nagar, Annai Sathya Nagar Main Road, Ramapuram",
+        "addressLocality": "Chennai",
+        "addressRegion": "Tamil Nadu",
+        "postalCode": "600089",
+        "addressCountry": "IN"
+      }
+    }
   }
 };
 
@@ -28,7 +85,7 @@ export default function SEO() {
   const location = useLocation();
 
   useEffect(() => {
-    // Determine path, strip trailing slash if any
+    // Determine path, strip trailing slash
     let path = location.pathname;
     if (path.length > 1 && path.endsWith("/")) {
       path = path.slice(0, -1);
@@ -36,48 +93,60 @@ export default function SEO() {
 
     const config = seoConfig[path] || seoConfig["/"];
 
-    // Update Document Title
+    // ── Update Document Title ──
     document.title = config.title;
 
-    // Update Meta Description
-    let metaDescription = document.querySelector('meta[name="description"]');
-    if (!metaDescription) {
-      metaDescription = document.createElement('meta');
-      metaDescription.setAttribute('name', 'description');
-      document.head.appendChild(metaDescription);
-    }
-    metaDescription.setAttribute('content', config.description);
+    // Helper to upsert a <meta> tag
+    const upsertMeta = (selector, attr, value) => {
+      let el = document.querySelector(selector);
+      if (!el) {
+        el = document.createElement("meta");
+        const [key, val] = attr.split("=");
+        el.setAttribute(key, val.replace(/"/g, ""));
+        document.head.appendChild(el);
+      }
+      el.setAttribute("content", value);
+    };
 
-    // Update Meta Keywords
-    let metaKeywords = document.querySelector('meta[name="keywords"]');
-    if (!metaKeywords) {
-      metaKeywords = document.createElement('meta');
-      metaKeywords.setAttribute('name', 'keywords');
-      document.head.appendChild(metaKeywords);
-    }
-    metaKeywords.setAttribute('content', config.keywords);
+    // ── Meta tags ──
+    upsertMeta('meta[name="description"]', 'name=description', config.description);
+    upsertMeta('meta[name="keywords"]', 'name=keywords', config.keywords);
 
-    // Update Canonical URL
+    // ── Canonical URL ──
     let canonical = document.querySelector('link[rel="canonical"]');
     if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.setAttribute('rel', 'canonical');
+      canonical = document.createElement("link");
+      canonical.setAttribute("rel", "canonical");
       document.head.appendChild(canonical);
     }
-    const cleanPath = path === "/" ? "" : `#${path}`;
-    canonical.setAttribute('href', `https://www.axiino.com/${cleanPath}`);
+    const canonicalUrl = path === "/" ? "https://www.axiino.com/" : `https://www.axiino.com${path}`;
+    canonical.setAttribute("href", canonicalUrl);
 
-    // Update Open Graph tags for rich sharing preview
-    const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute('content', config.title);
+    // ── Open Graph ──
+    upsertMeta('meta[property="og:title"]', 'property=og:title', config.title);
+    upsertMeta('meta[property="og:description"]', 'property=og:description', config.description);
+    upsertMeta('meta[property="og:url"]', 'property=og:url', canonicalUrl);
 
-    const ogDescription = document.querySelector('meta[property="og:description"]');
-    if (ogDescription) ogDescription.setAttribute('content', config.description);
+    // ── Twitter Card ──
+    upsertMeta('meta[name="twitter:title"]', 'name=twitter:title', config.title);
+    upsertMeta('meta[name="twitter:description"]', 'name=twitter:description', config.description);
 
-    const ogUrl = document.querySelector('meta[property="og:url"]');
-    if (ogUrl) ogUrl.setAttribute('content', `https://www.axiino.com/${cleanPath}`);
+    // ── Per-page JSON-LD Schema ──
+    const existingPageSchema = document.getElementById("page-schema-ld");
+    if (existingPageSchema) existingPageSchema.remove();
+
+    const schema = pageSchemas[path];
+    if (schema) {
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.id = "page-schema-ld";
+      script.text = JSON.stringify(schema, null, 2);
+      document.head.appendChild(script);
+    }
 
   }, [location]);
 
   return null;
 }
+
+
