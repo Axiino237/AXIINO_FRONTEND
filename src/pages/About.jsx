@@ -354,13 +354,19 @@ function AboutUs() {
         <div className="orb absolute orb-blue w-[500px] h-[500px] -top-64 right-0 opacity-10 blur-[120px]" />
 
         <div className="max-w-7xl mx-auto relative z-20">
-          <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7 }}
+            className="text-center mb-16"
+          >
             <p className="text-fuchsia-400 text-sm font-bold uppercase tracking-[0.2em] mb-4">The Workflow</p>
             <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">Our Methodology</h2>
             <p className="text-slate-300 text-lg max-w-2xl mx-auto leading-relaxed font-light">
               We leverage an iterative, audit-driven development cycle that prioritizes structural integrity and high-fidelity output.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
@@ -383,15 +389,20 @@ function AboutUs() {
                 color: "from-indigo-500 to-indigo-400"
               }
             ].map((item, i) => (
-              <div
+              <motion.div
                 key={i}
-                className={`relative group p-10 rounded-[32px] border border-white/5 bg-[#030912]/60 backdrop-blur-md hover:border-white/15 transition-all duration-500 overflow-hidden hover:-translate-y-2 hover:scale-[1.02]`}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: i * 0.15 }}
+                whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                className={`relative group p-10 rounded-[32px] border border-white/5 bg-[#030912]/60 backdrop-blur-md hover:border-white/15 transition-all duration-500 overflow-hidden`}
               >
                 <div className={`absolute top-0 right-0 w-48 h-48 bg-gradient-to-br ${item.color} opacity-[0.07] blur-2xl group-hover:opacity-[0.15] transition-opacity`} />
                 <span className={`text-6xl font-black mb-6 block bg-gradient-to-br ${item.color} bg-clip-text text-transparent drop-shadow-lg`}>{item.step}</span>
                 <h4 className="text-2xl font-bold text-white mb-4">{item.title}</h4>
                 <p className="text-slate-400 leading-relaxed font-light">{item.desc}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -455,13 +466,19 @@ function AboutUs() {
         <div className="orb absolute orb-fuchsia w-[500px] h-[500px] top-1/2 left-0 -translate-y-1/2 opacity-10 blur-[120px]" />
 
         <div className="max-w-7xl mx-auto relative z-20">
-          <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7 }}
+            className="text-center mb-16"
+          >
             <p className="text-sky-400 text-sm font-bold uppercase tracking-[0.2em] mb-4">Product Suite</p>
             <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">Our Engineering Ecosystem</h2>
             <p className="text-slate-300 text-lg max-w-2xl mx-auto leading-relaxed font-light">
               We design and manage a suite of specialized digital products engineered for efficiency, compliance, and seamless operational flow.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
@@ -490,13 +507,18 @@ function AboutUs() {
                 desc: "AI video preprocessing (using body landmark and motion detectors) drafts assessments and structures diagnostic support reports while complying with health regulations."
               }
             ].map((prod, i) => (
-              <div
+              <motion.div
                 key={i}
-                className="p-8 rounded-[32px] border border-white/5 bg-[#030712]/40 backdrop-blur-md hover:border-white/10 transition-all duration-300 hover:-translate-y-1"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                className="p-8 rounded-[32px] border border-white/5 bg-[#030712]/40 backdrop-blur-md hover:border-white/10 transition-all duration-300"
               >
                 <h4 className="text-xl font-bold text-white mb-3">{prod.title}</h4>
                 <p className="text-slate-400 text-sm leading-relaxed font-light">{prod.desc}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -507,13 +529,19 @@ function AboutUs() {
         <div className="animated-grid absolute inset-0 opacity-20" />
         <div className="orb absolute orb-purple w-[500px] h-[500px] top-0 right-0 opacity-20 blur-[100px]" />
 
-        <div className="text-center mb-16 relative z-20">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-16 relative z-20"
+        >
           <p className="text-sky-400 text-sm font-bold uppercase tracking-[0.2em] mb-4">The Brains</p>
           <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">Meet the Leadership</h2>
           <p className="text-slate-300 text-lg mt-2 max-w-2xl mx-auto leading-relaxed">
             Decades of combined engineering and product design experience steering the ship toward technical excellence.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto relative z-20 w-full">
           {[
@@ -522,9 +550,14 @@ function AboutUs() {
             { name: "Sujitha", role: "CTO", initials: "SJ", glow: "from-sky-500 to-teal-500" },
             { name: "Saran", role: "AI & Software Solutions", initials: "SR", glow: "from-purple-500 to-indigo-500" }
           ].map((member, i) => (
-            <div
+            <motion.div
               key={i}
-              className="card-glow p-8 rounded-3xl text-center flex flex-col items-center group cursor-default hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              whileHover={{ y: -8, scale: 1.03, transition: { duration: 0.2 } }}
+              className="card-glow p-8 rounded-3xl text-center flex flex-col items-center group cursor-default transition-all duration-300"
             >
               <div className="relative w-24 h-24 mb-6">
                 {/* Outer glow ring */}
@@ -545,7 +578,7 @@ function AboutUs() {
               </p>
               
               <div className="w-12 h-0.5 bg-white/5 group-hover:bg-sky-500/30 mt-6 rounded-full transition-colors" />
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
@@ -554,26 +587,37 @@ function AboutUs() {
       <section className="relative bg-[#050b14] px-6 py-24 overflow-hidden z-10">
         <div className="orb absolute orb-fuchsia w-[600px] h-[600px] -bottom-[200px] -left-[200px] opacity-15" />
 
-        <div className="text-center mb-16 relative z-20">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-16 relative z-20"
+        >
           <p className="text-fuchsia-400 text-sm font-bold uppercase tracking-[0.2em] mb-4">Philosophy</p>
           <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">Our Operating Protocol</h2>
           <p className="text-slate-300 text-lg mt-2 max-w-2xl mx-auto leading-relaxed">
             These eight axioms govern every architectural decision, every sprint, and every deployment we execute.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto relative z-20">
           {beliefs.map((item, i) => (
-            <div
+            <motion.div
               key={i}
-              className="card-glow p-8 rounded-3xl hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: i * 0.06 }}
+              whileHover={{ y: -8, transition: { duration: 0.2 } }}
+              className="card-glow p-8 rounded-3xl transition-all duration-300"
             >
               <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-fuchsia-500/20 to-purple-500/20 border border-fuchsia-400/30 flex items-center justify-center text-fuchsia-300 shadow-[0_0_15px_rgba(232,121,249,0.2)] mb-6">
                 {item.icon}
               </div>
               <h4 className="text-xl font-bold text-white mb-4 leading-tight">{item.title}</h4>
               <p className="text-slate-300 text-sm leading-loose">{item.desc}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>

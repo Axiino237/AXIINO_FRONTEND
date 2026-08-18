@@ -1,5 +1,7 @@
 import { useState, useEffect, memo } from "react";
-import { Mail, Phone, MapPin, Send, MessageSquare, Shield, Lock, Globe, Database, Cpu } from "lucide-react";
+import { motion } from "framer-motion";
+import confetti from "canvas-confetti";
+import { Mail, Phone, MapPin, Send, MessageSquare, Shield, Lock, Globe, Database, Cpu, CheckCircle } from "lucide-react";
 
 const BackgroundParticle = memo(({ size, top, left, duration, delay }) => {
   return (
@@ -123,6 +125,18 @@ function Contact() {
       if (res.ok) {
         setStatus("success");
         setFormData({ name: "", email: "", phoneNumber: "", service: "Web Development", message: "" });
+        
+        // Celebratory confetti burst
+        try {
+          confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ['#38bdf8', '#c084fc', '#e879f9', '#4ade80', '#fbbf24']
+          });
+        } catch (e) {
+          // ignore if canvas not supported
+        }
       } else {
         throw new Error(result.error || "Something went wrong");
       }

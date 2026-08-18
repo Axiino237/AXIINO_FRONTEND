@@ -10,11 +10,15 @@ import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import Chatbot from "./components/Chatbot";
 import SEO from "./components/SEO";
+import SmoothScroll from "./components/SmoothScroll";
+import SpotlightCursor from "./components/SpotlightCursor";
 
 function App() {
   return (
     <Router>
       <SEO />
+      <SmoothScroll />
+      <SpotlightCursor />
       <Navbar />
       <ScrollToTop />
       <Routes>

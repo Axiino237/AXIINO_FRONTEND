@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { ChevronDown, Code2, Brain, Smartphone, Server, Bot, Layers, LayoutDashboard, Target, ShieldCheck, Handshake, Rocket, Lightbulb, Cloud, PenTool, Database, Search, TrendingUp, Cpu, Globe, Zap, Shield, GitBranch } from "lucide-react";
 
 import reactnative from "../assets/tech/reactnative.png";
@@ -324,23 +325,48 @@ function Home() {
 
         {/* Hero Content Flex */}
         <div className="max-w-7xl mx-auto w-full flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10">
-          <div className="flex flex-col items-start text-left lg:w-1/2">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="flex flex-col items-start text-left lg:w-1/2"
+          >
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-sky-400/40 bg-sky-950/50 text-sky-200 text-sm font-semibold tracking-wide shadow-[0_0_15px_rgba(56,189,248,0.2)] mb-8">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-sky-400/40 bg-sky-950/50 text-sky-200 text-sm font-semibold tracking-wide shadow-[0_0_15px_rgba(56,189,248,0.2)] mb-8"
+            >
               <span className="w-2.5 h-2.5 rounded-full bg-sky-400 shadow-[0_0_8px_#38bdf8] animate-[pulse-glow_2s_infinite]" />
               Premium Digital Agency
-            </div>
+            </motion.div>
 
-            <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6 text-white">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6 text-white"
+            >
               <span className="gradient-text pb-1 inline-block">Axiino</span> Engineers <br />
               <span className="gradient-text pb-2 inline-block">Digital Futures</span>
-            </h1>
+            </motion.h1>
 
-            <p className="text-xl text-slate-300 mb-10 leading-relaxed font-light max-w-xl">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="text-xl text-slate-300 mb-10 leading-relaxed font-light max-w-xl"
+            >
               Axiino architects scalable, highly-performant, and AI-driven platforms that empower modern startups and enterprise leaders.
-            </p>
+            </motion.p>
 
-            <div className="flex flex-wrap gap-5">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="flex flex-wrap gap-5"
+            >
               <Link
                 to="/contact"
                 className="glow-btn px-8 py-4 bg-gradient-to-r from-sky-500 to-fuchsia-500 text-white font-bold rounded-xl shadow-[0_0_30px_rgba(192,132,252,0.4)] hover:shadow-[0_0_40px_rgba(56,189,248,0.6)] transition-all duration-300 border border-white/20"
@@ -353,14 +379,19 @@ function Home() {
               >
                 Discover Axiino
               </Link>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* ── AI HERO VISUAL ── */}
           {isLargeScreen && (
-          <div className="relative hidden lg:flex lg:w-1/2 items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+            className="relative hidden lg:flex lg:w-1/2 items-center justify-center"
+          >
             <AIHeroVisual />
-          </div>
+          </motion.div>
           )}
 
         </div>
@@ -376,20 +407,31 @@ function Home() {
         <div className="animated-grid absolute inset-0 opacity-40 mix-blend-screen" />
         <div className="orb orb-blue w-[500px] h-[500px] top-0 right-0 opacity-20" />
 
-        <div className="text-center max-w-4xl mx-auto mb-20 relative z-20">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7 }}
+          className="text-center max-w-4xl mx-auto mb-20 relative z-20"
+        >
           <p className="text-sky-400 text-sm font-bold uppercase tracking-[0.2em] mb-4">Our Expertise</p>
           <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">Comprehensive Engineering</h2>
           <p className="text-slate-300 text-lg leading-relaxed">
             We don't just write code. We deliver complete, robust technological ecosystems across the entire stack.
           </p>
-        </div>
+        </motion.div>
 
         {/* Expanded Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto relative z-20">
           {services.map((service, index) => (
-            <div
+            <motion.div
               key={index}
-              className="card-glow p-8 rounded-3xl flex flex-col h-full cursor-default hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+              whileHover={{ y: -8, transition: { duration: 0.2 } }}
+              className="card-glow p-8 rounded-3xl flex flex-col h-full cursor-default transition-all duration-300"
             >
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-500/20 to-fuchsia-500/20 border border-sky-400/30 flex items-center justify-center text-sky-300 shadow-[0_0_15px_rgba(56,189,248,0.2)]">
@@ -419,7 +461,7 @@ function Home() {
                   <p className="text-xs font-semibold text-fuchsia-300">{service.tech}</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
@@ -429,13 +471,19 @@ function Home() {
         <div className="animated-grid absolute inset-0 opacity-30 mix-blend-screen" />
         <div className="orb orb-purple w-[600px] h-[600px] top-[10%] left-[-200px] opacity-20" />
 
-        <div className="text-center max-w-4xl mx-auto mb-20 relative z-20">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7 }}
+          className="text-center max-w-4xl mx-auto mb-20 relative z-20"
+        >
           <p className="text-fuchsia-400 text-sm font-bold uppercase tracking-[0.2em] mb-4">Enterprise SaaS Products</p>
           <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">Our Custom Digital Products</h2>
           <p className="text-slate-300 text-lg leading-relaxed">
             In addition to custom consulting, we engineer ready-to-scale enterprise products that automate operations, compliance, and clinical research.
           </p>
-        </div>
+        </motion.div>
 
         {/* Enterprise Products Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto relative z-20">
@@ -477,9 +525,14 @@ function Home() {
               features: ["MediaPipe landmark tracking", "LLaVA & Ollama report drafts", "HIPAA-compliant secure storage"]
             }
           ].map((prod, index) => (
-            <div
+            <motion.div
               key={index}
-              className="card-glow p-8 rounded-3xl flex flex-col h-full cursor-default hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 bg-[#0a1122]/30 backdrop-blur-xl"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+              whileHover={{ y: -8, transition: { duration: 0.2 } }}
+              className="card-glow p-8 rounded-3xl flex flex-col h-full cursor-default transition-all duration-300 bg-[#0a1122]/30 backdrop-blur-xl"
             >
               <div className="mb-6">
                 <span className="text-xs font-bold text-sky-400 uppercase tracking-widest block mb-2">{prod.subtitle}</span>
@@ -501,7 +554,7 @@ function Home() {
                   ))}
                 </ul>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
@@ -510,19 +563,30 @@ function Home() {
       <section className="relative bg-gradient-to-b from-[#050b14] to-[#020617] px-6 py-32 overflow-hidden z-10">
         <div className="orb orb-purple w-[600px] h-[600px] bottom-0 left-0 opacity-20" />
 
-        <div className="text-center mb-20 relative z-20">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-20 relative z-20"
+        >
           <p className="text-fuchsia-400 text-sm font-bold uppercase tracking-[0.2em] mb-4">Core Values</p>
           <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">Built Differently</h2>
           <p className="text-slate-300 text-lg max-w-2xl mx-auto leading-relaxed">
             We blend raw technical horsepower with sharp business strategy to deliver transformative results.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto relative z-20">
           {coreValues.map((item, i) => (
-            <div
+            <motion.div
               key={i}
-              className="group relative p-8 rounded-[32px] border border-white/5 bg-[#0a1122]/40 backdrop-blur-xl hover:border-white/10 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 overflow-hidden flex flex-col items-center text-center justify-center gap-6"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.4, delay: i * 0.06 }}
+              whileHover={{ y: -6, transition: { duration: 0.2 } }}
+              className="group relative p-8 rounded-[32px] border border-white/5 bg-[#0a1122]/40 backdrop-blur-xl hover:border-white/10 transition-all duration-300 overflow-hidden flex flex-col items-center text-center justify-center gap-6"
             >
               {/* Animated Inner Glow */}
               <div className="absolute inset-x-0 h-px top-0 bg-gradient-to-r from-transparent via-sky-500/50 to-transparent scale-0 group-hover:scale-100 transition-transform duration-700" />
@@ -536,7 +600,7 @@ function Home() {
               </div>
 
               <h4 className="font-bold text-slate-100 text-lg tracking-tight group-hover:text-white transition-colors">{item.title}</h4>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
@@ -546,26 +610,37 @@ function Home() {
         <div className="animated-grid absolute inset-0 opacity-20" />
         <div className="orb orb-fuchsia w-[500px] h-[500px] top-1/2 right-0 -translate-y-1/2 opacity-15" />
 
-        <div className="text-center mb-20 relative z-20">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-20 relative z-20"
+        >
           <p className="text-purple-400 text-sm font-bold uppercase tracking-[0.2em] mb-4">Our DNA</p>
           <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">Guiding Principles</h2>
           <p className="text-slate-300 text-lg max-w-3xl mx-auto leading-relaxed">
             We are not just a vendor. We are a dedicated technology partner committed wholly to your long-term success.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto relative z-20">
           {drivesUs.map((item, i) => (
-            <div
+            <motion.div
               key={item.title}
-              className="card-glow p-8 rounded-3xl hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              whileHover={{ y: -8, transition: { duration: 0.2 } }}
+              className="card-glow p-8 rounded-3xl transition-all duration-300"
             >
               <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-fuchsia-500/20 border border-purple-400/30 flex items-center justify-center text-purple-300 shadow-[0_0_15px_rgba(192,132,252,0.2)] mb-6">
                 {item.icon}
               </div>
               <h4 className="text-xl font-bold text-white mb-4">{item.title}</h4>
               <p className="text-slate-300 text-sm leading-loose">{item.desc}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
