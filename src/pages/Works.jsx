@@ -33,7 +33,7 @@ const projects = [
         description: "An interactive digital presence and brand activation website for a premium event management and stall fabrication company, showcasing experiential design and corporate events.",
         icon: <Globe className="text-sky-400" />,
         image: firstStepImage,
-        url: "https://thefirstsetpsolution.com"
+        url: "https://www.thefirststepsolutions.com/"
     }
 ];
 
