@@ -63,7 +63,7 @@ export default function Privacy() {
           <section>
             <h2 className="text-xl font-bold text-white mb-2">5. Data Retention &amp; Security</h2>
             <p>
-              We enforce industry-standard TLS encryption for all data in transit and AES-256 encryption at rest. Inactive inquiry records are purged periodically in compliance with applicable Indian data protection laws and international standards (including GDPR guidelines for European users).
+              We enforce HTTPS encryption for data in transit and secure database controls for stored inquiries. Inactive inquiry records are purged periodically in compliance with applicable Indian data protection laws and international standards (including GDPR guidelines for European users).
             </p>
           </section>
 

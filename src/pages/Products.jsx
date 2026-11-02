@@ -42,7 +42,7 @@ const productsList = [
       "Encrypted e-signature workflows with legal audit timestamps",
       "Granular document retention policies and automated archival",
       "Immutable version control with rollback history",
-      "AES-256 data encryption at rest and TLS 1.3 in transit with audit-ready access logs"
+      "Secure encrypted data storage and detailed audit-ready access logs"
     ],
     benefits: [
       "Find any archived document within seconds using smart semantic search",
