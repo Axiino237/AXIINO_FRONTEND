@@ -25,7 +25,7 @@ export default async (req, res) => {
     const data = await response.json();
 
     return res.status(200).json(data);
-  } catch (error) {
+  } catch (_err) {
     clearTimeout(timeoutId);
     return res.status(200).json({ count: 185 }); // Secure fallback count
   }

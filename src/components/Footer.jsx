@@ -1,19 +1,35 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Facebook, Twitter, Linkedin, Instagram, Mail, Phone, MapPin, X, Eye } from "lucide-react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Linkedin, Instagram, Mail, Phone, MapPin, X, Eye, ArrowUpRight } from "lucide-react";
 import logo from "../assets/logo.png";
 
 const socialLinks = [
-  // { icon: <Facebook size={18} />, href: "#" },
-  // { icon: <Twitter size={18} />, href: "#" },
-  { icon: <Linkedin size={18} />, href: "https://www.linkedin.com/company/axiino-tech" },
-  { icon: <Instagram size={18} />, href: "https://www.instagram.com/_axiino_?igsh=MTM2YXcyMzF6ajZ6dA==" },
+  { icon: <Linkedin size={18} />, href: "https://www.linkedin.com/company/axiino-tech", label: "LinkedIn" },
+  { icon: <Instagram size={18} />, href: "https://www.instagram.com/_axiino_?igsh=MTM2YXcyMzF6ajZ6dA==", label: "Instagram" },
+];
+
+const serviceLinks = [
+  { label: "Custom Software Development", path: "/services/custom-software-development" },
+  { label: "Web Application Development", path: "/services/web-application-development" },
+  { label: "Mobile App Development", path: "/services/mobile-app-development" },
+  { label: "AI & Business Automation", path: "/services/ai-business-automation" },
+  { label: "SaaS Product Development", path: "/services/saas-product-development" },
+  { label: "Cloud & DevOps Engineering", path: "/services/cloud-devops" },
+];
+
+const productLinks = [
+  { label: "Axiino Core HRMS", path: "/products#hrms" },
+  { label: "Axiino Secure EDMS", path: "/products#edms" },
+  { label: "Axiino LMS", path: "/products#lms" },
+  { label: "Axiino SRM", path: "/products#srm" },
+  { label: "Axiino LIMS", path: "/products#lims" },
+  { label: "Clinical ISMS", path: "/products#isms" },
 ];
 
 function Footer() {
   const [views, setViews] = useState(null);
-  const [activeModal, setActiveModal] = useState(null);
-
+  
   useEffect(() => {
     async function handleCounter() {
       const storageKey = "axiino_unique_visitor_v1";
@@ -45,7 +61,7 @@ function Footer() {
         }
       } catch (err) {
         console.error("Counter API error:", err);
-        setViews(185); // Fallback view count
+        setViews(185);
       } finally {
         clearTimeout(timeoutId);
       }
@@ -55,10 +71,10 @@ function Footer() {
   }, []);
 
   return (
-    <footer className="relative bg-gray-950 overflow-hidden border-t border-white/5 selection:bg-blue-500/30">
+    <footer className="relative bg-[#020617] overflow-hidden border-t border-white/5 selection:bg-blue-500/30">
       {/* Top running neon scanning line */}
-      <div 
-        className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-blue-400 to-fuchsia-500 to-transparent opacity-80 pointer-events-none"
+      <div
+        className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-blue-400 to-fuchsia-500 opacity-80 pointer-events-none"
         style={{
           backgroundSize: '200% auto',
           animation: 'shimmer 4s linear infinite'
@@ -73,106 +89,153 @@ function Footer() {
       <div className="orb orb-purple w-[300px] h-[150px] top-0 right-1/4 opacity-10 blur-[80px]" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 border-b border-white/5 pb-12">
-          
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 border-b border-white/5 pb-14">
+
           {/* Column 1: Brand & Contact Info */}
-          <motion.div
-            className="space-y-6"
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-          >
-            <div className="flex items-center gap-3">
-              <div className="relative cursor-pointer">
-                <div className="absolute inset-0 bg-blue-500 rounded-full blur-md opacity-30" />
-                <motion.img 
-                  src={logo} 
-                  height="36" 
-                  width="36" 
-                  alt="Axiino" 
+          <div className="space-y-6">
+            <Link to="/" className="flex items-center gap-3 group w-fit" aria-label="Axiino Technologies Home">
+              <div className="relative">
+                <div className="absolute inset-0 bg-blue-500 rounded-full blur-md opacity-30 group-hover:opacity-60 transition-opacity" />
+                <img
+                  src={logo}
+                  height="38"
+                  width="38"
+                  alt="Axiino Technologies"
                   className="relative rounded-full"
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.8, ease: "easeInOut" }}
                 />
               </div>
               <div>
                 <h4 className="text-base font-bold bg-gradient-to-r from-blue-400 to-fuchsia-400 bg-clip-text text-transparent">
                   Axiino Technologies
                 </h4>
-                <p className="text-xs text-gray-500 mt-0.5">
-                  Building future-ready solutions — one line of code at a time.
+                <p className="text-xs text-gray-400 mt-0.5">
+                  Engineers for Digital Futures
                 </p>
               </div>
-            </div>
+            </Link>
 
-            <div className="space-y-3.5 pt-2">
-              <motion.a 
+            <p className="text-xs text-gray-400 leading-relaxed">
+              Custom software engineering, high-performance web applications, mobile platforms, and AI workflow automation. Headquartered in Ramapuram, Chennai.
+            </p>
+
+            <div className="space-y-3 pt-1">
+              <a
                 href="mailto:axiino237@gmail.com"
-                className="flex items-center gap-3 text-xs text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer w-fit"
-                whileHover={{ x: 5, color: "#38bdf8" }}
+                className="flex items-center gap-3 text-xs text-gray-300 hover:text-sky-300 transition-colors duration-200 cursor-pointer w-fit"
               >
                 <Mail size={14} className="text-blue-400 shrink-0" />
                 <span>axiino237@gmail.com</span>
-              </motion.a>
-              <motion.a 
+              </a>
+              <a
                 href="tel:+919361395699"
-                className="flex items-center gap-3 text-xs text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer w-fit"
-                whileHover={{ x: 5, color: "#e879f9" }}
+                className="flex items-center gap-3 text-xs text-gray-300 hover:text-fuchsia-300 transition-colors duration-200 cursor-pointer w-fit"
               >
                 <Phone size={14} className="text-fuchsia-400 shrink-0" />
                 <span>+91 93613 95699</span>
-              </motion.a>
-              <motion.a 
+              </a>
+              <a
                 href="https://maps.google.com/?q=13.036214732907844,80.18460287544686"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 text-xs text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer w-fit"
-                whileHover={{ x: 5, color: "#818cf8" }}
+                className="flex items-start gap-3 text-xs text-gray-300 hover:text-indigo-300 transition-colors duration-200 cursor-pointer"
               >
-                <MapPin size={14} className="text-purple-400 shrink-0" />
+                <MapPin size={14} className="text-purple-400 shrink-0 mt-0.5" />
                 <span>Flat No. 27, 1st Street, Kothari Nagar, Ramapuram, Chennai - 600089</span>
-              </motion.a>
+              </a>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Column 2: Legal & Live Counter */}
-          <motion.div
-            className="space-y-5 md:pl-16"
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
-            <h5 className="text-xs font-bold text-gray-400 uppercase tracking-widest">Legal & Analytics</h5>
-            
-            <div className="flex flex-col gap-3">
-              <motion.button
-                onClick={() => setActiveModal("terms")}
-                className="text-left text-xs text-gray-500 hover:text-white transition-colors duration-200 w-fit flex items-center gap-1.5"
-                whileHover={{ x: 6, color: "#38bdf8" }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          {/* Column 2: Engineering Services */}
+          <div className="space-y-4">
+            <h5 className="text-xs font-bold text-gray-300 uppercase tracking-widest border-l-2 border-sky-400 pl-2">
+              Core Services
+            </h5>
+            <ul className="space-y-2.5">
+              {serviceLinks.map((s, idx) => (
+                <li key={idx}>
+                  <Link
+                    to={s.path}
+                    className="text-xs text-gray-400 hover:text-sky-300 transition-colors duration-200 flex items-center gap-1.5"
+                  >
+                    <span className="w-1 h-1 rounded-full bg-sky-400/60" />
+                    {s.label}
+                  </Link>
+                </li>
+              ))}
+              <li className="pt-1">
+                <Link
+                  to="/services"
+                  className="text-xs font-semibold text-sky-400 hover:text-sky-300 inline-flex items-center gap-1"
+                >
+                  All Services &rarr;
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 3: Enterprise Products */}
+          <div className="space-y-4">
+            <h5 className="text-xs font-bold text-gray-300 uppercase tracking-widest border-l-2 border-fuchsia-400 pl-2">
+              Enterprise Products
+            </h5>
+            <ul className="space-y-2.5">
+              {productLinks.map((p, idx) => (
+                <li key={idx}>
+                  <Link
+                    to={p.path}
+                    className="text-xs text-gray-400 hover:text-fuchsia-300 transition-colors duration-200 flex items-center gap-1.5"
+                  >
+                    <span className="w-1 h-1 rounded-full bg-fuchsia-400/60" />
+                    {p.label}
+                  </Link>
+                </li>
+              ))}
+              <li className="pt-1">
+                <Link
+                  to="/products"
+                  className="text-xs font-semibold text-fuchsia-400 hover:text-fuchsia-300 inline-flex items-center gap-1"
+                >
+                  Explore Products &rarr;
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 4: Quick Links & Legal */}
+          <div className="space-y-4">
+            <h5 className="text-xs font-bold text-gray-300 uppercase tracking-widest border-l-2 border-purple-400 pl-2">
+              Company &amp; Legal
+            </h5>
+            <div className="flex flex-col gap-2.5">
+              <Link to="/about" className="text-xs text-gray-400 hover:text-white transition-colors duration-200">
+                About Axiino Technologies
+              </Link>
+              <Link to="/works" className="text-xs text-gray-400 hover:text-white transition-colors duration-200">
+                Completed Works &amp; Portfolio
+              </Link>
+              <Link to="/contact" className="text-xs text-gray-400 hover:text-white transition-colors duration-200">
+                Contact &amp; Free Consultation
+              </Link>
+              <a
+                href="https://www.umshiv.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-emerald-400 hover:text-emerald-300 transition-colors duration-200 flex items-center gap-1"
               >
-                <span className="w-1 h-1 rounded-full bg-blue-400/80" />
-                Terms & Conditions
-              </motion.button>
-              <motion.button
-                onClick={() => setActiveModal("privacy")}
-                className="text-left text-xs text-gray-500 hover:text-white transition-colors duration-200 w-fit flex items-center gap-1.5"
-                whileHover={{ x: 6, color: "#e879f9" }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              >
-                <span className="w-1 h-1 rounded-full bg-fuchsia-400/80" />
+                <span>UMSHIV Group of Companies</span>
+                <ArrowUpRight size={12} />
+              </a>
+              <Link to="/terms" className="text-xs text-gray-400 hover:text-white transition-colors duration-200">
+                Terms &amp; Conditions
+              </Link>
+              <Link to="/privacy" className="text-xs text-gray-400 hover:text-white transition-colors duration-200">
                 Privacy Policy
-              </motion.button>
+              </Link>
             </div>
 
-            <motion.div 
-              className="pt-2 w-fit"
-              animate={{ y: [0, -4, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-blue-950/20 border border-blue-500/20 text-blue-300 text-xs font-semibold shadow-[0_0_15px_rgba(59,130,246,0.1)] hover:border-blue-400/50 hover:shadow-[0_0_20px_rgba(56,189,248,0.25)] transition-all duration-300">
+            {/* Live Counter Badge */}
+            <div className="pt-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-blue-950/30 border border-blue-500/20 text-blue-300 text-xs font-semibold shadow-[0_0_15px_rgba(59,130,246,0.1)]">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
@@ -182,130 +245,33 @@ function Footer() {
                   {views !== null ? `${views.toLocaleString()} Unique Views` : "Calculating..."}
                 </span>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
 
         {/* Footer Bottom Row */}
         <div className="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-gray-600">
-            © 2025 Axiino Technologies. All rights reserved.
+          <p className="text-xs text-gray-400">
+            &copy; {new Date().getFullYear()} Axiino Technologies. All rights reserved. Ramapuram, Chennai, India.
           </p>
 
           {/* Social Icons */}
-          <motion.div
-            className="flex items-center gap-3"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
+          <div className="flex items-center gap-3">
             {socialLinks.map((link, i) => (
-              <motion.a
+              <a
                 key={i}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white transition-all duration-300"
-                whileHover={{ 
-                  scale: 1.15, 
-                  y: -3, 
-                  borderColor: "rgba(56, 189, 248, 0.4)", 
-                  backgroundColor: "rgba(56, 189, 248, 0.1)",
-                  boxShadow: "0 0 15px rgba(56, 189, 248, 0.2)"
-                }}
-                whileTap={{ scale: 0.95 }}
+                aria-label={`Axiino Technologies on ${link.label}`}
+                className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-sky-400/50 hover:bg-sky-500/10 transition-all duration-300"
               >
                 {link.icon}
-              </motion.a>
+              </a>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
-
-      {/* ── MODALS (Terms & Privacy) ── */}
-      <AnimatePresence>
-        {activeModal && (
-          <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <motion.div
-              className="relative w-full max-w-2xl max-h-[80vh] overflow-y-auto bg-[#0a1122]/90 border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl backdrop-blur-xl"
-              initial={{ scale: 0.9, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 20 }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            >
-              {/* Close Button */}
-              <button
-                onClick={() => setActiveModal(null)}
-                className="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-colors duration-200"
-              >
-                <X size={16} />
-              </button>
-
-              {activeModal === "terms" ? (
-                <div>
-                  <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-fuchsia-400 bg-clip-text text-transparent mb-6">
-                    Terms & Conditions
-                  </h3>
-                  <div className="space-y-4 text-sm text-gray-300 leading-relaxed font-light">
-                    <p>
-                      Welcome to Axiino Technologies. By accessing our website, tools, or hiring our squad, you agree to these Terms. Please read them carefully.
-                    </p>
-                    <h4 className="text-white font-semibold pt-2">1. Scope of Services</h4>
-                    <p>
-                      Axiino Technologies provides elite custom web development, mobile application design, AI integration, and consulting solutions. Deliverables, pricing, and timelines are governed by mutual statements of work (SOW).
-                    </p>
-                    <h4 className="text-white font-semibold pt-2">2. Intellectual Property</h4>
-                    <p>
-                      Unless specified otherwise in a custom service contract, all foundational architectural design patterns, software libraries, and proprietary technologies remain the intellectual property of Axiino. Once full payment is received, clients are granted license or full ownership of project-specific custom codebase as defined in their SOW.
-                    </p>
-                    <h4 className="text-white font-semibold pt-2">3. Limitation of Liability</h4>
-                    <p>
-                      Axiino Technologies builds platforms with high structural integrity and follows strict testing procedures. However, we are not liable for business interruptions, third-party infrastructure failures, or external outages that impact live deliverables.
-                    </p>
-                    <h4 className="text-white font-semibold pt-2">4. Revisions & Updates</h4>
-                    <p>
-                      These terms may be updated from time to time to align with new legal requirements or technology models. Continued use of our site and services implies acceptance of the updated terms.
-                    </p>
-                  </div>
-                </div>
-              ) : (
-                <div>
-                  <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-fuchsia-400 bg-clip-text text-transparent mb-6">
-                    Privacy Policy
-                  </h3>
-                  <div className="space-y-4 text-sm text-gray-300 leading-relaxed font-light">
-                    <p>
-                      At Axiino Technologies, we respect your privacy and secure all transmissions. This policy outlines how we handle data.
-                    </p>
-                    <h4 className="text-white font-semibold pt-2">1. Information Collection</h4>
-                    <p>
-                      We collect basic information you explicitly provide when submitting an inquiry form (name, email, phone number, and project details) to review your inquiry and schedule consultation calls.
-                    </p>
-                    <h4 className="text-white font-semibold pt-2">2. Device Analytics</h4>
-                    <p>
-                      To prevent counting duplicate visits, we use local storage identifiers to calculate unique device visits displayed in our footer. This tracker is static, stored locally on your device, and does not monitor browsing histories.
-                    </p>
-                    <h4 className="text-white font-semibold pt-2">3. Data Sharing</h4>
-                    <p>
-                      We never sell, rent, or lease contact information to third-party advertisers. All information stays secure and private within the UMSHIV Group of Companies.
-                    </p>
-                    <h4 className="text-white font-semibold pt-2">4. Security Protocols</h4>
-                    <p>
-                      Our databases are monitored under modern cloud security parameters, preventing unauthorized breaches or leaks.
-                    </p>
-                  </div>
-                </div>
-              )}
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </footer>
   );
 }

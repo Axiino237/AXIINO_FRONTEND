@@ -1,233 +1,240 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Globe, ArrowRight } from "lucide-react";
+import { Globe, ArrowRight, ExternalLink, Code2, Layers, CheckCircle2 } from "lucide-react";
 import creativixImage from "../assets/creativix_portfolio.png";
 import umshivImage from "../assets/umshiv_portfolio.png";
 import firstStepImage from "../assets/firststep_portfolio.png";
 
-const categories = ["All", "Branding & Web Design"];
+const categories = ["All", "Corporate & Branding Portals", "Experiential Web"];
 
 const projects = [
-    {
-        id: 1,
-        title: "Creativix Agency",
-        category: "Branding & Web Design",
-        description: "A premium creative agency website featuring modern aesthetics, dark mode, and seamless animations. Built with a focus on visual impact and strategic user experience.",
-        icon: <Globe className="text-sky-400" />,
-        image: creativixImage,
-        url: "https://creativix-eight.vercel.app/"
-    },
-    {
-        id: 2,
-        title: "UMSHIV Group",
-        category: "Branding & Web Design",
-        description: "A multi-brand corporate portal built for UMSHIV Group of Companies, showcasing their diverse portfolio of services across technology, travel, design, events, and branding.",
-        icon: <Globe className="text-sky-400" />,
-        image: umshivImage,
-        url: "https://www.umshiv.com/"
-    },
-    {
-        id: 3,
-        title: "The First Step Solutions",
-        category: "Branding & Web Design",
-        description: "An interactive digital presence and brand activation website for a premium event management and stall fabrication company, showcasing experiential design and corporate events.",
-        icon: <Globe className="text-sky-400" />,
-        image: firstStepImage,
-        url: "https://www.thefirststepsolutions.com/"
-    }
+  {
+    id: 1,
+    title: "Creativix Agency",
+    category: "Corporate & Branding Portals",
+    badge: "Digital Agency Web App",
+    problem: "Creativix needed a dark-mode first, high-impact digital presence that showcased creative agency capabilities with fluid 60 FPS animations without sacrificing mobile loading speed.",
+    solution: "Axiino architected a modern React application utilizing Tailwind CSS, Framer Motion, and asset optimization, resulting in instant rendering, seamless navigation, and engaging interactive micro-interactions.",
+    techStack: ["React.js", "Tailwind CSS", "Framer Motion", "Vite", "Vercel"],
+    description: "A premium creative agency platform featuring modern aesthetics, dark mode, and seamless animations. Built with a focus on visual impact and strategic user experience.",
+    icon: <Globe className="text-sky-400" size={24} />,
+    image: creativixImage,
+    url: "https://creativix-eight.vercel.app/"
+  },
+  {
+    id: 2,
+    title: "UMSHIV Group",
+    category: "Corporate & Branding Portals",
+    badge: "Multi-Brand Corporate Ecosystem",
+    problem: "UMSHIV Group required a consolidated corporate portal to represent multiple business divisions across technology, travel, design, events, and branding with unified brand equity.",
+    solution: "Axiino engineered a multi-brand portal with structured navigation hierarchies, modern responsive design tokens, and modular section architectures enabling rapid corporate updates.",
+    techStack: ["React.js", "Tailwind CSS", "Lucide Icons", "Vite"],
+    description: "A multi-brand corporate portal built for UMSHIV Group of Companies, showcasing their diverse portfolio of services across technology, travel, design, events, and branding.",
+    icon: <Layers className="text-emerald-400" size={24} />,
+    image: umshivImage,
+    url: "https://www.umshiv.com/"
+  },
+  {
+    id: 3,
+    title: "The First Step Solutions",
+    category: "Experiential Web",
+    badge: "Event & Experiential Activation",
+    problem: "The client needed an interactive digital portfolio to showcase complex physical stall fabrication, experiential designs, and corporate event management to enterprise prospective clients.",
+    solution: "We designed a visual-first digital showcase with responsive image galleries, high-contrast typography, and intuitive project classification, enhancing brand perception and enquiry conversion.",
+    techStack: ["React.js", "Tailwind CSS", "Framer Motion", "Responsive Layouts"],
+    description: "An interactive digital presence and brand activation website for a premium event management and stall fabrication company, showcasing experiential design and corporate events.",
+    icon: <Code2 className="text-fuchsia-400" size={24} />,
+    image: firstStepImage,
+    url: "https://www.thefirststepsolutions.com/"
+  }
 ];
-
-/*
-// =========================================================================
-// ADDITIONAL CASE STUDIES & ENTERPRISE PROJECTS (FOR REFERENCE / COMING SOON)
-// =========================================================================
-// Below is the context of enterprise software deployments (LIMS, HRMS, LMS, EDMS, SRM)
-// built with regulatory frameworks and integrated platforms.
-const upcomingProjects = [
-    {
-        id: 4,
-        title: "Centralized Document & Workflow Portal (EDMS)",
-        category: "Enterprise Software",
-        description: "An electronic document management system featuring automated retention routing, multilingual Google Vision OCR file scanning, custom metadata tagging, and integrated e-signature approvals for secure document compliance.",
-        techStack: ["Node.js", "NestJS", "React", "PostgreSQL", "Google Vision API"]
-    },
-    {
-        id: 5,
-        title: "Automated Laboratory Information Management System (LIMS)",
-        category: "Automation & Enterprise Systems",
-        description: "A comprehensive sample tracking and barcode automation system designed in partnership with lab managers. Integrates with data acquisition instruments to minimize manual entries and automatically logs industry-compliant audit trails.",
-        techStack: ["React.js", "Python", "Flask", "SQL-Server", "ERP integration"]
-    },
-    {
-        id: 6,
-        title: "AI-Powered Intervention and Care Management (ISMS)",
-        category: "AI & Machine Learning",
-        description: "An AI-powered video analytics and motion landmark tracking platform supporting care for neurodivergent individuals. Leverages MediaPipe and LLMs to accelerate assessment reviews and automatically draft diagnostics.",
-        techStack: ["Python", "TensorFlow", "MediaPipe", "LLaVA", "PostgreSQL (pgvector)"]
-    },
-    {
-        id: 7,
-        title: "Supplier Relations & E-Procurement Hub (SRM)",
-        category: "Enterprise Systems",
-        description: "An end-to-end supplier onboarding, contract drafting, and bidding portal. Enables role-based approval routing, live budget tracking, RFx tender management, and seamless ERP sync.",
-        techStack: ["React", "NestJS", "PostgreSQL", "SAP Integration"]
-    },
-    {
-        id: 8,
-        title: "Corporate Talent Management & HRMS Platform",
-        category: "Enterprise Systems",
-        description: "A centralized workforce directory managing profiles, leave tracker workflows, payroll systems, and structured appraisal cycles with self-service dashboard capabilities.",
-        techStack: ["React.js", "Node.js", "MongoDB", "Express"]
-    }
-];
-*/
 
 const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: {
-            staggerChildren: 0.1,
-        },
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
     },
+  },
 };
 
 const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
 const Works = () => {
-    const [activeCategory, setActiveCategory] = useState("All");
+  const [activeCategory, setActiveCategory] = useState("All");
 
-    const filteredProjects = projects.filter(
-        (project) => activeCategory === "All" || project.category === activeCategory
-    );
+  const filteredProjects = projects.filter(
+    (project) => activeCategory === "All" || project.category === activeCategory
+  );
 
-    return (
-        <div className="min-h-screen bg-[#030712] pt-32 pb-20 px-6 sm:px-12 overflow-hidden relative">
-            {/* Background Elements */}
-            <div className="animated-grid absolute inset-0 opacity-40 mix-blend-screen" />
-            <div className="orb absolute orb-blue w-[600px] h-[600px] top-[-150px] left-[-150px] opacity-40 blur-[100px]" />
-            <div className="orb absolute orb-purple w-[700px] h-[700px] bottom-[-200px] right-[-200px] opacity-30 blur-[120px]" />
+  return (
+    <div className="min-h-screen bg-[#030712] pt-36 pb-24 px-6 sm:px-12 overflow-hidden relative text-white">
+      {/* Background Elements */}
+      <div className="animated-grid absolute inset-0 opacity-40 mix-blend-screen pointer-events-none" />
+      <div className="orb absolute orb-blue w-[600px] h-[600px] -top-[150px] -left-[150px] opacity-40 blur-[100px] pointer-events-none" />
+      <div className="orb absolute orb-purple w-[700px] h-[700px] bottom-[-200px] right-[-200px] opacity-30 blur-[120px] pointer-events-none" />
 
-            <div className="max-w-7xl mx-auto relative z-10">
-                {/* Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="text-center mb-10 md:mb-16"
-                >
-                    <motion.div
-                        className="inline-flex items-center gap-2 px-4 py-1.5 md:px-5 md:py-2 rounded-full border border-sky-400/40 bg-sky-950/50 text-sky-200 text-xs md:text-sm font-semibold tracking-wide mb-6 shadow-[0_0_15px_rgba(56,189,248,0.2)]"
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.2 }}
-                    >
-                        <span className="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-sky-400 shadow-[0_0_8px_#38bdf8] animate-[pulse-glow_2s_infinite]" />
-                        Our Portfolio
-                    </motion.div>
-                    <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] text-white mb-6">
-                        Our <span className="gradient-text">Completed Work</span>
-                    </h1>
-                    <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto font-light leading-relaxed px-4 md:px-0">
-                        A showcase of our commitment to excellence, innovation, and premium digital experiences.
-                    </p>
-                </motion.div>
+      <div className="max-w-7xl mx-auto relative z-10">
 
-                {/* Filters */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
-                    className="flex flex-wrap justify-center gap-2 md:gap-3 mb-12 md:mb-16"
-                >
-                    {categories.map((cat) => (
-                        <button
-                            key={cat}
-                            onClick={() => setActiveCategory(cat)}
-                            className={`px-4 py-2 md:px-6 md:py-2.5 rounded-full text-xs md:text-sm font-bold transition-all duration-300 border ${activeCategory === cat
-                                ? "bg-gradient-to-r from-sky-500 to-fuchsia-500 border-transparent text-white shadow-[0_0_20px_rgba(56,189,248,0.4)]"
-                                : "bg-white/5 border-white/10 text-slate-400 hover:border-sky-400/50 hover:text-white"
-                                }`}
-                        >
-                            {cat}
-                        </button>
-                    ))}
-                </motion.div>
+        {/* Breadcrumb Navigation */}
+        <nav aria-label="Breadcrumb" className="mb-8">
+          <ol className="flex items-center gap-2 text-xs font-semibold text-slate-400">
+            <li><Link to="/" className="hover:text-white transition-colors">Home</Link></li>
+            <li>/</li>
+            <li className="text-sky-400" aria-current="page">Works</li>
+          </ol>
+        </nav>
 
-                {/* Project Grid */}
-                <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate="visible"
-                    layout
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center px-2 md:px-0"
-                >
-                    <AnimatePresence mode="popLayout">
-                        {filteredProjects.map((project) => (
-                            <motion.div
-                                key={project.id}
-                                layout
-                                variants={cardVariants}
-                                initial="hidden"
-                                animate="visible"
-                                exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
-                                className="group card-glow rounded-[2rem] md:rounded-[2.5rem] overflow-hidden bg-[#0a1122]/40 backdrop-blur-xl border border-white/5 hover:border-white/10 transition-all duration-500 max-w-2xl w-full"
-                                whileHover={{ y: -10, transition: { duration: 0.3 } }}
-                            >
-                                {/* Image Container */}
-                                <div className="relative aspect-video overflow-hidden">
-                                    <img
-                                        src={project.image}
-                                        alt={project.title}
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-transparent opacity-60" />
-
-                                    {/* Category Badge on Image */}
-                                    <div className="absolute top-4 left-4 md:top-6 md:left-6 px-3 py-1 md:px-4 md:py-1.5 rounded-full bg-[#030712]/80 backdrop-blur-md border border-white/10 text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-sky-400">
-                                        {project.category}
-                                    </div>
-                                </div>
-
-                                <div className="p-6 md:p-10">
-                                    <div className="flex items-center gap-4 md:gap-6 mb-4 md:mb-6">
-                                        <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-gradient-to-br from-sky-500/10 to-fuchsia-500/10 border border-white/5 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500 shrink-0">
-                                            {project.icon}
-                                        </div>
-                                        <div>
-                                            <h3 className="text-2xl md:text-3xl font-bold text-white group-hover:text-sky-400 transition-colors">
-                                                {project.title}
-                                            </h3>
-                                            <p className="text-sky-400/60 text-[10px] md:text-xs font-bold uppercase tracking-widest mt-0.5 md:mt-1">Live Project</p>
-                                        </div>
-                                    </div>
-                                    <p className="text-slate-300 text-base md:text-lg leading-relaxed mb-8 md:mb-10 font-light">
-                                        {project.description}
-                                    </p>
-
-                                    <motion.a
-                                        href={project.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2 md:gap-3 px-6 py-3 md:px-8 md:py-4 bg-white/5 border border-white/10 rounded-xl md:rounded-2xl text-xs md:text-sm font-bold text-white uppercase tracking-[0.2em] group/btn hover:bg-white/10 hover:border-sky-500/50 transition-all w-full sm:w-auto justify-center sm:justify-start"
-                                        whileHover={{ x: 5 }}
-                                    >
-                                        Visit Website <ArrowRight size={18} className="text-sky-400 group-hover/btn:translate-x-1 transition-transform" />
-                                    </motion.a>
-                                </div>
-
-                                {/* Bottom Glow Line */}
-                                <div className="absolute inset-x-0 h-1 bottom-0 bg-gradient-to-r from-transparent via-sky-400 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
-                            </motion.div>
-                        ))}
-                    </AnimatePresence>
-                </motion.div>
-            </div>
+        {/* Header */}
+        <div className="text-center mb-12 md:mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 md:px-5 md:py-2 rounded-full border border-sky-400/40 bg-sky-950/50 text-sky-200 text-xs md:text-sm font-semibold tracking-wide mb-6 shadow-[0_0_15px_rgba(56,189,248,0.2)]">
+            <span className="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-sky-400 shadow-[0_0_8px_#38bdf8] animate-[pulse-glow_2s_infinite]" />
+            Real Project Evidence
+          </div>
+          <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] text-white mb-6">
+            Completed <span className="gradient-text">Client Works</span>
+          </h1>
+          <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto font-light leading-relaxed">
+            Real software systems, corporate portals, and brand applications delivered by Axiino Technologies. Verified live deployments.
+          </p>
         </div>
-    );
+
+        {/* Filters */}
+        <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-12 md:mb-16">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-4 py-2 md:px-6 md:py-2.5 rounded-full text-xs md:text-sm font-bold transition-all duration-300 border cursor-pointer ${
+                activeCategory === cat
+                  ? "bg-gradient-to-r from-sky-500 to-fuchsia-500 border-transparent text-white shadow-[0_0_20px_rgba(56,189,248,0.4)]"
+                  : "bg-white/5 border-white/10 text-slate-400 hover:border-sky-400/50 hover:text-white"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        {/* Project Grid */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center"
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project) => (
+              <motion.article
+                key={project.id}
+                layout
+                variants={cardVariants}
+                initial="hidden"
+                animate="visible"
+                exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
+                className="group card-glow rounded-[2rem] overflow-hidden bg-[#0a1122]/50 backdrop-blur-xl border border-white/10 hover:border-sky-400/30 transition-all duration-500 flex flex-col h-full"
+                whileHover={{ y: -8, transition: { duration: 0.3 } }}
+              >
+                {/* Image Container */}
+                <div className="relative aspect-video overflow-hidden bg-[#020617]">
+                  <img
+                    src={project.image}
+                    alt={`${project.title} - Web Development & Digital Design Project by Axiino Technologies`}
+                    width="800"
+                    height="450"
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-transparent opacity-60" />
+
+                  <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-[#030712]/80 backdrop-blur-md border border-white/10 text-[10px] font-bold uppercase tracking-widest text-sky-400">
+                    {project.badge}
+                  </div>
+                </div>
+
+                <div className="p-6 md:p-8 flex flex-col flex-grow">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+                      {project.icon}
+                    </div>
+                    <div>
+                      <h2 className="text-2xl font-bold text-white group-hover:text-sky-400 transition-colors">
+                        {project.title}
+                      </h2>
+                      <p className="text-emerald-400 text-[10px] font-bold uppercase tracking-widest flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        Verified Live Production
+                      </p>
+                    </div>
+                  </div>
+
+                  <p className="text-slate-300 text-sm leading-relaxed mb-6">
+                    {project.description}
+                  </p>
+
+                  {/* Problem & Solution Case Snapshot */}
+                  <div className="space-y-3 mb-6 p-4 rounded-xl bg-white/[0.02] border border-white/5 text-xs text-slate-300">
+                    <div>
+                      <span className="font-bold text-sky-400 uppercase tracking-wider block text-[10px] mb-0.5">Challenge</span>
+                      <p className="leading-relaxed">{project.problem}</p>
+                    </div>
+                    <div className="pt-2 border-t border-white/5">
+                      <span className="font-bold text-fuchsia-400 uppercase tracking-wider block text-[10px] mb-0.5">Engineered Solution</span>
+                      <p className="leading-relaxed">{project.solution}</p>
+                    </div>
+                  </div>
+
+                  {/* Tech stack */}
+                  <div className="mt-auto pt-4 border-t border-white/10">
+                    <div className="flex flex-wrap gap-1.5 mb-6">
+                      {project.techStack.map((t, idx) => (
+                        <span key={idx} className="text-[10px] font-semibold text-slate-300 bg-white/5 border border-white/10 px-2 py-0.5 rounded">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/5 border border-white/10 rounded-xl text-xs font-bold text-white uppercase tracking-wider hover:bg-sky-500/10 hover:border-sky-500/40 hover:text-sky-300 transition-all w-full justify-center"
+                    >
+                      <span>Visit Live Website</span>
+                      <ExternalLink size={14} className="text-sky-400" />
+                    </a>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+
+        {/* Enterprise Notice */}
+        <section className="mt-20 p-8 sm:p-12 rounded-3xl bg-[#0a1122]/40 border border-white/10 text-center max-w-3xl mx-auto">
+          <h2 className="text-2xl font-bold text-white mb-3">Enterprise Deployments Under NDA</h2>
+          <p className="text-slate-300 text-sm leading-relaxed mb-6">
+            In addition to public client websites, Axiino engineers private internal platforms (EDMS, LIMS, SRM, and HRMS) governed by strict non-disclosure agreements. Anonymized architectural walk-throughs are available during technical consultations.
+          </p>
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 text-sm font-bold text-sky-400 hover:text-sky-300"
+          >
+            <span>Request an Architectural Consultation</span>
+            <ArrowRight size={15} />
+          </Link>
+        </section>
+
+      </div>
+    </div>
+  );
 };
 
 export default Works;

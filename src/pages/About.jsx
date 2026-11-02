@@ -225,8 +225,8 @@ function AboutHeroVisual() {
         className="absolute -top-4 -right-4 bg-[#0a1122]/90 border border-fuchsia-400/30 rounded-2xl px-4 py-2.5 backdrop-blur-md z-20"
         style={{ animation: "float 4s ease-in-out infinite", boxShadow: "0 0 20px rgba(232,121,249,0.15)" }}
       >
-        <p className="text-[9px] text-slate-400 uppercase tracking-widest">Client Rating</p>
-        <p className="text-base font-extrabold text-white">⭐ 5.0 <span className="text-fuchsia-400 text-xs">/ 5</span></p>
+        <p className="text-[9px] text-slate-400 uppercase tracking-widest">Engineered SLA</p>
+        <p className="text-base font-extrabold text-white">99.9% <span className="text-fuchsia-400 text-xs">Uptime</span></p>
       </div>
 
       <style>{`
@@ -240,13 +240,11 @@ function AboutHeroVisual() {
 }
 
 function AboutUs() {
-  const [isMediumScreen, setIsMediumScreen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const checkSize = () => {
-      setIsMediumScreen(window.innerWidth >= 768);
-      setIsMobile(window.innerWidth < 768);
+            setIsMobile(window.innerWidth < 768);
     };
     checkSize();
     window.addEventListener("resize", checkSize);
@@ -259,7 +257,15 @@ function AboutUs() {
       <PersistentBackground isMobile={isMobile} />
 
       {/* ── HERO ── */}
-      <section className="relative bg-[#050b14] px-6 pt-8 pb-12 overflow-hidden z-10 w-full">
+      <section className="relative bg-[#050b14] px-6 pt-36 pb-12 overflow-hidden z-10 w-full">
+
+        <nav aria-label="Breadcrumb" className="mb-6 max-w-7xl mx-auto px-4 z-20 relative">
+          <ol className="flex items-center gap-2 text-xs font-semibold text-slate-400">
+            <li><Link to="/" className="hover:text-white transition-colors">Home</Link></li>
+            <li>/</li>
+            <li className="text-fuchsia-400" aria-current="page">About Us</li>
+          </ol>
+        </nav>
         <div className="animated-grid absolute inset-0 opacity-40 mix-blend-screen" />
         <div className="orb absolute orb-blue w-[600px] h-[600px] -top-[200px] -left-[200px] opacity-30" />
         <div className="orb absolute orb-fuchsia w-[400px] h-[400px] -bottom-[100px] -right-[100px] opacity-20" />

@@ -1,83 +1,47 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { servicesData } from "../data/servicesData";
 
-const seoConfig = {
+const staticSeoConfig = {
   "/": {
-    title: "Axiino | Axio | Axiino Technologies | Web Development near KK Nagar Chennai | IT Services & AI Solutions",
-    description: "Axiino Technologies (also known as Axio, Axio Tech) — website development company near KK Nagar, Ashok Nagar, Ramapuram, Chennai. Custom web apps, mobile apps, AI & IT services. Free consultation!",
-    keywords: "Axiino, Axio, Axio Technologies, Axio Chennai, Axio IT, Axio Tech, Axio website development, Axio software, Axiino Technologies, Axiino Tech, Axiino Chennai, axiino.com, web development near KK Nagar, IT company near KK Nagar Chennai, website development KK Nagar, software company KK Nagar, web developer near me KK Nagar, IT services KK Nagar Chennai, website development Ashok Nagar, web development Ramapuram, web development Vadapalani, web development Arumbakkam, web development Anna Nagar, IT company near me Chennai, website development company Chennai, mobile app development Chennai, AI development Chennai, full stack development Chennai"
+    title: "Axiino Technologies | Custom Software & AI Development",
+    description: "Axiino builds custom software, web and mobile applications, AI solutions and business automation for startups and growing businesses worldwide.",
+    keywords: "Axiino Technologies, custom software development, web application development, mobile app development, AI solutions, business automation, full stack developers Chennai"
   },
   "/about": {
     title: "About Axiino Technologies | Elite IT Engineers & AI Architects in Chennai",
-    description: "Meet the team behind Axiino Technologies — Chennai's rising IT company. Expert software engineers, AI architects, and full-stack developers building future-ready digital solutions.",
-    keywords: "about Axiino Technologies, Axiino team Chennai, IT engineers Chennai, AI architects India, software development team, Axiino CEO Aravindhan, full stack engineers Chennai, software company about us, Axiino Labs"
+    description: "Meet the engineering leadership behind Axiino Technologies — Chennai's software engineering and AI architecture firm delivering future-ready platforms.",
+    keywords: "about Axiino Technologies, software engineers Chennai, AI architects India, Axiino leadership, software development company Ramapuram"
+  },
+  "/services": {
+    title: "Software Engineering & IT Services | Axiino Technologies Chennai",
+    description: "Full-spectrum software engineering services: custom software, web applications, mobile apps, AI automation, SaaS products, and cloud infrastructure.",
+    keywords: "custom software development, web app development, mobile app development, AI automation services, SaaS development, cloud infrastructure Chennai"
+  },
+  "/products": {
+    title: "Enterprise Software Products Suite | Axiino Technologies",
+    description: "Explore Axiino's proprietary enterprise software suite: Core HRMS, Secure EDMS, LMS, SRM, LIMS, and Clinical ISMS frameworks available for custom deployment.",
+    keywords: "enterprise HRMS, EDMS document automation, enterprise LMS, SRM procurement system, LIMS lab management, clinical ISMS software"
   },
   "/works": {
-    title: "Axiino Works | Web App & AI Project Portfolio | Chennai IT Company",
-    description: "Explore Axiino Technologies' project portfolio — premium business websites, custom AI tools, mobile apps, and enterprise software built for clients in Chennai and across India.",
-    keywords: "Axiino portfolio, web development projects Chennai, IT company case studies, AI project portfolio India, custom web app development, business website Chennai, mobile app portfolio, enterprise software projects"
+    title: "Axiino Works | Web App & Software Project Portfolio",
+    description: "Explore completed client projects engineered by Axiino Technologies — responsive digital portals, brand platforms, and modern web applications.",
+    keywords: "Axiino portfolio, web development projects Chennai, software case studies, web app portfolio, corporate portal development"
   },
   "/contact": {
-    title: "Contact Axiino Technologies | Hire Web Developers & IT Experts in Chennai",
-    description: "Get in touch with Axiino Technologies in Ramapuram, Chennai. Discuss your web development, mobile app, AI, or IT service needs. Call +91 93613 95699 or email axiino237@gmail.com.",
-    keywords: "contact Axiino Technologies, hire web developers Chennai, IT company contact Ramapuram, software development inquiry Chennai, Axiino phone number, Axiino address Chennai, hire AI developers India, website development quote Chennai"
-  }
-};
-
-// Per-page JSON-LD for pages
-const pageSchemas = {
-  "/": null, // Handled in index.html
-  "/about": {
-    "@context": "https://schema.org",
-    "@type": "AboutPage",
-    "url": "https://www.axiino.com/about",
-    "name": "About Axiino Technologies",
-    "description": "Learn about Axiino Technologies — Chennai's premier IT services and software development company.",
-    "mainEntity": {
-      "@type": "Organization",
-      "name": "Axiino Technologies",
-      "url": "https://www.axiino.com",
-      "foundingDate": "2024",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Chennai",
-        "addressRegion": "Tamil Nadu",
-        "addressCountry": "IN"
-      }
-    }
+    title: "Contact Axiino Technologies | Hire Software Developers in Chennai",
+    description: "Get in touch with Axiino Technologies in Ramapuram, Chennai. Discuss your web, mobile, AI, or software development needs. Free technical consultation.",
+    keywords: "contact Axiino Technologies, hire web developers Chennai, software company contact Ramapuram, hire AI developers India, software development quote"
   },
-  "/works": {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "url": "https://www.axiino.com/works",
-    "name": "Axiino Technologies Portfolio",
-    "description": "Project portfolio of Axiino Technologies — custom web apps, AI tools, and mobile apps for businesses.",
-    "provider": {
-      "@type": "Organization",
-      "name": "Axiino Technologies",
-      "url": "https://www.axiino.com"
-    }
+  "/privacy": {
+    title: "Privacy Policy | Axiino Technologies",
+    description: "Axiino Technologies privacy policy detailing data protection, confidentiality, and security standards for clients and visitors.",
+    keywords: "Axiino privacy policy, data protection, confidentiality"
   },
-  "/contact": {
-    "@context": "https://schema.org",
-    "@type": "ContactPage",
-    "url": "https://www.axiino.com/contact",
-    "name": "Contact Axiino Technologies",
-    "description": "Contact Axiino Technologies for website development, mobile apps, and IT services in Chennai.",
-    "mainEntity": {
-      "@type": "Organization",
-      "name": "Axiino Technologies",
-      "telephone": "+919361395699",
-      "email": "axiino237@gmail.com",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Flat No. 27, 1st Street, Kothari Nagar, Annai Sathya Nagar Main Road, Ramapuram",
-        "addressLocality": "Chennai",
-        "addressRegion": "Tamil Nadu",
-        "postalCode": "600089",
-        "addressCountry": "IN"
-      }
-    }
+  "/terms": {
+    title: "Terms & Conditions | Axiino Technologies",
+    description: "Terms of service and project engagement guidelines for Axiino Technologies software development and consulting.",
+    keywords: "Axiino terms and conditions, service agreement, intellectual property"
   }
 };
 
@@ -85,13 +49,34 @@ export default function SEO() {
   const location = useLocation();
 
   useEffect(() => {
-    // Determine path, strip trailing slash
     let path = location.pathname;
     if (path.length > 1 && path.endsWith("/")) {
       path = path.slice(0, -1);
     }
 
-    const config = seoConfig[path] || seoConfig["/"];
+    let config = staticSeoConfig[path];
+
+    // Check dynamic service path: /services/:slug
+    if (!config && path.startsWith("/services/")) {
+      const slug = path.replace("/services/", "");
+      const service = servicesData[slug];
+      if (service) {
+        config = {
+          title: service.metaTitle,
+          description: service.metaDescription,
+          keywords: `${service.title}, ${service.techStack.join(", ")}, Axiino Technologies`
+        };
+      }
+    }
+
+    // Fallback for 404
+    if (!config) {
+      config = {
+        title: "Page Not Found (404) | Axiino Technologies",
+        description: "The requested page could not be found on Axiino Technologies. Explore our software development services and project portfolio.",
+        keywords: "404, page not found, Axiino Technologies"
+      };
+    }
 
     // ── Update Document Title ──
     document.title = config.title;
@@ -126,21 +111,100 @@ export default function SEO() {
     upsertMeta('meta[property="og:title"]', 'property=og:title', config.title);
     upsertMeta('meta[property="og:description"]', 'property=og:description', config.description);
     upsertMeta('meta[property="og:url"]', 'property=og:url', canonicalUrl);
+    upsertMeta('meta[property="og:image"]', 'property=og:image', 'https://www.axiino.com/logo.png');
 
     // ── Twitter Card ──
     upsertMeta('meta[name="twitter:title"]', 'name=twitter:title', config.title);
     upsertMeta('meta[name="twitter:description"]', 'name=twitter:description', config.description);
+    upsertMeta('meta[name="twitter:image"]', 'name=twitter:image', 'https://www.axiino.com/logo.png');
 
-    // ── Per-page JSON-LD Schema ──
+    // ── Dynamic Schema per route ──
     const existingPageSchema = document.getElementById("page-schema-ld");
     if (existingPageSchema) existingPageSchema.remove();
 
-    const schema = pageSchemas[path];
-    if (schema) {
+    let pageSchema = null;
+
+    if (path === "/about") {
+      pageSchema = {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "url": "https://www.axiino.com/about",
+        "name": "About Axiino Technologies",
+        "description": "Learn about Axiino Technologies — software engineering and AI solutions company based in Ramapuram, Chennai.",
+        "mainEntity": {
+          "@type": "Organization",
+          "name": "Axiino Technologies",
+          "url": "https://www.axiino.com",
+          "foundingDate": "2024",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Flat No. 27, 1st Street, Kothari Nagar, Annai Sathya Nagar Main Road, Ramapuram",
+            "addressLocality": "Chennai",
+            "addressRegion": "Tamil Nadu",
+            "postalCode": "600089",
+            "addressCountry": "IN"
+          }
+        }
+      };
+    } else if (path === "/contact") {
+      pageSchema = {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "url": "https://www.axiino.com/contact",
+        "name": "Contact Axiino Technologies",
+        "description": "Contact Axiino Technologies for custom software development, web applications, and AI consulting.",
+        "mainEntity": {
+          "@type": "Organization",
+          "name": "Axiino Technologies",
+          "telephone": "+919361395699",
+          "email": "axiino237@gmail.com",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Flat No. 27, 1st Street, Kothari Nagar, Annai Sathya Nagar Main Road, Ramapuram",
+            "addressLocality": "Chennai",
+            "addressRegion": "Tamil Nadu",
+            "postalCode": "600089",
+            "addressCountry": "IN"
+          }
+        }
+      };
+    } else if (path === "/works") {
+      pageSchema = {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "url": "https://www.axiino.com/works",
+        "name": "Axiino Technologies Portfolio",
+        "description": "Completed software engineering and web application projects by Axiino Technologies."
+      };
+    } else if (path.startsWith("/services/")) {
+      const slug = path.replace("/services/", "");
+      const s = servicesData[slug];
+      if (s) {
+        pageSchema = {
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": s.title,
+          "serviceType": s.shortTitle,
+          "description": s.metaDescription,
+          "provider": {
+            "@type": "Organization",
+            "name": "Axiino Technologies",
+            "url": "https://www.axiino.com",
+            "logo": "https://www.axiino.com/logo.png"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "Worldwide"
+          }
+        };
+      }
+    }
+
+    if (pageSchema) {
       const script = document.createElement("script");
       script.type = "application/ld+json";
       script.id = "page-schema-ld";
-      script.text = JSON.stringify(schema, null, 2);
+      script.text = JSON.stringify(pageSchema, null, 2);
       document.head.appendChild(script);
     }
 
@@ -148,5 +212,3 @@ export default function SEO() {
 
   return null;
 }
-
-

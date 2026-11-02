@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Menu, X, ArrowUpRight } from "lucide-react";
-import logo from "../assets/logo.png"
+import logo from "../assets/logo.png";
 
 const routes = [
   { path: "/", label: "Home" },
   { path: "/about", label: "About Us" },
+  { path: "/services", label: "Services" },
+  { path: "/products", label: "Products" },
   { path: "/works", label: "Our Works" },
   { path: "/contact", label: "Contact Us" },
 ];
@@ -23,7 +25,7 @@ function Navbar() {
   }, []);
 
   return (
-    <nav className="fixed top-4 inset-x-0 z-50 px-4">
+    <nav className="fixed top-4 inset-x-0 z-50 px-4" aria-label="Main Navigation">
       <div
         className={`max-w-6xl mx-auto px-6 py-3 flex justify-between items-center rounded-2xl border transition-all duration-300 ${scrolled
           ? "bg-gray-950/90 border-white/10 shadow-lg shadow-black/40 backdrop-blur-xl"
@@ -31,25 +33,25 @@ function Navbar() {
           }`}
       >
         {/* Logo */}
-        <a href="https://creativix-eight.vercel.app/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-3 group" aria-label="Axiino Technologies Home">
           <div className="relative">
-            <div className="absolute inset-0 bg-blue-500 rounded-full blur-md opacity-40" />
-            <img src={logo} height="36" width="36" alt="Axiino" className="relative rounded-full" />
+            <div className="absolute inset-0 bg-blue-500 rounded-full blur-md opacity-40 group-hover:opacity-70 transition-opacity" />
+            <img src={logo} height="36" width="36" alt="Axiino Technologies Logo" className="relative rounded-full" />
           </div>
           <span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-fuchsia-400 bg-clip-text text-transparent tracking-wide">
             AXIINO
           </span>
-        </a>
+        </Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-1">
           {routes.map(({ path, label }) => {
-            const isActive = pathname === path;
+            const isActive = pathname === path || (path !== "/" && pathname.startsWith(path));
             return (
               <Link
                 key={path}
                 to={path}
-                className={`relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${isActive
+                className={`relative px-3.5 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${isActive
                   ? "text-white"
                   : "text-gray-400 hover:text-white hover:bg-white/5"
                   }`}
@@ -69,17 +71,18 @@ function Navbar() {
             href="https://www.umshiv.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="ml-3 relative inline-block p-[1px] rounded-full bg-gradient-to-r from-emerald-500 via-teal-500 to-amber-500 hover:scale-105 transition-transform duration-300 group"
+            className="ml-2 relative inline-block p-[1px] rounded-full bg-gradient-to-r from-emerald-500 via-teal-500 to-amber-500 hover:scale-105 transition-transform duration-300 group"
+            title="UMSHIV Group of Companies"
           >
-            <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#050b14]/90 text-white text-xs font-semibold tracking-wide transition duration-300 group-hover:bg-[#050b14]/75">
+            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#050b14]/90 text-white text-xs font-semibold tracking-wide transition duration-300 group-hover:bg-[#050b14]/75">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]" />
-              Go to the Tree
+              UMSHIV Group
               <ArrowUpRight size={13} className="text-amber-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
             </span>
           </a>
           <Link
             to="/contact"
-            className="ml-3 px-4 py-2 bg-gradient-to-r from-blue-600 to-fuchsia-600 text-white text-sm font-semibold rounded-xl hover:opacity-90 transition shadow-lg shadow-blue-900/40"
+            className="ml-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-fuchsia-600 text-white text-sm font-semibold rounded-xl hover:opacity-90 transition shadow-lg shadow-blue-900/40"
           >
             Get Started
           </Link>
@@ -90,6 +93,7 @@ function Navbar() {
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden text-gray-300 hover:text-white transition"
           aria-label="Toggle Menu"
+          aria-expanded={isOpen}
         >
           {isOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
@@ -99,13 +103,13 @@ function Navbar() {
       {isOpen && (
         <div className="mt-2 max-w-6xl mx-auto rounded-2xl border border-white/10 bg-gray-950/95 backdrop-blur-xl shadow-xl overflow-hidden transition-all duration-150 ease-out">
           {routes.map(({ path, label }) => {
-            const isActive = pathname === path;
+            const isActive = pathname === path || (path !== "/" && pathname.startsWith(path));
             return (
               <Link
                 key={path}
                 to={path}
                 onClick={() => setIsOpen(false)}
-                className={`flex items-center px-6 py-4 border-b border-white/5 text-sm font-medium transition-all ${isActive
+                className={`flex items-center px-6 py-3.5 border-b border-white/5 text-sm font-medium transition-all ${isActive
                   ? "text-blue-400 bg-blue-950/40"
                   : "text-gray-300 hover:text-white hover:bg-white/5"
                   }`}
@@ -130,7 +134,7 @@ function Navbar() {
           >
             <span className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]" />
-              Go to the Tree
+              UMSHIV Group
             </span>
             <ArrowUpRight size={16} className="text-amber-400" />
           </a>
