@@ -50,7 +50,7 @@ const services = [
   {
     title: "Backend Architecture",
     slug: "backend-api-development",
-    description: "Secure, scalable, and robust API layers engineered to handle millions of concurrent requests.",
+    description: "Secure, scalable, and robust API layers engineered for high-throughput performance, low latency, and resilient transactional workflows.",
     icon: <Server size={26} />,
     features: ["Microservices", "REST & GraphQL", "Rate Limiting"],
     tech: "Node.js, NestJS, Go"
@@ -328,7 +328,7 @@ function Home() {
               className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-sky-400/40 bg-sky-950/50 text-sky-200 text-sm font-semibold tracking-wide shadow-[0_0_15px_rgba(56,189,248,0.2)] mb-8"
             >
               <span className="w-2.5 h-2.5 rounded-full bg-sky-400 shadow-[0_0_8px_#38bdf8] animate-[pulse-glow_2s_infinite]" />
-              Engineering Digital Futures
+              Software Engineering & AI Solutions
             </motion.div>
 
             {/* Semantic Single H1 */}
@@ -498,7 +498,7 @@ function Home() {
               id: "edms",
               title: "Axiino Secure EDMS",
               subtitle: "Compliance-First Document Automation",
-              desc: "A centralized, secure digital document management system. Features Google Vision OCR, custom metadata tagging, and e-signatures while staying GDPR & HIPAA compliant.",
+              desc: "A centralized, secure digital document management system. Features Google Vision OCR, custom metadata tagging, e-signatures, and role-based audit logging designed for regulatory compliance.",
               features: ["Multilingual OCR & Search", "E-signature approvals", "Detailed Version control & audit logs"]
             },
             {
@@ -527,7 +527,7 @@ function Home() {
               title: "Axiino Clinical ISMS",
               subtitle: "AI-Powered Developmental Care tracking",
               desc: "Designed to support personalized therapeutic care. Uses AI video landmark detection and MediaPipe to track developmental progress and draft assessment reports.",
-              features: ["MediaPipe landmark tracking", "LLaVA & Ollama report drafts", "HIPAA-compliant secure storage"]
+              features: ["MediaPipe landmark tracking", "LLaVA & Ollama report drafts", "End-to-end encrypted medical data storage"]
             }
           ].map((prod, index) => (
             <motion.div

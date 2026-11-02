@@ -42,7 +42,7 @@ const productsList = [
       "Encrypted e-signature workflows with legal audit timestamps",
       "Granular document retention policies and automated archival",
       "Immutable version control with rollback history",
-      "GDPR and HIPAA-aligned data encryption at rest and in transit"
+      "AES-256 data encryption at rest and TLS 1.3 in transit with audit-ready access logs"
     ],
     benefits: [
       "Find any archived document within seconds using smart semantic search",
@@ -146,7 +146,7 @@ const productsList = [
       "Privacy-first video processing with on-device feature extraction",
       "AI-assisted clinical session summary generation with LLM guardrails",
       "Therapist goal progression tracking and milestone charting",
-      "HIPAA-compliant encrypted data storage and clinical consent management"
+      "Encrypted patient records storage with clinical consent management workflows"
     ],
     benefits: [
       "Saves therapists up to 60 minutes per patient in drafting progress notes",
