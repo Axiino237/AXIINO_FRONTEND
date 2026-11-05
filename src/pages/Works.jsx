@@ -1,29 +1,89 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Globe, ArrowRight, ExternalLink, Code2, Layers, CheckCircle2 } from "lucide-react";
-import creativixImage from "../assets/creativix_portfolio.png";
+import {
+  Globe,
+  ArrowRight,
+  ExternalLink,
+  Code2,
+  Layers,
+  Building2,
+  HeartHandshake,
+  FileText,
+  LayoutDashboard
+} from "lucide-react";
+import srdollarsImage from "../assets/srdollars_portfolio.svg";
+import s2sImage from "../assets/s2s_portfolio.svg";
+import madirImage from "../assets/madir_portfolio.svg";
+import crmImage from "../assets/crm_portfolio.svg";
 import umshivImage from "../assets/umshiv_portfolio.png";
+import creativixImage from "../assets/creativix_portfolio.png";
 import firstStepImage from "../assets/firststep_portfolio.png";
 
-const categories = ["All", "Corporate & Branding Portals", "Experiential Web"];
+const categories = [
+  "All",
+  "PropTech & Real Estate",
+  "AI & SaaS Platforms",
+  "FinTech & Operations",
+  "Corporate & Branding Portals",
+  "Experiential Web"
+];
 
 const projects = [
   {
     id: 1,
-    title: "Creativix Agency",
-    category: "Corporate & Branding Portals",
-    badge: "Digital Agency Web App",
-    problem: "Creativix needed a dark-mode first, high-impact digital presence that showcased creative agency capabilities with fluid 60 FPS animations without sacrificing mobile loading speed.",
-    solution: "Axiino architected a modern React application utilizing Tailwind CSS, Framer Motion, and asset optimization, resulting in instant rendering, seamless navigation, and engaging interactive micro-interactions.",
-    techStack: ["React.js", "Tailwind CSS", "Framer Motion", "Vite", "Vercel"],
-    description: "A premium creative agency platform featuring modern aesthetics, dark mode, and seamless animations. Built with a focus on visual impact and strategic user experience.",
-    icon: <Globe className="text-sky-400" size={24} />,
-    image: creativixImage,
-    url: "https://creativix-eight.vercel.app/"
+    title: "SR Dollars and Builders",
+    category: "PropTech & Real Estate",
+    badge: "Real Estate & Construction Portal",
+    problem: "SR Dollars and Builders required an interactive digital platform to showcase 120+ approved residential layouts and turnkey construction services, allowing administrators to upload and share live property status updates effortlessly.",
+    solution: "Axiino engineered a high-performance PropTech portal featuring dynamic plot discovery, instant property update sharing, clear-title verification flows, and responsive inquiry capture.",
+    techStack: ["React.js", "Tailwind CSS", "Vite", "Property Feed Engine", "Responsive UI"],
+    description: "A comprehensive real estate and turnkey construction platform built for SR Dollars and Builders. Enables buyers and administrators to seamlessly discover approved residential layouts, review DTCP/RERA approvals, and track real-time property developments.",
+    icon: <Building2 className="text-amber-400" size={24} />,
+    image: srdollarsImage,
+    url: "https://srdollarsandbuilders.com/"
   },
   {
     id: 2,
+    title: "S2S Matrimony",
+    category: "AI & SaaS Platforms",
+    badge: "AI Horoscope & Matchmaking Platform",
+    problem: "Traditional matchmaking involved tedious manual horoscope transcription and error-prone compatibility evaluations across complex astrological charts and South Indian community traditions.",
+    solution: "Axiino developed an intelligent matchmaking application powered by an AI horoscope extraction engine that reads chart documents automatically, parses astrological data, and computes real-time 10-Porutham compatibility scores.",
+    techStack: ["React.js", "Node.js", "AI Extraction Engine", "Astrological Matching Engine", "Tailwind CSS"],
+    description: "A community matrimony platform engineered with an AI-powered horoscope extraction and matching engine. Automatically extracts chart data from documents and delivers algorithmic compatibility matchmaking.",
+    icon: <HeartHandshake className="text-rose-400" size={24} />,
+    image: s2sImage,
+    url: "http://s2smatrimony.com/"
+  },
+  {
+    id: 3,
+    title: "Madir Intelligence",
+    category: "FinTech & Operations",
+    badge: "Financial Document Intelligence",
+    problem: "Financial analysts and decision-makers faced scattered documents, complex unstructured disclosure statements, and fragmented research across disconnected silos without unified synthesis.",
+    solution: "Axiino engineered a centralized document intelligence platform where users upload multifaceted financial documents, synthesize data into clear timelines, and make confident, high-stakes decisions.",
+    techStack: ["React.js", "Tailwind CSS", "Financial Analytics", "Document Processing", "Vite"],
+    description: "A financial intelligence and document aggregation platform that enables users to upload, centralize, and evaluate documents in one secure workspace to drive data-backed financial decisions.",
+    icon: <FileText className="text-cyan-400" size={24} />,
+    image: madirImage,
+    url: "https://madirintel.com/"
+  },
+  {
+    id: 4,
+    title: "Axiino CRM",
+    category: "AI & SaaS Platforms",
+    badge: "All-in-One Operations Suite",
+    problem: "Organizations struggled with multiple disconnected software subscriptions for staff attendance, team communication, role security, and central business records, leading to siloed operational data.",
+    solution: "Axiino engineered CRM Pro, an all-in-one operations system unifying automated attendance tracking, real-time team chat, role-based access control (RBAC), and unified business data management.",
+    techStack: ["React.js", "Vite", "Real-Time Chat", "Role-Based Access Control", "Tailwind CSS"],
+    description: "An all-in-one operations platform that brings daily attendance, live team chat, RBAC user security, and business data tracking together into a unified organizational control plane.",
+    icon: <LayoutDashboard className="text-violet-400" size={24} />,
+    image: crmImage,
+    url: "https://crm.axiino.com/"
+  },
+  {
+    id: 5,
     title: "UMSHIV Group",
     category: "Corporate & Branding Portals",
     badge: "Multi-Brand Corporate Ecosystem",
@@ -36,7 +96,20 @@ const projects = [
     url: "https://www.umshiv.com/"
   },
   {
-    id: 3,
+    id: 6,
+    title: "Creativix Agency",
+    category: "Corporate & Branding Portals",
+    badge: "Digital Agency Web App",
+    problem: "Creativix needed a dark-mode first, high-impact digital presence that showcased creative agency capabilities with fluid 60 FPS animations without sacrificing mobile loading speed.",
+    solution: "Axiino architected a modern React application utilizing Tailwind CSS, Framer Motion, and asset optimization, resulting in instant rendering, seamless navigation, and engaging interactive micro-interactions.",
+    techStack: ["React.js", "Tailwind CSS", "Framer Motion", "Vite", "Vercel"],
+    description: "A premium creative agency platform featuring modern aesthetics, dark mode, and seamless animations. Built with a focus on visual impact and strategic user experience.",
+    icon: <Globe className="text-sky-400" size={24} />,
+    image: creativixImage,
+    url: "https://creativix-eight.vercel.app/"
+  },
+  {
+    id: 7,
     title: "The First Step Solutions",
     category: "Experiential Web",
     badge: "Event & Experiential Activation",

@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bgGradCrm" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070b19" />
+      <stop offset="50%" stop-color="#0d1126" />
+      <stop offset="100%" stop-color="#050810" />
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#ec4899" />
+    </linearGradient>
+    <linearGradient id="activeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.0" />
+    </linearGradient>
+    <filter id="glowCrm" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="35" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bgGradCrm)" />
+
+  <!-- Ambient Glow -->
+  <circle cx="240" cy="100" r="150" fill="#8b5cf6" opacity="0.16" filter="url(#glowCrm)" />
+  <circle cx="680" cy="350" r="160" fill="#3b82f6" opacity="0.12" filter="url(#glowCrm)" />
+
+  <!-- Subdued Dot Matrix Grid -->
+  <g opacity="0.08" fill="#a78bfa">
+    <circle cx="25" cy="25" r="1.5" /><circle cx="75" cy="25" r="1.5" /><circle cx="125" cy="25" r="1.5" /><circle cx="175" cy="25" r="1.5" /><circle cx="225" cy="25" r="1.5" /><circle cx="275" cy="25" r="1.5" /><circle cx="325" cy="25" r="1.5" /><circle cx="375" cy="25" r="1.5" /><circle cx="425" cy="25" r="1.5" /><circle cx="475" cy="25" r="1.5" /><circle cx="525" cy="25" r="1.5" /><circle cx="575" cy="25" r="1.5" /><circle cx="625" cy="25" r="1.5" /><circle cx="675" cy="25" r="1.5" /><circle cx="725" cy="25" r="1.5" /><circle cx="775" cy="25" r="1.5" /><circle cx="25" cy="75" r="1.5" /><circle cx="75" cy="75" r="1.5" /><circle cx="125" cy="75" r="1.5" /><circle cx="175" cy="75" r="1.5" /><circle cx="225" cy="75" r="1.5" /><circle cx="275" cy="75" r="1.5" /><circle cx="325" cy="75" r="1.5" /><circle cx="375" cy="75" r="1.5" /><circle cx="425" cy="75" r="1.5" /><circle cx="475" cy="75" r="1.5" /><circle cx="525" cy="75" r="1.5" /><circle cx="575" cy="75" r="1.5" /><circle cx="625" cy="75" r="1.5" /><circle cx="675" cy="75" r="1.5" /><circle cx="725" cy="75" r="1.5" /><circle cx="775" cy="75" r="1.5" /><circle cx="25" cy="125" r="1.5" /><circle cx="75" cy="125" r="1.5" /><circle cx="125" cy="125" r="1.5" /><circle cx="175" cy="125" r="1.5" /><circle cx="225" cy="125" r="1.5" /><circle cx="275" cy="125" r="1.5" /><circle cx="325" cy="125" r="1.5" /><circle cx="375" cy="125" r="1.5" /><circle cx="425" cy="125" r="1.5" /><circle cx="475" cy="125" r="1.5" /><circle cx="525" cy="125" r="1.5" /><circle cx="575" cy="125" r="1.5" /><circle cx="625" cy="125" r="1.5" /><circle cx="675" cy="125" r="1.5" /><circle cx="725" cy="125" r="1.5" /><circle cx="775" cy="125" r="1.5" /><circle cx="25" cy="175" r="1.5" /><circle cx="75" cy="175" r="1.5" /><circle cx="125" cy="175" r="1.5" /><circle cx="175" cy="175" r="1.5" /><circle cx="225" cy="175" r="1.5" /><circle cx="275" cy="175" r="1.5" /><circle cx="325" cy="175" r="1.5" /><circle cx="375" cy="175" r="1.5" /><circle cx="425" cy="175" r="1.5" /><circle cx="475" cy="175" r="1.5" /><circle cx="525" cy="175" r="1.5" /><circle cx="575" cy="175" r="1.5" /><circle cx="625" cy="175" r="1.5" /><circle cx="675" cy="175" r="1.5" /><circle cx="725" cy="175" r="1.5" /><circle cx="775" cy="175" r="1.5" /><circle cx="25" cy="225" r="1.5" /><circle cx="75" cy="225" r="1.5" /><circle cx="125" cy="225" r="1.5" /><circle cx="175" cy="225" r="1.5" /><circle cx="225" cy="225" r="1.5" /><circle cx="275" cy="225" r="1.5" /><circle cx="325" cy="225" r="1.5" /><circle cx="375" cy="225" r="1.5" /><circle cx="425" cy="225" r="1.5" /><circle cx="475" cy="225" r="1.5" /><circle cx="525" cy="225" r="1.5" /><circle cx="575" cy="225" r="1.5" /><circle cx="625" cy="225" r="1.5" /><circle cx="675" cy="225" r="1.5" /><circle cx="725" cy="225" r="1.5" /><circle cx="775" cy="225" r="1.5" /><circle cx="25" cy="275" r="1.5" /><circle cx="75" cy="275" r="1.5" /><circle cx="125" cy="275" r="1.5" /><circle cx="175" cy="275" r="1.5" /><circle cx="225" cy="275" r="1.5" /><circle cx="275" cy="275" r="1.5" /><circle cx="325" cy="275" r="1.5" /><circle cx="375" cy="275" r="1.5" /><circle cx="425" cy="275" r="1.5" /><circle cx="475" cy="275" r="1.5" /><circle cx="525" cy="275" r="1.5" /><circle cx="575" cy="275" r="1.5" /><circle cx="625" cy="275" r="1.5" /><circle cx="675" cy="275" r="1.5" /><circle cx="725" cy="275" r="1.5" /><circle cx="775" cy="275" r="1.5" /><circle cx="25" cy="325" r="1.5" /><circle cx="75" cy="325" r="1.5" /><circle cx="125" cy="325" r="1.5" /><circle cx="175" cy="325" r="1.5" /><circle cx="225" cy="325" r="1.5" /><circle cx="275" cy="325" r="1.5" /><circle cx="325" cy="325" r="1.5" /><circle cx="375" cy="325" r="1.5" /><circle cx="425" cy="325" r="1.5" /><circle cx="475" cy="325" r="1.5" /><circle cx="525" cy="325" r="1.5" /><circle cx="575" cy="325" r="1.5" /><circle cx="625" cy="325" r="1.5" /><circle cx="675" cy="325" r="1.5" /><circle cx="725" cy="325" r="1.5" /><circle cx="775" cy="325" r="1.5" /><circle cx="25" cy="375" r="1.5" /><circle cx="75" cy="375" r="1.5" /><circle cx="125" cy="375" r="1.5" /><circle cx="175" cy="375" r="1.5" /><circle cx="225" cy="375" r="1.5" /><circle cx="275" cy="375" r="1.5" /><circle cx="325" cy="375" r="1.5" /><circle cx="375" cy="375" r="1.5" /><circle cx="425" cy="375" r="1.5" /><circle cx="475" cy="375" r="1.5" /><circle cx="525" cy="375" r="1.5" /><circle cx="575" cy="375" r="1.5" /><circle cx="625" cy="375" r="1.5" /><circle cx="675" cy="375" r="1.5" /><circle cx="725" cy="375" r="1.5" /><circle cx="775" cy="375" r="1.5" /><circle cx="25" cy="425" r="1.5" /><circle cx="75" cy="425" r="1.5" /><circle cx="125" cy="425" r="1.5" /><circle cx="175" cy="425" r="1.5" /><circle cx="225" cy="425" r="1.5" /><circle cx="275" cy="425" r="1.5" /><circle cx="325" cy="425" r="1.5" /><circle cx="375" cy="425" r="1.5" /><circle cx="425" cy="425" r="1.5" /><circle cx="475" cy="425" r="1.5" /><circle cx="525" cy="425" r="1.5" /><circle cx="575" cy="425" r="1.5" /><circle cx="625" cy="425" r="1.5" /><circle cx="675" cy="425" r="1.5" /><circle cx="725" cy="425" r="1.5" /><circle cx="775" cy="425" r="1.5" />
+  </g>
+
+  <!-- Central CRM Dashboard Window -->
+  <g transform="translate(60, 45)">
+    <!-- Main Window Outer Frame -->
+    <rect width="680" height="360" rx="16" fill="#0c1228" fill-opacity="0.9" stroke="rgba(167, 139, 250, 0.3)" stroke-width="1.5" />
+
+    <!-- Window Header Bar -->
+    <rect width="680" height="48" rx="16" fill="rgba(255, 255, 255, 0.03)" />
+    <!-- Traffic dots -->
+    <circle cx="28" cy="24" r="5" fill="#ef4444" opacity="0.8" />
+    <circle cx="44" cy="24" r="5" fill="#f59e0b" opacity="0.8" />
+    <circle cx="60" cy="24" r="5" fill="#10b981" opacity="0.8" />
+
+    <!-- System Branding -->
+    <text x="85" y="28" fill="#f8fafc" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" letter-spacing="1">AXIINO CRM PRO — UNIFIED OPERATIONS &amp; RBAC CONSOLE</text>
+    
+    <rect x="535" y="14" width="125" height="20" rx="10" fill="rgba(139, 92, 246, 0.18)" stroke="rgba(167, 139, 250, 0.4)" stroke-width="1" />
+    <circle cx="547" cy="24" r="3.5" fill="#a855f7" />
+    <text x="556" y="28" fill="#c084fc" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="600">ENTERPRISE SYSTEM</text>
+
+    <!-- Sidebar Navigation -->
+    <rect x="18" y="62" width="170" height="280" rx="10" fill="rgba(255, 255, 255, 0.02)" stroke="rgba(255, 255, 255, 0.05)" stroke-width="1" />
+    
+    <!-- Nav item: Overview -->
+    <rect x="28" y="76" width="150" height="32" rx="6" fill="rgba(139, 92, 246, 0.2)" stroke="rgba(167, 139, 250, 0.4)" stroke-width="1" />
+    <circle cx="44" cy="92" r="4" fill="#a855f7" />
+    <text x="56" y="96" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="10" font-weight="700">Live Dashboard</text>
+
+    <!-- Nav item: Attendance -->
+    <rect x="28" y="116" width="150" height="32" rx="6" fill="transparent" />
+    <circle cx="44" cy="132" r="3" fill="#64748b" />
+    <text x="56" y="136" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10" font-weight="500">Attendance &amp; Shifts</text>
+
+    <!-- Nav item: Team Chat -->
+    <rect x="28" y="156" width="150" height="32" rx="6" fill="transparent" />
+    <circle cx="44" cy="172" r="3" fill="#10b981" />
+    <text x="56" y="176" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10" font-weight="500">Team Chat (12 online)</text>
+
+    <!-- Nav item: Role Access -->
+    <rect x="28" y="196" width="150" height="32" rx="6" fill="transparent" />
+    <circle cx="44" cy="212" r="3" fill="#64748b" />
+    <text x="56" y="216" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10" font-weight="500">RBAC User Security</text>
+
+    <!-- Nav item: Business Data -->
+    <rect x="28" y="236" width="150" height="32" rx="6" fill="transparent" />
+    <circle cx="44" cy="252" r="3" fill="#64748b" />
+    <text x="56" y="256" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10" font-weight="500">Operations Data Hub</text>
+
+    <!-- Shift Check-In Badge -->
+    <rect x="28" y="286" width="150" height="42" rx="8" fill="rgba(16, 185, 129, 0.12)" stroke="rgba(16, 185, 129, 0.3)" stroke-width="1" />
+    <text x="38" y="303" fill="#34d399" font-family="system-ui, sans-serif" font-size="9" font-weight="700">STATUS: CLOCKED IN</text>
+    <text x="38" y="318" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9">Logged at 09:15 AM IST</text>
+
+    <!-- Main Workspace Top Stats -->
+    <!-- Attendance Metric -->
+    <rect x="202" y="62" width="145" height="72" rx="10" fill="rgba(255, 255, 255, 0.03)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
+    <text x="216" y="83" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9" font-weight="600">TODAY ATTENDANCE</text>
+    <text x="216" y="110" fill="#34d399" font-family="system-ui, sans-serif" font-size="22" font-weight="800">98.4%</text>
+    <text x="216" y="125" fill="#64748b" font-family="system-ui, sans-serif" font-size="9">42 / 43 Members On Duty</text>
+
+    <!-- Active Tasks / Tickets -->
+    <rect x="357" y="62" width="145" height="72" rx="10" fill="rgba(255, 255, 255, 0.03)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
+    <text x="371" y="83" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9" font-weight="600">ACTIVE BUSINESS DEALS</text>
+    <text x="371" y="110" fill="#a78bfa" font-family="system-ui, sans-serif" font-size="22" font-weight="800">₹84.6L</text>
+    <text x="371" y="125" fill="#a78bfa" font-family="system-ui, sans-serif" font-size="9">18 Deals In Closing Stage</text>
+
+    <!-- Role Security Level -->
+    <rect x="512" y="62" width="150" height="72" rx="10" fill="rgba(255, 255, 255, 0.03)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
+    <text x="526" y="83" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9" font-weight="600">RBAC ACCESS PROTOCOL</text>
+    <text x="526" y="110" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="20" font-weight="800">SUPER ADMIN</text>
+    <text x="526" y="125" fill="#10b981" font-family="system-ui, sans-serif" font-size="9">● MFA Verified Session</text>
+
+    <!-- Bottom Split: Chat & Operations Data -->
+    <!-- Live Chat Panel -->
+    <rect x="202" y="146" width="225" height="196" rx="10" fill="rgba(255, 255, 255, 0.02)" stroke="rgba(255, 255, 255, 0.07)" stroke-width="1" />
+    <text x="216" y="170" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="11" font-weight="700">INTERNAL CHAT STREAM</text>
+    <circle cx="410" cy="166" r="3.5" fill="#10b981" />
+
+    <!-- Chat Message 1 -->
+    <rect x="214" y="184" width="190" height="42" rx="8" fill="rgba(255, 255, 255, 0.03)" />
+    <text x="224" y="198" fill="#c084fc" font-family="system-ui, sans-serif" font-size="9" font-weight="700">Kavitha (HR Lead)</text>
+    <text x="224" y="213" fill="#cbd5e1" font-family="system-ui, sans-serif" font-size="9">Shift rosters approved for Q4.</text>
+
+    <!-- Chat Message 2 -->
+    <rect x="214" y="234" width="190" height="42" rx="8" fill="rgba(139, 92, 246, 0.1)" stroke="rgba(167, 139, 250, 0.3)" stroke-width="1" />
+    <text x="224" y="248" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="9" font-weight="700">Aravindhan (Lead Eng)</text>
+    <text x="224" y="263" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="9">All-in-one business sync deployed.</text>
+
+    <!-- Chat Input simulation -->
+    <rect x="214" y="292" width="200" height="34" rx="8" fill="rgba(255, 255, 255, 0.05)" />
+    <text x="226" y="313" fill="#64748b" font-family="system-ui, sans-serif" font-size="9">Send update to team...</text>
+
+    <!-- Operations Data Breakdown -->
+    <rect x="437" y="146" width="225" height="196" rx="10" fill="rgba(255, 255, 255, 0.02)" stroke="rgba(255, 255, 255, 0.07)" stroke-width="1" />
+    <text x="451" y="170" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="11" font-weight="700">CENTRAL BUSINESS RADAR</text>
+
+    <!-- Progress 1: Operations -->
+    <text x="451" y="200" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9">Client Engagement Pipeline</text>
+    <text x="640" y="200" text-anchor="end" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="9" font-weight="700">92%</text>
+    <rect x="451" y="208" width="195" height="6" rx="3" fill="rgba(255, 255, 255, 0.06)" />
+    <rect x="451" y="208" width="179" height="6" rx="3" fill="#a855f7" />
+
+    <!-- Progress 2: Shift Compliance -->
+    <text x="451" y="238" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9">Attendance Compliance</text>
+    <text x="640" y="238" text-anchor="end" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="9" font-weight="700">98%</text>
+    <rect x="451" y="246" width="195" height="6" rx="3" fill="rgba(255, 255, 255, 0.06)" />
+    <rect x="451" y="246" width="191" height="6" rx="3" fill="#10b981" />
+
+    <!-- Progress 3: Security & RBAC -->
+    <text x="451" y="276" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9">RBAC Permission Audit</text>
+    <text x="640" y="276" text-anchor="end" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="9" font-weight="700">100%</text>
+    <rect x="451" y="284" width="195" height="6" rx="3" fill="rgba(255, 255, 255, 0.06)" />
+    <rect x="451" y="284" width="195" height="6" rx="3" fill="#38bdf8" />
+  </g>
+</svg>
